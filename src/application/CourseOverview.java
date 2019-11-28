@@ -13,7 +13,7 @@ public class CourseOverview extends Application{
 	@Override
 	public void start(Stage primaryStage) throws IOException {
 
-		Parent root = FXMLLoader.load(getClass().getResource("grading.fxml"));
+		Parent root = FXMLLoader.load(getClass().getResource("courseOverview.fxml"));
         primaryStage.setTitle("current semester");
         primaryStage.setScene(new Scene(root, 600, 600));
         primaryStage.show();
