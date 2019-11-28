@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2019??11??27?? ????11:42:48 by Hibernate Tools 3.5.0.Final -->
+<hibernate-mapping>
+    <class name="po.CourseStudents" table="COURSESTUDENTS">
+        <id name="cID" type="java.lang.String" access="field">
+            <column name="CID" />
+            <generator class="assigned" />
+        </id>
+        <property name="cSID" type="java.lang.String" access="field">
+            <column name="CSID" />
+        </property>
+        <property name="bUID" type="java.lang.String" access="field">
+            <column name="BUID" />
+        </property>
+        <property name="condition" type="java.lang.String">
+            <column name="CONDITION" />
+        </property>
+        <property name="grade" type="java.lang.String">
+            <column name="GRADE" />
+        </property>
+        <property name="comment" type="java.lang.String">
+            <column name="COMMENT" />
+        </property>
+    </class>
+</hibernate-mapping>
