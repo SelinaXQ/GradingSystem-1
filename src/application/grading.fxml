@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="600.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Pane prefHeight="140.0" prefWidth="600.0">
+         <children>
+            <Label layoutX="222.0" layoutY="33.0" text="student info management" />
+            <Button layoutX="150.0" layoutY="82.0" mnemonicParsing="false" text="Import student" />
+            <Button layoutX="344.0" layoutY="82.0" mnemonicParsing="false" text="Delete student" />
+         </children>
+      </Pane>
+      <Pane layoutY="141.0" prefHeight="193.0" prefWidth="600.0">
+         <children>
+            <Label layoutX="256.0" layoutY="14.0" text="course criteria" />
+            <TableView layoutX="68.0" layoutY="36.0" prefHeight="129.0" prefWidth="464.0">
+              <columns>
+                <TableColumn prefWidth="75.0" text="C1" />
+                <TableColumn prefWidth="75.0" text="C2" />
+              </columns>
+            </TableView>
+         </children>
+      </Pane>
+      <Pane layoutX="1.0" layoutY="333.0" prefHeight="266.0" prefWidth="600.0">
+         <children>
+            <Label layoutX="259.0" layoutY="14.0" text="Assignment 1" />
+            <TableView layoutX="67.0" layoutY="41.0" prefHeight="162.0" prefWidth="464.0">
+              <columns>
+                <TableColumn prefWidth="75.0" text="C1" />
+                <TableColumn prefWidth="75.0" text="C2" />
+              </columns>
+            </TableView>
+            <Button fx:id="btnOverview" layoutX="455.0" layoutY="214.0" mnemonicParsing="false" text="Overview" />
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>
