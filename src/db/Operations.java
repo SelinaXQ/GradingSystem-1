@@ -173,8 +173,11 @@ public class Operations {
 	}
 
 	// save students ' detailed grades and comments
+	// use uitable.detailedgrades class
 	
 	// save students information
+	// Thus, the add/delete/edit operations only make sense on GUI
+	// only save make sense on database
 	
 	// close a course
 
