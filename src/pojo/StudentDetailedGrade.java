@@ -24,5 +24,11 @@ public class StudentDetailedGrade {
 	public void setScore(double score) {
 		this.score = score;
 	}
+	public String getComment() {
+		return comment;
+	}
+	public void setComment(String comment) {
+		this.comment = comment;
+	}
 	
 }
