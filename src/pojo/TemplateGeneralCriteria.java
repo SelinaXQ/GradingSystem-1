@@ -1,11 +1,14 @@
 package pojo;
 
 // Table TemplateGeneralCriteria
-public class TemplateGeneralCriteria {
+public class TemplateGeneralCriteria{
 	private String gCriID;  // *, General Criteria ID, [HS], created by courseID(cID) and genenal criteria type(GenCriType)
 	private String cID; // courseID, [HS], created by coursename and semester
 	private String genCriType; // General Criteria Type, Assignment, Quiz, Exam
 	private double genCriPer; // General Criteria Type 's Percentage
+	public TemplateGeneralCriteria(GeneralCriteria gCri) {
+		// TODO Auto-generated constructor stub
+	}
 	public String getgCriID() {
 		return gCriID;
 	}

@@ -6,6 +6,9 @@ public class GeneralCriteria {
 	private String cID; // courseID, [HS], created by coursename and semester
 	private String genCriType; // General Criteria Type, Assignment, Quiz, Exam
 	private double genCriPer; // General Criteria Type 's Percentage
+	public GeneralCriteria(TemplateGeneralCriteria tGCri) {
+		// TODO Auto-generated constructor stub
+	}
 	public String getgCriID() {
 		return gCriID;
 	}

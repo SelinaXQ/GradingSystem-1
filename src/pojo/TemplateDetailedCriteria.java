@@ -6,6 +6,9 @@ public class TemplateDetailedCriteria {
 	private String gCriID; // General Criteria ID, [HS], created by courseID(cID) and genenal criteria type(GenCriType)
 	private String deCriType; // Detailed Criteria Type, Assignment1, Assignment2
 	private double deCriPer; // Detailed Criteria Type 's Percentage
+	public TemplateDetailedCriteria(DetailedCriteria dCri) {
+		// TODO Auto-generated constructor stub
+	}
 	public String getdCriID() {
 		return dCriID;
 	}

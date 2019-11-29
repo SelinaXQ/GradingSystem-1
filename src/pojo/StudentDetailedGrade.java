@@ -5,6 +5,7 @@ public class StudentDetailedGrade {
 	private String cSID; // created by courseID and buID, [HS]
 	private String dCriID;  // Detailed Criteria ID, [HS], created by General Criteria ID(gCriID)[HS] and detailed criteria type(deCriType)
 	private double score;
+	private String comment;
 	public String getcSID() {
 		return cSID;
 	}
