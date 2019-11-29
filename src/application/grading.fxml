@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="600.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane prefHeight="600.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.Grading">
    <children>
       <Pane prefHeight="140.0" prefWidth="600.0">
          <children>
@@ -34,7 +34,7 @@
                 <TableColumn prefWidth="75.0" text="C2" />
               </columns>
             </TableView>
-            <Button fx:id="btnOverview" layoutX="455.0" layoutY="214.0" mnemonicParsing="false" text="Overview" />
+            <Button fx:id="btnOverview" layoutX="455.0" layoutY="214.0" mnemonicParsing="false" onAction="#handleOverViewBtn" text="Overview" />
          </children>
       </Pane>
    </children>
