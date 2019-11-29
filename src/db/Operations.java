@@ -118,8 +118,17 @@ public class Operations {
 
 		}
 	}
+	
 
-	// save the percentage of a detailed criteria
+	// click save as template. 
+	// if not save as template, but just the course' s criteria, click 'save' in two steps
+	
+	public void saveCriteriaAsTemplate(ArrayList<GeneralCriteria> gCris, ArrayList<DetailedCriteria> dCris) {
+		saveGeneralCriterias(gCris, true);
+		saveDetailedCriterias(dCris, true);
+	}
+	
+	// save the percentage of a detailed criteria, 
 
 	public boolean saveDetailedCriterias(ArrayList<DetailedCriteria> dCris, boolean ifTemplate) {
 		boolean flag = false;
@@ -163,8 +172,10 @@ public class Operations {
 		return 0;
 	}
 
-	// save students ' detailed grades 
+	// save students ' detailed grades and comments
 	
-	//
+	// save students information
+	
+	// close a course
 
 }
