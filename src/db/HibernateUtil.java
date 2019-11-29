@@ -23,10 +23,6 @@ public class HibernateUtil {
         return sessionFactory;
     }
     
-    public static void open() {
-    	sessionFactory.openSession();
-    }
-    
     public static void close() {
 		sessionFactory.close();
 	}
