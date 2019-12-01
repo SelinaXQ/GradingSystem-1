@@ -6,6 +6,14 @@ public class Student {
 	private String firstName;
 	private String middleName;
 	private String lastName;
+	
+	public Student(String bUID, String firstName, String middleName, String lastName) {
+		super();
+		this.BUID = bUID;
+		this.firstName = firstName;
+		this.middleName = middleName;
+		this.lastName = lastName;
+	}
 	public String getBUID() {
 		return BUID;
 	}
@@ -29,12 +37,6 @@ public class Student {
 	}
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
-	}
-	
-	@Override
-	public String toString() {
-		return BUID + " , " + firstName + " , " + middleName + " , " + lastName;
-		
 	}
 	
 }

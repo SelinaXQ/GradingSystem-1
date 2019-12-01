@@ -8,6 +8,15 @@ public class Course {
 	private String college; // college, CAS, GRS
 	private boolean state; // closed or not, 0 = closed, 1 = open
 
+	public Course(String cID, String cName, String semID, String college, boolean state) {
+		super();
+		this.cID = cID;
+		this.cName = cName;
+		this.semID = semID;
+		this.college = college;
+		this.state = state;
+	}
+
 	public String getcID() {
 		return cID;
 	}

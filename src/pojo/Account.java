@@ -5,6 +5,12 @@ public class Account {
 	// no key
 	private String userName;  // cpk
 	private String passward;  // cpk
+	
+	public Account(String userName, String passward) {
+		super();
+		this.userName = userName;
+		this.passward = passward;
+	}
 	public String getUserName() {
 		return userName;
 	}

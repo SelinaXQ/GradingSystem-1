@@ -8,6 +8,16 @@ public class CourseStudents {
 	private String condition; // w or null
 	private String grade; // A+ , A-
 	private String comment;
+	
+	public CourseStudents(String cSID, String cID, String bUID, String condition, String grade, String comment) {
+		super();
+		this.cSID = cSID;
+		this.cID = cID;
+		this.bUID = bUID;
+		this.condition = condition;
+		this.grade = grade;
+		this.comment = comment;
+	}
 	public String getcSID() {
 		return cSID;
 	}

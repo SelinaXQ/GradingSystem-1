@@ -1,13 +1,56 @@
 package uitable;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
-import pojo.GeneralCriteria;
 import pojo.Student;
 
+// this class is for the window which could overview students ' grade
+// each attribute is corresponding to a column in that table
 public class Overview {
 	private Student student;
-	private ArrayList<GeneralCriteria> gcs;
-	private double total;
-	private String grade;
+	private HashMap<String, DetailedGrade> dcs;  // the String is the general Score 's id (primary key)
+	private ArrayList<GeneralGrade> gcScores;
+	private double total; // composite
+	private String grade;  // A+, A, ...
+	
+	public Overview(Student student, HashMap<String, DetailedGrade> dcs, ArrayList<GeneralGrade> gcScores, double total,
+			String grade) {
+		super();
+		this.student = student;
+		this.dcs = dcs;
+		this.gcScores = gcScores;
+		this.total = total;
+		this.grade = grade;
+	}
+	public Student getStudent() {
+		return student;
+	}
+	public void setStudent(Student student) {
+		this.student = student;
+	}
+	public HashMap<String, DetailedGrade> getDcs() {
+		return dcs;
+	}
+	public void setDcs(HashMap<String, DetailedGrade> dcs) {
+		this.dcs = dcs;
+	}
+	public ArrayList<GeneralGrade> getGcScores() {
+		return gcScores;
+	}
+	public void setGcScores(ArrayList<GeneralGrade> gcScores) {
+		this.gcScores = gcScores;
+	}
+	public double getTotal() {
+		return total;
+	}
+	public void setTotal(double total) {
+		this.total = total;
+	}
+	public String getGrade() {
+		return grade;
+	}
+	public void setGrade(String grade) {
+		this.grade = grade;
+	}
 }

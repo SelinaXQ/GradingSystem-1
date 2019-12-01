@@ -2,6 +2,14 @@ package db;
 
 import java.util.ArrayList;
 
+import org.hibernate.Criteria;
+import org.hibernate.HibernateException;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
+import org.hibernate.criterion.Restrictions;
+
+import antlr.collections.List;
+import pojo.DetailedCriteria;
 import pojo.GeneralCriteria;
 import pojo.TemplateDetailedCriteria;
 import pojo.TemplateGeneralCriteria;
@@ -9,29 +17,93 @@ import pojo.TemplateGeneralCriteria;
 public class ManageTemplate {
 
 	public ArrayList<TemplateGeneralCriteria> getGeneralCriteriaByCourseID(String cID) {
-		return null;
-		// TODO Auto-generated method stub
-		
+		Session session = HibernateUtil.getSessionFactory().openSession();
+		List gCris = null;
+		Criteria criteria = session.createCriteria(GeneralCriteria.class);
+		criteria.add(Restrictions.eq("CID", cID));
+		gCris = (List) criteria.list();
+		session.close();
+		return (ArrayList<TemplateGeneralCriteria>) gCris;
 	}
 
 	public ArrayList<TemplateDetailedCriteria> getDetailedCriterias(String gCriID) {
-		// TODO Auto-generated method stub
-		return null;
+		Session session = HibernateUtil.getSessionFactory().openSession();
+		List dCris = null;
+		Criteria criteria = session.createCriteria(GeneralCriteria.class);
+		criteria.add(Restrictions.eq("GCriID", gCriID));
+		dCris = (List) criteria.list();
+		session.close();
+		return (ArrayList<TemplateDetailedCriteria>) dCris;
 	}
 
 
 	public void deleteGeneralCriteria(TemplateGeneralCriteria templateGeneralCriteria) {
-		// TODO Auto-generated method stub
-		
+		Session session = HibernateUtil.getSessionFactory().openSession();
+		Transaction tx = null;
+		try {
+			tx = session.beginTransaction();
+			TemplateGeneralCriteria gCri =  (TemplateGeneralCriteria) session.get(TemplateGeneralCriteria.class, templateGeneralCriteria.getgCriID());
+			session.delete(gCri);
+			tx.commit();
+		} catch (HibernateException e) {
+			if (tx != null)
+				tx.rollback();
+			e.printStackTrace();
+		} finally {
+			session.close();
+		}
 	}
 
 	public void updateOrSaveGeneralCriteria(TemplateGeneralCriteria templateGeneralCriteria) {
-		// TODO Auto-generated method stub
-		
+		Session session = HibernateUtil.getSessionFactory().openSession();
+		Transaction tx = null;
+		try {
+			tx = session.beginTransaction();
+			TemplateGeneralCriteria gCri = (TemplateGeneralCriteria) session.get(TemplateGeneralCriteria.class, templateGeneralCriteria.getgCriID());
+			session.merge(gCri);
+			tx.commit();
+		} catch (HibernateException e) {
+			if (tx != null)
+				tx.rollback();
+			e.printStackTrace();
+		} finally {
+			session.close();
+		}
 	}
 
 	public void updateOrSaveDetailedCriteria(TemplateDetailedCriteria templateDetailedCriteria) {
-		// TODO Auto-generated method stub
+		Session session = HibernateUtil.getSessionFactory().openSession();
+		Transaction tx = null;
+		try {
+			tx = session.beginTransaction();
+			TemplateDetailedCriteria dCri = (TemplateDetailedCriteria) session.get(TemplateDetailedCriteria.class, templateDetailedCriteria.getdCriID());
+			session.merge(dCri);
+			tx.commit();
+		} catch (HibernateException e) {
+			if (tx != null)
+				tx.rollback();
+			e.printStackTrace();
+		} finally {
+			session.close();
+		}
+		
+	}
+
+	public void deleteDetailedCriteria(TemplateDetailedCriteria templateDetailedCriteria) {
+		Session session = HibernateUtil.getSessionFactory().openSession();
+		Transaction tx = null;
+		try {
+			tx = session.beginTransaction();
+			TemplateDetailedCriteria dCri = (TemplateDetailedCriteria) session.get(TemplateDetailedCriteria.class, templateDetailedCriteria.getdCriID());
+			session.delete(dCri);
+			tx.commit();
+		} catch (HibernateException e) {
+			if (tx != null)
+				tx.rollback();
+			e.printStackTrace();
+		} finally {
+			session.close();
+		}
 		
 	}
 

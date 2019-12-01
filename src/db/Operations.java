@@ -3,8 +3,9 @@ package db;
 import java.util.ArrayList;
 
 import pojo.*;
-import uitable.DetailedGrades;
+import uitable.GiveDetailedGrades;
 import uitable.Overview;
+import uitable.StudentInfo;
 
 public class Operations {
 	ManageCourse mCourse;
@@ -55,8 +56,8 @@ public class Operations {
 	public ArrayList<GeneralCriteria> getGeneralCriteriasByCourseID(String cID, boolean ifTemplate) {
 		if (ifTemplate == true) {
 			ArrayList<TemplateGeneralCriteria> tGCris = mTemplate.getGeneralCriteriaByCourseID(cID);
-			ArrayList<GeneralCriteria> gCriterias = null;
-			for(TemplateGeneralCriteria tGCri : tGCris) {
+			ArrayList<GeneralCriteria> gCriterias = new ArrayList<GeneralCriteria>();
+			for (TemplateGeneralCriteria tGCri : tGCris) {
 				gCriterias.add(new GeneralCriteria(tGCri));
 			}
 			return gCriterias;
@@ -67,11 +68,11 @@ public class Operations {
 
 	// get detailed Criterias By General Criterias (gCriID
 
-	public ArrayList<DetailedCriteria> getDetailedCriteriasByCourseID(String gCriID, boolean ifTemplate) {
+	public ArrayList<DetailedCriteria> getDetailedCriteriasByGenerCriID(String gCriID, boolean ifTemplate) {
 		if (ifTemplate == true) {
 			ArrayList<TemplateDetailedCriteria> tDCris = mTemplate.getDetailedCriterias(gCriID);
-			ArrayList<DetailedCriteria> dCriterias = null;
-			for(TemplateDetailedCriteria tDCri : tDCris) {
+			ArrayList<DetailedCriteria> dCriterias = new ArrayList<DetailedCriteria>();
+			for (TemplateDetailedCriteria tDCri : tDCris) {
 				dCriterias.add(new DetailedCriteria(tDCri));
 			}
 			return dCriterias;
@@ -107,7 +108,6 @@ public class Operations {
 		}
 	}
 
-
 	// delete a general criteria
 
 	public void deleteGeneralCriteria(GeneralCriteria gCriteria, boolean ifTemplate) {
@@ -119,17 +119,17 @@ public class Operations {
 
 		}
 	}
-	
 
-	// click save as template. 
-	// if not save as template, but just the course' s criteria, click 'save' in two steps
-	
+	// click save as template.
+	// if not save as template, but just the course' s criteria, click 'save' in two
+	// steps
+
 	public void saveCriteriaAsTemplate(ArrayList<GeneralCriteria> gCris, ArrayList<DetailedCriteria> dCris) {
 		saveGeneralCriterias(gCris, true);
 		saveDetailedCriterias(dCris, true);
 	}
-	
-	// save the percentage of a detailed criteria, 
+
+	// save the percentage of a detailed criteria,
 
 	public boolean saveDetailedCriterias(ArrayList<DetailedCriteria> dCris, boolean ifTemplate) {
 		boolean flag = false;
@@ -159,7 +159,12 @@ public class Operations {
 	// delete a detailed criteria
 
 	public void deleteDetailedCriteria(DetailedCriteria dCriteria, boolean ifTemplate) {
-		mCriteria.deleteDetailedCriteria(dCriteria);
+		if (ifTemplate == true) {
+			mTemplate.deleteDetailedCriteria(new TemplateDetailedCriteria(dCriteria));
+
+		} else {
+			mCriteria.deleteDetailedCriteria(dCriteria);
+		}
 	}
 
 	// get information for the overview window
@@ -175,27 +180,79 @@ public class Operations {
 
 	// save students ' detailed grades and comments
 	// use uitable.detailedgrades class
-	public void updateStudentsDetailedGrade(ArrayList<DetailedGrades> dGs) {
-		
+	public void updateStudentsDetailedGrade(DetailedCriteria dCriteria, ArrayList<GiveDetailedGrades> gdgs) {
+		for (GiveDetailedGrades gdg : gdgs) {
+			Student s = mStudents.getStudentByBUID(gdg.getBUID()).get(0);
+			CourseStudents cs = mStudents.getStudentCSID(s.getBUID()).get(0);
+			StudentDetailedGrade studentDetailedGrade = new StudentDetailedGrade(cs.getcSID(), dCriteria.getdCriID(),
+					gdg.getScore(), gdg.getComment());
+			mOthers.updateOrSaveStudentDetailedGrade(studentDetailedGrade);
+		}
+
 	}
-	
-	
+
 	// save students information
 	// Thus, the add/delete/edit operations only make sense on GUI
 	// only save make sense on database
-	
+
 	public void updateStudentInfo(ArrayList<Student> students) {
-		for(Student s:students) {
+		for (Student s : students) {
 			mStudents.updateOrSaveStudent(s);
 		}
 	}
-	
+
 	// close a course
 	public void closeCourse(Course c) {
 		c.setState(false);
 		mCourse.updateOrSaveCourse(c);
 	}
-	
-	
+
+	// Grading, this will return a arraylist which could be used directly by the
+	// table
+
+	public ArrayList<GiveDetailedGrades> getStudentsDetailedGrades(Course course, DetailedCriteria dCriteria) {
+		ArrayList<CourseStudents> students = mStudents.getStudentsByCId(course);
+		ArrayList<GiveDetailedGrades> giveDetailedGrades = new ArrayList<GiveDetailedGrades>();
+		for (CourseStudents cs : students) {
+			StudentDetailedGrade sDetailedGrade = mOthers.getStudentDetailedGrade(cs.getcSID(), dCriteria.getdCriID())
+					.get(0);
+			Student s = mStudents.getStudentByBUID(cs.getbUID()).get(0);
+			GiveDetailedGrades giveDetailedGrade = new GiveDetailedGrades(s.getBUID(), s.getFirstName(),
+					s.getMiddleName(), s.getLastName(), sDetailedGrade.getScore());
+			// GiveDetailedGrades giveDetailedGrade = new GiveDetailedGrades(s.getBUID(),
+			// s.getFirstName(), s.getMiddleName(), s.getLastName(),
+			// sDetailedGrade.getScore(), sDetailedGrade.getComment());
+			giveDetailedGrades.add(giveDetailedGrade);
+		}
+		return giveDetailedGrades;
+
+	}
+
+	// Load Information to Manage student information window
+
+	public ArrayList<StudentInfo> getStudentsByCourseID(Course course) {
+		ArrayList<StudentInfo> sInfos = new ArrayList<StudentInfo>();
+		ArrayList<CourseStudents> css = mStudents.getStudentsByCId(course);
+		for (CourseStudents cs : css) {
+			Student student = mStudents.getStudentByBUID(cs.getbUID()).get(0);
+			StudentInfo sInfo = new StudentInfo(student.getBUID(), student.getFirstName(), student.getMiddleName(),
+					student.getLastName(), cs.getCondition());
+			sInfos.add(sInfo);
+		}
+		return sInfos;
+	}
+
+	// Save Information from Manage student information window
+
+	public void saveOpUpdateStudentsInfo(ArrayList<StudentInfo> sInfos, Course c) {
+		for (StudentInfo sInfo : sInfos) {
+			Student student = new Student(sInfo.getBUID(), sInfo.getFirstName(), sInfo.getMiddleName(), sInfo.getLastName());
+			mStudents.updateOrSaveStudent(student);
+			if(sInfo.getCondition().trim().equals("w")==false) {
+				CourseStudents cs = new CourseStudents("", c.getcID(), sInfo.getBUID(), sInfo.getCondition(), "", "");
+				mStudents.updateOrSaveCourseStudent(cs);
+			}
+		}
+	}
 
 }

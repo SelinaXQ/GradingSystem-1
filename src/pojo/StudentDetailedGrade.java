@@ -6,6 +6,13 @@ public class StudentDetailedGrade {
 	private String dCriID;  // Detailed Criteria ID, [HS], created by General Criteria ID(gCriID)[HS] and detailed criteria type(deCriType)
 	private double score;
 	private String comment;
+	
+	public StudentDetailedGrade(String cSID, String dCriID, double score, String comment) {
+		this.cSID = cSID;
+		this.dCriID = dCriID;
+		this.score = score;
+		this.comment = comment;
+	}
 	public String getcSID() {
 		return cSID;
 	}
