@@ -90,9 +90,10 @@ Course
 ArrayList<GeneralCriteria>
 ArrayList<DetailedCriteria> 
 (每个GeneralCriteria 对应一个ArrayList<DetailedCriteria>）
-(但不能分成多个ArrayList<DetailedCriteria>)
+ArrayList<GiveDetailedGrades>
 
 method:
+
 public ArrayList<GeneralCriteria> getGeneralCriteriasByCourseID(String cID, boolean ifTemplate) 
 public boolean saveGeneralCriterias(ArrayList<GeneralCriteria> gCris, boolean ifTemplate)
 return false表示加起来的百分比不等于1
@@ -104,6 +105,20 @@ public ArrayList<GiveDetailedGrades> getStudentsDetailedGrades(Course course, De
 返回直接对应表格每一列的ArrayList，每一项表示一个学生
 
 public void updateStudentsDetailedGrade(DetailedCriteria dCriteria, ArrayList<GiveDetailedGrades> dGs) 
+对应表格每一列的ArrayList，每一项表示一个学生
+
+8. StudentManagement
+
+class（当前页面）：
+ArrayList<StudentInfo>
+Course 
+
+method:
+public ArrayList<StudentInfo> getStudentsByCourseID(Course course) 
+public void saveOpUpdateStudentsInfo(ArrayList<StudentInfo> sInfos, Course c)
+
+9. OverView
+
 
 
 
