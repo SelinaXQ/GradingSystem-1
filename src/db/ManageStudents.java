@@ -11,7 +11,7 @@ import antlr.collections.List;
 
 public class ManageStudents {
 	public ArrayList<Student> getStudents() {
-		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		Session session = HibernateUtil.getSessionFactory().openSession();
 		Transaction tx = null;
 		List students = null;
 		try {
@@ -30,7 +30,7 @@ public class ManageStudents {
 
 	/*
 	 * public ArrayList<Student> getStudentsByCId(Course course) { Session session =
-	 * HibernateUtil.getSessionFactory().getCurrentSession(); List students = null;
+	 * HibernateUtil.getSessionFactory().openSession(); List students = null;
 	 * Criteria criteria = session.createCriteria(CourseStudents.class);
 	 * criteria.add(Restrictions.eq("CID",course.getcID())); students = (List)
 	 * criteria.list();
@@ -39,26 +39,17 @@ public class ManageStudents {
 	 * (HibernateException e) { if (tx != null) tx.rollback(); e.printStackTrace();
 	 * } finally { session.close(); } return (ArrayList<Student>) students; }
 	 */
-
-	public void updateStudent(Student s) {
-		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
-		Transaction tx = null;
-		try {
-			tx = session.beginTransaction();
-			Student student = (Student) session.get(Student.class, s.getBUID());
-			session.update(student);
-			tx.commit();
-		} catch (HibernateException e) {
-			if (tx != null)
-				tx.rollback();
-			e.printStackTrace();
-		} finally {
-			session.close();
-		}
-	}
+	/*
+	 * public void updateStudent(Student s) { Session session =
+	 * HibernateUtil.getSessionFactory().openSession(); Transaction tx = null; try {
+	 * tx = session.beginTransaction(); Student student = (Student)
+	 * session.get(Student.class, s.getBUID()); session.update(student);
+	 * tx.commit(); } catch (HibernateException e) { if (tx != null) tx.rollback();
+	 * e.printStackTrace(); } finally { session.close(); } }
+	 */
 
 	public void deleteStudent(Student s) {
-		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		Session session = HibernateUtil.getSessionFactory().openSession();
 		Transaction tx = null;
 		try {
 			tx = session.beginTransaction();	
@@ -74,12 +65,21 @@ public class ManageStudents {
 		}
 	}
 
-	public void addStudent(Student s) {
-		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+	/*
+	 * public void addStudent(Student s) { Session session =
+	 * HibernateUtil.getSessionFactory().openSession(); Transaction tx = null; try {
+	 * tx = session.beginTransaction(); session.save(s); tx.commit(); } catch
+	 * (HibernateException e) { if (tx != null) tx.rollback(); e.printStackTrace();
+	 * } finally { session.close(); } }
+	 */
+
+	public void updateOrSaveStudent(Student s) {
+		Session session = HibernateUtil.getSessionFactory().openSession();
 		Transaction tx = null;
 		try {
 			tx = session.beginTransaction();
-			session.save(s);
+			Student student = (Student) session.get(Student.class, s.getBUID());
+			session.merge(student);
 			tx.commit();
 		} catch (HibernateException e) {
 			if (tx != null)

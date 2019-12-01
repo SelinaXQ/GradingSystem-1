@@ -50,38 +50,22 @@ public class ManageCourse {
 		return (ArrayList<Course>) courses;
 	}
 
-	public ArrayList<GeneralCriteria> getGeneralCriteriaByCourseID(String cID) {
+	
+
+	public void updateOrSaveCourse(Course c) {
 		Session session = HibernateUtil.getSessionFactory().openSession();
-		List gCris = null;
-		Criteria criteria = session.createCriteria(GeneralCriteria.class);
-		criteria.add(Restrictions.eq("CID", cID));
-		gCris = (List) criteria.list();
-		session.close();
-		return (ArrayList<GeneralCriteria>) gCris;
-	}
-
-	public ArrayList<DetailedCriteria> getDetailedCriterias(String gCriID) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public void deleteGeneralCriteria(GeneralCriteria gCriteria) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	public void deleteDetailedCriteria(DetailedCriteria dCriteria) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	public void updateOrSaveGeneralCriteria(GeneralCriteria gCri) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	public void updateOrSaveDetailedCriteria(DetailedCriteria dCri) {
-		// TODO Auto-generated method stub
-		
+		Transaction tx = null;
+		try {
+			tx = session.beginTransaction();
+			Course course = (Course) session.get(Course.class, c.getcID());
+			session.merge(course);
+			tx.commit();
+		} catch (HibernateException e) {
+			if (tx != null)
+				tx.rollback();
+			e.printStackTrace();
+		} finally {
+			session.close();
+		}
 	}
 }

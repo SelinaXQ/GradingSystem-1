@@ -3,6 +3,7 @@ package db;
 import java.util.ArrayList;
 
 import pojo.*;
+import uitable.DetailedGrades;
 import uitable.Overview;
 
 public class Operations {
@@ -60,7 +61,7 @@ public class Operations {
 			}
 			return gCriterias;
 		} else {
-			return mCourse.getGeneralCriteriaByCourseID(cID);
+			return mCriteria.getGeneralCriteriaByCourseID(cID);
 		}
 	}
 
@@ -75,7 +76,7 @@ public class Operations {
 			}
 			return dCriterias;
 		} else {
-			return mCourse.getDetailedCriterias(gCriID);
+			return mCriteria.getDetailedCriterias(gCriID);
 		}
 	}
 
@@ -99,7 +100,7 @@ public class Operations {
 				}
 			} else {
 				for (GeneralCriteria gCri : gCris) {
-					mCourse.updateOrSaveGeneralCriteria(gCri);
+					mCriteria.updateOrSaveGeneralCriteria(gCri);
 				}
 			}
 			return flag;
@@ -114,7 +115,7 @@ public class Operations {
 			mTemplate.deleteGeneralCriteria(new TemplateGeneralCriteria(gCriteria));
 
 		} else {
-			mCourse.deleteGeneralCriteria(gCriteria);
+			mCriteria.deleteGeneralCriteria(gCriteria);
 
 		}
 	}
@@ -148,7 +149,7 @@ public class Operations {
 				}
 			} else {
 				for (DetailedCriteria dCri : dCris) {
-					mCourse.updateOrSaveDetailedCriteria(dCri);
+					mCriteria.updateOrSaveDetailedCriteria(dCri);
 				}
 			}
 			return flag;
@@ -158,7 +159,7 @@ public class Operations {
 	// delete a detailed criteria
 
 	public void deleteDetailedCriteria(DetailedCriteria dCriteria, boolean ifTemplate) {
-		mCourse.deleteDetailedCriteria(dCriteria);
+		mCriteria.deleteDetailedCriteria(dCriteria);
 	}
 
 	// get information for the overview window
@@ -174,11 +175,27 @@ public class Operations {
 
 	// save students ' detailed grades and comments
 	// use uitable.detailedgrades class
+	public void updateStudentsDetailedGrade(ArrayList<DetailedGrades> dGs) {
+		
+	}
+	
 	
 	// save students information
 	// Thus, the add/delete/edit operations only make sense on GUI
 	// only save make sense on database
 	
+	public void updateStudentInfo(ArrayList<Student> students) {
+		for(Student s:students) {
+			mStudents.updateOrSaveStudent(s);
+		}
+	}
+	
 	// close a course
+	public void closeCourse(Course c) {
+		c.setState(false);
+		mCourse.updateOrSaveCourse(c);
+	}
+	
+	
 
 }
