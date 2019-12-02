@@ -6,10 +6,12 @@ package uitable;
 public class GeneralGrade {
 	private String gCriID;  // *, General Criteria ID, [HS], created by courseID(cID) and genenal criteria type(GenCriType)
 	private double score;
+	private double per;
 	
-	public GeneralGrade(String gCriID, double score) {
+	public GeneralGrade(String gCriID,  double per, double score) {
 		super();
 		this.gCriID = gCriID;
+		this.per = per;
 		this.score = score;
 	}
 	public String getgCriID() {
@@ -23,6 +25,12 @@ public class GeneralGrade {
 	}
 	public void setScore(double score) {
 		this.score = score;
+	}
+	public double getPer() {
+		return per;
+	}
+	public void setPer(double per) {
+		this.per = per;
 	}
 	
 }

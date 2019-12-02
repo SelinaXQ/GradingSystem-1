@@ -7,13 +7,15 @@ public class DetailedCriteria {
 							// type(GenCriType)
 	private String deCriType; // Detailed Criteria Type, Assignment1, Assignment2
 	private double deCriPer; // Detailed Criteria Type 's Percentage
+	private double totalScore;
 
-	public DetailedCriteria(String dCriID, String gCriID, String deCriType, double deCriPer) {
+	public DetailedCriteria(String dCriID, String gCriID, String deCriType, double deCriPer, double totalScore) {
 		super();
 		this.dCriID = dCriID;
 		this.gCriID = gCriID;
 		this.deCriType = deCriType;
 		this.deCriPer = deCriPer;
+		this.totalScore = totalScore;
 	}
 
 	public DetailedCriteria(TemplateDetailedCriteria tDCri) {
@@ -21,6 +23,15 @@ public class DetailedCriteria {
 		this.gCriID = tDCri.getgCriID();
 		this.deCriType = tDCri.getDeCriType();
 		this.deCriPer = tDCri.getDeCriPer();
+		this.totalScore = tDCri.getTotalScore();
+	}
+
+	public double getTotalScore() {
+		return totalScore;
+	}
+
+	public void setTotalScore(double totalScore) {
+		this.totalScore = totalScore;
 	}
 
 	public String getdCriID() {

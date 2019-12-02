@@ -6,19 +6,29 @@ public class TemplateDetailedCriteria {
 	private String gCriID; // General Criteria ID, [HS], created by courseID(cID) and genenal criteria type(GenCriType)
 	private String deCriType; // Detailed Criteria Type, Assignment1, Assignment2
 	private double deCriPer; // Detailed Criteria Type 's Percentage
+	private double totalScore;
 	
-	public TemplateDetailedCriteria(String dCriID, String gCriID, String deCriType, double deCriPer) {
+	public TemplateDetailedCriteria(String dCriID, String gCriID, String deCriType, double deCriPer, double totalScore) {
 		super();
 		this.dCriID = dCriID;
 		this.gCriID = gCriID;
 		this.deCriType = deCriType;
 		this.deCriPer = deCriPer;
+		this.totalScore = totalScore;
 	}
 	public TemplateDetailedCriteria(DetailedCriteria dCri) {
 		this.dCriID = dCri.getdCriID();
 		this.gCriID = dCri.getgCriID();
 		this.deCriType = dCri.getDeCriType();
 		this.deCriPer = dCri.getDeCriPer();
+		this.totalScore = dCri.getTotalScore();
+	}
+	
+	public double getTotalScore() {
+		return totalScore;
+	}
+	public void setTotalScore(double totalScore) {
+		this.totalScore = totalScore;
 	}
 	public String getdCriID() {
 		return dCriID;

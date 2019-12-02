@@ -9,12 +9,12 @@ import pojo.Student;
 // each attribute is corresponding to a column in that table
 public class Overview {
 	private Student student;
-	private HashMap<String, DetailedGrade> dcs;  // the String is the general Score 's id (primary key)
+	private ArrayList<HashMap<String, DetailedGrade>> dcs;  // the String is the general Score 's id (primary key)
 	private ArrayList<GeneralGrade> gcScores;
 	private double total; // composite
 	private String grade;  // A+, A, ...
 	
-	public Overview(Student student, HashMap<String, DetailedGrade> dcs, ArrayList<GeneralGrade> gcScores, double total,
+	public Overview(Student student, ArrayList<HashMap<String, DetailedGrade>> dcs, ArrayList<GeneralGrade> gcScores, double total,
 			String grade) {
 		super();
 		this.student = student;
@@ -22,6 +22,7 @@ public class Overview {
 		this.gcScores = gcScores;
 		this.total = total;
 		this.grade = grade;
+	
 	}
 	public Student getStudent() {
 		return student;
@@ -29,10 +30,11 @@ public class Overview {
 	public void setStudent(Student student) {
 		this.student = student;
 	}
-	public HashMap<String, DetailedGrade> getDcs() {
+	
+	public ArrayList<HashMap<String, DetailedGrade>> getDcs() {
 		return dcs;
 	}
-	public void setDcs(HashMap<String, DetailedGrade> dcs) {
+	public void setDcs(ArrayList<HashMap<String, DetailedGrade>> dcs) {
 		this.dcs = dcs;
 	}
 	public ArrayList<GeneralGrade> getGcScores() {

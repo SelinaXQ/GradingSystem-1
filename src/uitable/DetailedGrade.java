@@ -6,12 +6,23 @@ package uitable;
 public class DetailedGrade {
 	private String dCriID;  // Detailed Criteria ID, [HS], created by General Criteria ID(gCriID)[HS] and detailed criteria type(deCriType)
 	private double score;
+	private double per;
 	
-	public DetailedGrade(String dCriID, double score) {
+	public DetailedGrade(String dCriID, double score,double per) {
 		super();
 		this.dCriID = dCriID;
 		this.score = score;
+		this.per = per;
 	}
+	
+	public double getPer() {
+		return per;
+	}
+
+	public void setPer(double per) {
+		this.per = per;
+	}
+
 	public String getdCriID() {
 		return dCriID;
 	}

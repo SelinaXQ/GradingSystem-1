@@ -4,10 +4,10 @@
 <!-- Generated 2019??11??27?? ????11:42:48 by Hibernate Tools 3.5.0.Final -->
 <hibernate-mapping>
     <class name="po.StudentDetailedGrade" table="STUDENTDETAILEDGRADE">
-        <id name="cSID" type="java.lang.String" access="field">
+        <property name="cSID" type="java.lang.String" access="field">
             <column name="CSID" />
             <generator class="assigned" />
-        </id>
+        </property>
         <property name="dCriID" type="java.lang.String" access="field">
             <column name="DCRIID" />
         </property>

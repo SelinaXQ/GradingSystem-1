@@ -28,7 +28,7 @@ public class ManageCourse {
 		List semesters = null;
 		try {
 			tx = session.beginTransaction();
-			semesters = (List) session.createQuery("FROM SemesterInfo").list();
+			semesters = (List) session.createQuery("FROM Semesters").list();
 			tx.commit();
 		} catch (HibernateException e) {
 			if (tx != null)

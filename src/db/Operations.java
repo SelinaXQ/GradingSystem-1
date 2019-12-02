@@ -1,8 +1,11 @@
 package db;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import pojo.*;
+import uitable.DetailedGrade;
+import uitable.GeneralGrade;
 import uitable.GiveDetailedGrades;
 import uitable.Overview;
 import uitable.StudentInfo;
@@ -169,13 +172,59 @@ public class Operations {
 
 	// get information for the overview window
 
-	public ArrayList<Overview> getOverviewInfoByCourseID(String cID) {
-		return null;
+	public ArrayList<Overview> getOverviewInfoByCourseID(Course course) {
+		ArrayList<Overview> overviews = new ArrayList<Overview>();
+		ArrayList<CourseStudents> students = mStudents.getStudentsByCId(course);
+		for (CourseStudents s : students) {
+			Student student = mStudents.getStudentByBUID(s.getbUID()).get(0);
+			ArrayList<GeneralCriteria> gcs = mCriteria.getGeneralCriteriaByCourseID(course.getcID());
+			ArrayList<HashMap<String, DetailedGrade>> dgs = new ArrayList<HashMap<String, DetailedGrade>>();
+			ArrayList<GeneralGrade> genGrades = new ArrayList<GeneralGrade>();
+			for (GeneralCriteria gc : gcs) {
+				HashMap<String, DetailedGrade> dList = new HashMap<String, DetailedGrade>();
+				ArrayList<DetailedCriteria> dCs = mCriteria.getDetailedCriterias(gc.getgCriID());
+				for (DetailedCriteria dc : dCs) {
+					StudentDetailedGrade sdGrade = mOthers.getStudentDetailedGrade(s.getcSID(), dc.getdCriID()).get(0);
+					double grade = sdGrade.getScore();
+					double totalScore = dc.getTotalScore();
+					double per = dc.getDeCriPer();
+					if (grade < 0) {
+						grade = (totalScore - grade) / totalScore;
+					}
+					DetailedGrade dGrade = new DetailedGrade(dc.getdCriID(), grade, per);
+					dList.put(gc.getgCriID(), dGrade);
+				}
+				dgs.add(dList);
+				GeneralGrade gg = new GeneralGrade(gc.getgCriID(), gc.getGenCriPer(), getGeneralGrades(dList, gc));
+				genGrades.add(gg);
+			}
+			Overview overview = new Overview(student, dgs, genGrades, getOverviewPercentage(genGrades), "");
+			overviews.add(overview);
+		}
+		return overviews;
+	}
+
+	// get a general criteria score
+	private double getGeneralGrades(HashMap<String, DetailedGrade> dgs, GeneralCriteria gc) {
+		double totalScore = 0;
+		for (String gCriID : dgs.keySet()) {
+			DetailedGrade dGrade = dgs.get(gCriID);
+			double per = dGrade.getPer();
+			double score = dGrade.getScore();
+			totalScore += per * score;
+		}
+		return totalScore;
 	}
 
 	// get overview score for the overview window
-	public double getOverviewPercentage() {
-		return 0;
+	private double getOverviewPercentage(ArrayList<GeneralGrade> ggs) {
+		double totalScore = 0;
+		for (GeneralGrade gg : ggs) {
+			double per = gg.getPer();
+			double score = gg.getScore();
+			totalScore += per * score;
+		}
+		return totalScore;
 	}
 
 	// save students ' detailed grades and comments
@@ -203,7 +252,7 @@ public class Operations {
 
 	// close a course
 	public void closeCourse(Course c) {
-		c.setState(false);
+		c.setState(0);
 		mCourse.updateOrSaveCourse(c);
 	}
 
@@ -246,9 +295,10 @@ public class Operations {
 
 	public void saveOpUpdateStudentsInfo(ArrayList<StudentInfo> sInfos, Course c) {
 		for (StudentInfo sInfo : sInfos) {
-			Student student = new Student(sInfo.getBUID(), sInfo.getFirstName(), sInfo.getMiddleName(), sInfo.getLastName());
+			Student student = new Student(sInfo.getBUID(), sInfo.getFirstName(), sInfo.getMiddleName(),
+					sInfo.getLastName());
 			mStudents.updateOrSaveStudent(student);
-			if(sInfo.getCondition().trim().equals("w")==false) {
+			if (sInfo.getCondition().trim().equals("w") == false) {
 				CourseStudents cs = new CourseStudents("", c.getcID(), sInfo.getBUID(), sInfo.getCondition(), "", "");
 				mStudents.updateOrSaveCourseStudent(cs);
 			}
