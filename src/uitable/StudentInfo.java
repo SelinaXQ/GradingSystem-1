@@ -6,6 +6,11 @@ public class StudentInfo {
 	private String middleName;
 	private String lastName;
 	private String condition; // w or null
+	
+	public StudentInfo() {
+		
+	}
+	
 	public StudentInfo(String bUID, String firstName, String middleName, String lastName, String condition) {
 		super();
 		this.BUID = bUID;
@@ -44,4 +49,13 @@ public class StudentInfo {
 	public void setCondition(String condition) {
 		this.condition = condition;
 	}
+
+	@Override
+	public String toString() {
+		return BUID + "," + firstName + "," + middleName + "," + lastName + "," + condition;
+			
+	}
+	
+	
+	
 }

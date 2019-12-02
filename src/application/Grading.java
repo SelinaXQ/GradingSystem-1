@@ -1,23 +1,26 @@
 package application;
 	
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.*;
+
+import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
+
 
 import javafx.application.Application;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-import pojo.*;
+import uitable.StudentInfo;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.layout.BorderPane;
 
 
 
 public class Grading extends Application {
+	
+	List<StudentInfo> studentList = new ArrayList<>();
 	
 	@Override
 	public void start(Stage primaryStage) throws IOException {
@@ -39,7 +42,7 @@ public class Grading extends Application {
 	}
 	
 	@FXML
-	private void importExcel() throws IOException{
+	private void importExcel() throws IOException, InvalidFormatException{
 		FileChooser fileChooser = new FileChooser();
 		System.out.println("importing...");
 		fileChooser.setTitle("Open Resource File");
@@ -52,8 +55,15 @@ public class Grading extends Application {
 		if(file != null) {
 			System.out.println("import success!");
 			
+			studentList = ExcelUtil.getStudentList(file);
 			
-			
+			int size = studentList.size();
+			System.out.println("student size: " + size);
+			for(int i = 0; i < size; i++) {
+				StudentInfo stu = studentList.get(i);
+				System.out.println(stu.toString());
+				
+			}
 		}
 		
 		
