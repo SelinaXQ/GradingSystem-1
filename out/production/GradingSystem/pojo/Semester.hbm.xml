@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2019??12??2?? ????5:26:58 by Hibernate Tools 3.5.0.Final -->
+<hibernate-mapping>
+    <class name="pojo.Semester" table="SEMESTERS">
+        <id name="semID" type="java.lang.String">
+            <column name="SEMID" />
+            <generator class="assigned" />
+        </id>
+    </class>
+</hibernate-mapping>

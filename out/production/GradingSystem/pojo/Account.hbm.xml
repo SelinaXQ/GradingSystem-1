@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping">
+<!-- Generated 2019??12??2?? ????5:26:58 by Hibernate Tools 3.5.0.Final -->
+<hibernate-mapping>
+    <class name="pojo.Account" table="ACCOUNT">
+        <id name="userName" type="java.lang.String">
+            <column name="USERNAME" />
+        </id>
+        <property name="password" type="java.lang.String">
+            <column name="PASSWORD" />
+        </property>
+    </class>
+</hibernate-mapping>

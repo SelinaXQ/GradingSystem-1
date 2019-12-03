@@ -10,18 +10,17 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 
-public class CourseOverview extends Application{
-	@Override
-	public void start(Stage primaryStage) throws IOException {
+public class Login extends Application{
+    @Override
+    public void start(Stage primaryStage) throws IOException {
 
-		Parent root = FXMLLoader.load(getClass().getResource("courseOverview.fxml"));
-        primaryStage.setTitle("current semester");
+        Parent root = FXMLLoader.load(getClass().getResource("Login.fxml"));
+        primaryStage.setTitle("Welcome!");
         primaryStage.setScene(new Scene(root, 600, 600));
         primaryStage.show();
-	}
-	
-	public static void main(String[] args) {
+    }
 
-		launch(args);
-	}
+    public static void main(String[] args) {
+        launch(args);
+    }
 }
