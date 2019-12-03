@@ -1,13 +1,12 @@
 package db;
 
-import java.util.ArrayList;
+import java.util.*;
 
 import org.hibernate.*;
 import org.hibernate.criterion.Restrictions;
 
 import pojo.*;
 
-import antlr.collections.List;
 
 public class ManageStudents {
 
@@ -25,7 +24,7 @@ public class ManageStudents {
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		List students = null;
 		Criteria criteria = session.createCriteria(CourseStudents.class);
-		criteria.add(Restrictions.eq("CID", course.getcID()));
+		criteria.add(Restrictions.eq("cID", course.getcID()));
 		students = (List) criteria.list();
 		session.close();
 		return (ArrayList<CourseStudents>) students;
@@ -40,12 +39,12 @@ public class ManageStudents {
 	 * e.printStackTrace(); } finally { session.close(); } }
 	 */
 
-	public void deleteStudent(Student s) {
+	public void deleteStudent(CourseStudents cStudents) {
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		Transaction tx = null;
 		try {
 			tx = session.beginTransaction();
-			Student student = (Student) session.get(Student.class, s.getBUID());
+			CourseStudents student = (CourseStudents) session.get(CourseStudents.class, cStudents.getcSID());
 			session.delete(student);
 			tx.commit();
 		} catch (HibernateException e) {
@@ -70,8 +69,7 @@ public class ManageStudents {
 		Transaction tx = null;
 		try {
 			tx = session.beginTransaction();
-			Student student = (Student) session.get(Student.class, s.getBUID());
-			session.merge(student);
+			session.saveOrUpdate(s);
 			tx.commit();
 		} catch (HibernateException e) {
 			if (tx != null)
@@ -87,10 +85,12 @@ public class ManageStudents {
 		Transaction tx = null;
 		try {
 			tx = session.beginTransaction();
-			CourseStudents cStudent = (CourseStudents) session.get(CourseStudents.class, cs.getcSID());
-			session.merge(cStudent);
+			System.out.println(cs.getcSID());
+			session.saveOrUpdate(cs);
 			tx.commit();
 		} catch (HibernateException e) {
+			
+			System.out.println(cs.getcSID());
 			if (tx != null)
 				tx.rollback();
 			e.printStackTrace();
@@ -103,7 +103,7 @@ public class ManageStudents {
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		List students = null;
 		Criteria criteria = session.createCriteria(CourseStudents.class);
-		criteria.add(Restrictions.eq("BUID", buid));
+		criteria.add(Restrictions.eq("bUID", buid));
 		students = (List) criteria.list();
 		session.close();
 		return (ArrayList<CourseStudents>) students;

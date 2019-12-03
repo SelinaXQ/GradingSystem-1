@@ -3,7 +3,7 @@
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <!-- Generated 2019??12??2?? ????5:26:58 by Hibernate Tools 3.5.0.Final -->
 <hibernate-mapping>
-    <class name="pojo.CourseStudents" table="COURSESTUDENTS">
+    <class name="pojo.CourseStudents" table="COURSESSTUDENTS">
     	<id name="cSID" type="java.lang.String" access="field">
             <column name="CSID" />
             <generator class="uuid" />
@@ -16,7 +16,7 @@
             <column name="BUID" />
         </property>
         <property name="condition" type="java.lang.String">
-            <column name="CONDITION" />
+            <column name="CON" />
         </property>
         <property name="grade" type="java.lang.String">
             <column name="GRADE" />

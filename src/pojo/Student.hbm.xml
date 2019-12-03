@@ -3,7 +3,7 @@
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <!-- Generated 2019??12??2?? ????5:26:58 by Hibernate Tools 3.5.0.Final -->
 <hibernate-mapping>
-    <class name="pojo.Student" table="STUDENT">
+    <class name="pojo.Student" table="STUDENTS">
         <id name="BUID" type="java.lang.String">
             <column name="BUID" />
             <generator class="assigned" />

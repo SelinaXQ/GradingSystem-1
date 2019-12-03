@@ -17,7 +17,9 @@ public class ManageOthers {
 	public ArrayList<Account> getAccount(String userName) {
 		Transaction transaction = null;
 		List<Account> accs = null;
-		try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+		Session session = null;
+		try{
+			session = HibernateUtil.getSessionFactory().openSession();
 			transaction = session.beginTransaction();
 			CriteriaBuilder builder = session.getCriteriaBuilder();
 			CriteriaQuery<Account> query = builder.createQuery(Account.class);
@@ -31,6 +33,8 @@ public class ManageOthers {
 			if (transaction != null) {
 				transaction.rollback();
 			}
+		}finally {
+			session.close();
 		}
 		return (ArrayList<Account>) accs;
 
@@ -39,8 +43,9 @@ public class ManageOthers {
 	public ArrayList<StudentDetailedGrade> getStudentDetailedGrade(String cSID, String dCriID) {
 		Transaction transaction = null;
 		List<StudentDetailedGrade> studentDetailedGrades = null;
+		Session session = null;
 		try {
-			Session session = HibernateUtil.getSessionFactory().openSession();
+			session = HibernateUtil.getSessionFactory().openSession();
 			transaction = session.beginTransaction();
 			CriteriaBuilder builder = session.getCriteriaBuilder();
 			CriteriaQuery<StudentDetailedGrade> query = builder.createQuery(StudentDetailedGrade.class);
@@ -56,6 +61,8 @@ public class ManageOthers {
 			if (transaction != null) {
 				transaction.rollback();
 			}
+		}finally {
+			session.close();
 		}
 		return (ArrayList<StudentDetailedGrade>) studentDetailedGrades;
 

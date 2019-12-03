@@ -1,6 +1,6 @@
 package db;
 
-import java.util.ArrayList;
+import java.util.*;
 
 import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
@@ -8,8 +8,6 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
 
-import antlr.collections.List;
-import pojo.DetailedCriteria;
 import pojo.GeneralCriteria;
 import pojo.TemplateDetailedCriteria;
 import pojo.TemplateGeneralCriteria;
@@ -20,7 +18,7 @@ public class ManageTemplate {
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		List gCris = null;
 		Criteria criteria = session.createCriteria(GeneralCriteria.class);
-		criteria.add(Restrictions.eq("CID", cID));
+		criteria.add(Restrictions.eq("cID", cID));
 		gCris = (List) criteria.list();
 		session.close();
 		return (ArrayList<TemplateGeneralCriteria>) gCris;
@@ -30,7 +28,7 @@ public class ManageTemplate {
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		List dCris = null;
 		Criteria criteria = session.createCriteria(GeneralCriteria.class);
-		criteria.add(Restrictions.eq("GCriID", gCriID));
+		criteria.add(Restrictions.eq("gCriID", gCriID));
 		dCris = (List) criteria.list();
 		session.close();
 		return (ArrayList<TemplateDetailedCriteria>) dCris;

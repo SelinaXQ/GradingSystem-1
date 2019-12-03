@@ -240,16 +240,6 @@ public class Operations {
 
 	}
 
-	// save students information
-	// Thus, the add/delete/edit operations only make sense on GUI
-	// only save make sense on database
-
-	public void updateStudentInfo(ArrayList<Student> students) {
-		for (Student s : students) {
-			mStudents.updateOrSaveStudent(s);
-		}
-	}
-
 	// close a course
 	public void closeCourse(Course c) {
 		c.setState(0);
@@ -299,10 +289,18 @@ public class Operations {
 					sInfo.getLastName());
 			mStudents.updateOrSaveStudent(student);
 			if (sInfo.getCondition().trim().equals("w") == false) {
-				CourseStudents cs = new CourseStudents("", c.getcID(), sInfo.getBUID(), sInfo.getCondition(), "", "");
+				CourseStudents cs = new CourseStudents();
+				cs.setbUID(sInfo.getBUID());
+				cs.setcID(c.getcID());
+				cs.setCondition(sInfo.getCondition());
 				mStudents.updateOrSaveCourseStudent(cs);
 			}
 		}
+	}
+	
+	public void deleteStudentInfo(StudentInfo sInfo) {
+		CourseStudents cStudents = mStudents.getStudentCSID(sInfo.getBUID()).get(0);
+		mStudents.deleteStudent(cStudents);
 	}
 
 }

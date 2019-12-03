@@ -9,8 +9,9 @@ public class Course {
 	private int state; // closed or not, 0 = closed, 1 = open
 
 	public Course() {
-		
+
 	}
+
 	public Course(String cID, String cName, String semID, String college, int state) {
 		super();
 		this.cID = cID;
@@ -52,7 +53,6 @@ public class Course {
 		this.college = college;
 	}
 
-	
 	public int getState() {
 		return state;
 	}
@@ -62,7 +62,11 @@ public class Course {
 	}
 
 	public String toString() {
-		return college + " " + cName;
+		if (state == 0) {
+			return college + " " + cName + "   Closed";
+		} else {
+			return college + " " + cName;
+		}
 	}
 
 }
