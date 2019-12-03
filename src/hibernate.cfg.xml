@@ -1,25 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE hibernate-configuration PUBLIC
-		"-//Hibernate/Hibernate Configuration DTD 3.0//EN"
-		"http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<!DOCTYPE hibernate-configuration PUBLIC "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+                                         "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
 <hibernate-configuration>
-    <session-factory>
-    <property name="hibernate.connection.username">root</property>
-      <property name="hibernate.connection.password">123321</property>
-      <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
-      <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
-      <property name="hibernate.connection.url">jdbc:mysql:///gradingsys</property>
-      <property name="hibernate.show_sql">true</property>
-      <property name="hibernate.format_sql">true</property>
-	<mapping resource="po/Account.hbm.xml"/>
-	<mapping resource="po/Course.hbm.xml"/>
-	<mapping resource="po/CourseStudents.hbm.xml"/>
-	<mapping resource="po/DetailedCriteria.hbm.xml"/>
-	<mapping resource="po/GeneralCriteria.hbm.xml"/>
-	<mapping resource="po/Semester.hbm.xml"/>
-	<mapping resource="po/Student.hbm.xml"/>
-	<mapping resource="po/StudentDetailedGrade.hbm.xml"/>
-	<mapping resource="po/TemplateDetailedCriteria.hbm.xml"/>
-	<mapping resource="po/TemplateGeneralCriteria.hbm.xml"/>
-    </session-factory>
+	<session-factory>
+		<property name="hibernate.connection.driver_class">com.mysql.cj.jdbc.Driver</property>
+		<property name="hibernate.connection.password">123321</property>
+		<property name="hibernate.connection.url">jdbc:mysql://localhost:3306/gradingsys?serverTimezone=America/New_York</property>
+		<property name="hibernate.connection.username">root</property>
+		<property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
+		<property name="hibernate.format_sql">true</property>
+		<property name="hibernate.show_sql">true</property>
+		<mapping resource="pojo/Account.hbm.xml" />
+		<mapping resource="pojo/Course.hbm.xml" />
+		<mapping resource="pojo/CourseStudents.hbm.xml" />
+		<mapping resource="pojo/DetailedCriteria.hbm.xml" />
+		<mapping resource="pojo/GeneralCriteria.hbm.xml" />
+		<mapping resource="pojo/Semester.hbm.xml" />
+		<mapping resource="pojo/Student.hbm.xml" />
+		<mapping resource="pojo/StudentDetailedGrade.hbm.xml" />
+		<mapping resource="pojo/TemplateDetailedCriteria.hbm.xml" />
+		<mapping resource="pojo/TemplateGeneralCriteria.hbm.xml" />
+	</session-factory>
 </hibernate-configuration>

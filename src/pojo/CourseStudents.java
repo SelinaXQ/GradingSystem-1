@@ -8,7 +8,9 @@ public class CourseStudents {
 	private String condition; // w or null
 	private String grade; // A+ , A-
 	private String comment;
-	
+	public CourseStudents() {
+		
+	}
 	public CourseStudents(String cSID, String cID, String bUID, String condition, String grade, String comment) {
 		super();
 		this.cSID = cSID;

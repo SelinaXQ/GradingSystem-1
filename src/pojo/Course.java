@@ -8,6 +8,9 @@ public class Course {
 	private String college; // college, CAS, GRS
 	private int state; // closed or not, 0 = closed, 1 = open
 
+	public Course() {
+		
+	}
 	public Course(String cID, String cName, String semID, String college, int state) {
 		super();
 		this.cID = cID;

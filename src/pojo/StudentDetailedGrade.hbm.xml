@@ -1,18 +1,21 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-<!-- Generated 2019??11??27?? ????11:42:48 by Hibernate Tools 3.5.0.Final -->
+<!-- Generated 2019??12??2?? ????5:26:58 by Hibernate Tools 3.5.0.Final -->
 <hibernate-mapping>
-    <class name="po.StudentDetailedGrade" table="STUDENTDETAILEDGRADE">
-        <property name="cSID" type="java.lang.String" access="field">
+    <class name="pojo.StudentDetailedGrade" table="STUDENTDETAILEDGRADE">
+        <id name="cSID" type="java.lang.String" access="field">
             <column name="CSID" />
             <generator class="assigned" />
-        </property>
+        </id>
         <property name="dCriID" type="java.lang.String" access="field">
             <column name="DCRIID" />
         </property>
         <property name="score" type="double">
             <column name="SCORE" />
+        </property>
+        <property name="comment" type="java.lang.String">
+            <column name="COMMENT" />
         </property>
     </class>
 </hibernate-mapping>

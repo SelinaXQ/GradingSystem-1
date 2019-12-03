@@ -1,6 +1,6 @@
 package db;
 
-import java.util.ArrayList;
+import java.util.*;
 
 import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
@@ -8,13 +8,12 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
 
-import antlr.collections.List;
 import pojo.*;
 
 public class ManageCourse {
 	public ArrayList<Course> getCoursesBySemester(String semester){
 		Session session = HibernateUtil.getSessionFactory().openSession();
-		List courses = null;
+		List<Course> courses = null;
 		Criteria criteria = session.createCriteria(Course.class);
 		criteria.add(Restrictions.eq("SEMID", semester));
 		courses = (List) criteria.list();
@@ -25,7 +24,7 @@ public class ManageCourse {
 	public ArrayList<Semester> getSemesters(){
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		Transaction tx = null;
-		List semesters = null;
+		List<Semester> semesters = null;
 		try {
 			tx = session.beginTransaction();
 			semesters = (List) session.createQuery("FROM Semesters").list();

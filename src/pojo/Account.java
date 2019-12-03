@@ -4,12 +4,15 @@ package pojo;
 public class Account {
 	// no key
 	private String userName;  // cpk
-	private String passward;  // cpk
+	private String password;  // cpk
 	
-	public Account(String userName, String passward) {
+	public Account() {
+		
+	}
+	public Account(String userName, String password) {
 		super();
 		this.userName = userName;
-		this.passward = passward;
+		this.password = password;
 	}
 	public String getUserName() {
 		return userName;
@@ -17,10 +20,10 @@ public class Account {
 	public void setUserName(String userName) {
 		this.userName = userName;
 	}
-	public String getPassward() {
-		return passward;
+	public String getPassword() {
+		return password;
 	}
-	public void setPassward(String passward) {
-		this.passward = passward;
+	public void setPassword(String password) {
+		this.password = password;
 	}
 }

@@ -1,15 +1,14 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
-"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-<!-- Generated 2019??11??27?? ????11:42:48 by Hibernate Tools 3.5.0.Final -->
+"http://www.hibernate.org/dtd/hibernate-mapping">
+<!-- Generated 2019??12??2?? ????5:26:58 by Hibernate Tools 3.5.0.Final -->
 <hibernate-mapping>
-    <class name="po.Account" table="ACCOUNT">
+    <class name="pojo.Account" table="ACCOUNT">
         <id name="userName" type="java.lang.String">
             <column name="USERNAME" />
-            <generator class="assigned" />
         </id>
-        <property name="passward" type="java.lang.String">
-            <column name="PASSWARD" />
+        <property name="password" type="java.lang.String">
+            <column name="PASSWORD" />
         </property>
     </class>
 </hibernate-mapping>

@@ -8,6 +8,10 @@ public class GeneralCriteria {
 	private String genCriType; // General Criteria Type, Assignment, Quiz, Exam
 	private double genCriPer; // General Criteria Type 's Percentage
 
+	public GeneralCriteria() {
+
+	}
+
 	public GeneralCriteria(String gCriID, String cID, String genCriType, double genCriPer) {
 		super();
 		this.gCriID = gCriID;

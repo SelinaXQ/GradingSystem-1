@@ -9,6 +9,10 @@ public class DetailedCriteria {
 	private double deCriPer; // Detailed Criteria Type 's Percentage
 	private double totalScore;
 
+	public DetailedCriteria() {
+
+	}
+
 	public DetailedCriteria(String dCriID, String gCriID, String deCriType, double deCriPer, double totalScore) {
 		super();
 		this.dCriID = dCriID;

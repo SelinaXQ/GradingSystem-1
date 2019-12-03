@@ -11,11 +11,11 @@ import uitable.Overview;
 import uitable.StudentInfo;
 
 public class Operations {
-	ManageCourse mCourse;
-	ManageCriteria mCriteria;
-	ManageStudents mStudents;
-	ManageTemplate mTemplate;
-	ManageOthers mOthers;
+	static ManageCourse mCourse;
+	static ManageCriteria mCriteria;
+	static ManageStudents mStudents;
+	static ManageTemplate mTemplate;
+	public static ManageOthers mOthers;
 
 	public Operations() {
 		mCourse = new ManageCourse();
@@ -30,7 +30,7 @@ public class Operations {
 	public boolean login(String userName, String pwd) {
 		boolean flag = false;
 		Account account = mOthers.getAccount(userName).get(0);
-		if (account.getPassward().equals(pwd)) {
+		if (account.getPassword().equals(pwd)) {
 			flag = true;
 		}
 		return flag;
