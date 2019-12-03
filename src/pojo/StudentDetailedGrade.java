@@ -1,7 +1,7 @@
 package pojo;
 
 public class StudentDetailedGrade {
-	// no key
+	private String sDGId; // *
 	private String cSID; // created by courseID and buID, [HS]
 	private String dCriID; // Detailed Criteria ID, [HS], created by General Criteria ID(gCriID)[HS] and
 							// detailed criteria type(deCriType)
@@ -17,6 +17,14 @@ public class StudentDetailedGrade {
 		this.dCriID = dCriID;
 		this.score = score;
 		this.comment = comment;
+	}
+
+	public String getSDGid() {
+		return sDGId;
+	}
+
+	public void setSDGid(String sDGid) {
+		this.sDGId = sDGid;
 	}
 
 	public String getcSID() {

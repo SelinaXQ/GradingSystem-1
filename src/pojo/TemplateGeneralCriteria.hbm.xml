@@ -6,7 +6,7 @@
     <class name="pojo.TemplateGeneralCriteria" table="TEMPLATEGENERALCRITERIA">
         <id name="cID" type="java.lang.String" access="field">
             <column name="CID" />
-            <generator class="assigned" />
+            <generator class="uuid" />
         </id>
         <property name="gCriID" type="java.lang.String" access="field">
             <column name="GCRIID" />
