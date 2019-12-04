@@ -69,6 +69,7 @@ public class GradingController implements Initializable{
 			}
 			
 			//add to sql
+			course = operations.getCourseInfo("1");
 			operations.saveOpUpdateStudentsInfo(studentList, course);
 			
 			studentList = operations.getStudentsByCourseID(course);
@@ -82,16 +83,19 @@ public class GradingController implements Initializable{
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		// TODO Auto-generated method stub
+		
+	}
+	
+	public ObservableList<StudentInfo> getStudentData(){
+		System.out.println("get data!");
+
 		course = operations.getCourseInfo("1");
 		studentList = operations.getStudentsByCourseID(course);
 		System.out.println("studentSize:" + studentList.size());
 		for(int i = 0; i < studentList.size(); i++) {
 			studentData.add(studentList.get(i));
 		}
-	}
-	
-	public ObservableList<StudentInfo> getStudentData(){
-		System.out.println("get data!");
+		System.out.println(studentData.size());
 		return studentData;
 	}
 

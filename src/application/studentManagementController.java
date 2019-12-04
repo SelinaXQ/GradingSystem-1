@@ -39,11 +39,10 @@ public class studentManagementController implements Initializable{
 		lastNameColumn.setCellValueFactory(new PropertyValueFactory<StudentInfo, String>("lastName"));
 		conditionColumn.setCellValueFactory(new PropertyValueFactory<StudentInfo, String>("condition"));
 		
-		studentData = gradingController.getStudentData();
-		System.out.println("studentData size:" + studentData.size());
-		for(int i = 0; i<studentData.size(); i++) {
-			System.out.println(studentData.toString());
-		}
+//		System.out.println("studentData size:" + studentData.size());
+//		for(int i = 0; i<studentData.size(); i++) {
+//			System.out.println(studentData.toString());
+//		}
 		tableView.setItems(getStudent());
 		
 		tableView.setEditable(true);
@@ -51,9 +50,11 @@ public class studentManagementController implements Initializable{
 	
 	public ObservableList<StudentInfo>  getStudent()
     {
-        ObservableList<StudentInfo> student = FXCollections.observableArrayList();
-        student.add(new StudentInfo("U96796201","Qian","", "Xiang", ""));
-        
+		
+		ObservableList<StudentInfo> student = gradingController.getStudentData();
+//        ObservableList<StudentInfo> student = FXCollections.observableArrayList();
+//        student.add(new StudentInfo("U96796201","Qian","", "Xiang", ""));
+//        
         return student;
     }
 
