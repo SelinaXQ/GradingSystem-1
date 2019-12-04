@@ -1,11 +1,13 @@
 package uitable;
 
+import javafx.beans.property.SimpleStringProperty;
+
 public class StudentInfo {
-    private String BUID; // *
-    private String firstName;
-    private String middleName;
-    private String lastName;
-    private String condition; // w or null
+    private SimpleStringProperty BUID; // *
+    private SimpleStringProperty firstName;
+    private SimpleStringProperty middleName;
+    private SimpleStringProperty lastName;
+    private SimpleStringProperty condition; // w or null
 
     public StudentInfo() {
 
@@ -13,51 +15,51 @@ public class StudentInfo {
 
     public StudentInfo(String bUID, String firstName, String middleName, String lastName, String condition) {
         super();
-        this.BUID = bUID;
-        this.firstName = firstName;
-        this.middleName = middleName;
-        this.lastName = lastName;
-        this.condition = condition;
+        this.BUID = new SimpleStringProperty(bUID);
+        this.firstName = new SimpleStringProperty(firstName);
+        this.middleName = new SimpleStringProperty(middleName);
+        this.lastName = new SimpleStringProperty(lastName);
+        this.condition = new SimpleStringProperty(condition);
     }
 
     public String getBUID() {
-        return BUID;
+        return BUID.get();
     }
 
     public void setBUID(String bUID) {
-        BUID = bUID;
+        BUID = new SimpleStringProperty(bUID);
     }
 
     public String getFirstName() {
-        return firstName;
+        return firstName.get();
     }
 
     public void setFirstName(String firstName) {
-        this.firstName = firstName;
+        this.firstName = new SimpleStringProperty(firstName);
     }
 
     public String getMiddleName() {
-        return middleName;
+        return middleName.get();
     }
 
     public void setMiddleName(String middleName) {
-        this.middleName = middleName;
+        this.middleName = new SimpleStringProperty(middleName);
     }
 
     public String getLastName() {
-        return lastName;
+        return lastName.get();
     }
 
     public void setLastName(String lastName) {
-        this.lastName = lastName;
+        this.lastName = new SimpleStringProperty(lastName);
     }
 
     public String getCondition() {
-        return condition;
+        return condition.get();
     }
 
     public void setCondition(String condition) {
-        this.condition = condition;
+        this.condition = new SimpleStringProperty(condition);
     }
 
     @Override
