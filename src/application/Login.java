@@ -16,7 +16,7 @@ public class Login extends Application{
 
         Parent root = FXMLLoader.load(getClass().getResource("Login.fxml"));
         primaryStage.setTitle("Welcome to the grading system!");
-        primaryStage.setScene(new Scene(root, 600, 600));
+        primaryStage.setScene(new Scene(root, 400, 240));
         primaryStage.show();
     }
 
