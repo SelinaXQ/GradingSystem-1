@@ -4,66 +4,75 @@ package uitable;
 // each attribute is corresponding to a column in that table
 
 public class GiveDetailedGrades {
-	private String BUID;
-	private String fName;
-	private String mName;
-	private String lName;
-	private double score;
-	private String comment;
-	
-	public GiveDetailedGrades(String bUID, String fName, String mName, String lName, double score) {
-		this.BUID = bUID;
-		this.fName = fName;
-		this.mName = mName;
-		this.lName = lName;
-		this.score = score;
-	}
-	
-	public GiveDetailedGrades(String bUID, String fName, String mName, String lName, double score,String comment) {
-		this.BUID = bUID;
-		this.fName = fName;
-		this.mName = mName;
-		this.lName = lName;
-		this.score = score;
-		this.comment = comment;
-	}
-	
-	public String getComment() {
-		return comment;
-	}
+    private String BUID;
+    private String fName;
+    private String mName;
+    private String lName;
+    private double score;
+    private String comment;
 
-	public void setComment(String comment) {
-		this.comment = comment;
-	}
+    public GiveDetailedGrades(String bUID, String fName, String mName, String lName, double score) {
+        this.BUID = bUID;
+        this.fName = fName;
+        this.mName = mName;
+        this.lName = lName;
+        this.score = score;
+    }
 
-	public String getBUID() {
-		return BUID;
-	}
-	public void setBUID(String bUID) {
-		BUID = bUID;
-	}
-	public String getfName() {
-		return fName;
-	}
-	public void setfName(String fName) {
-		this.fName = fName;
-	}
-	public String getmName() {
-		return mName;
-	}
-	public void setmName(String mName) {
-		this.mName = mName;
-	}
-	public String getlName() {
-		return lName;
-	}
-	public void setlName(String lName) {
-		this.lName = lName;
-	}
-	public double getScore() {
-		return score;
-	}
-	public void setScore(double score) {
-		this.score = score;
-	}
+    public GiveDetailedGrades(String bUID, String fName, String mName, String lName, double score, String comment) {
+        this.BUID = bUID;
+        this.fName = fName;
+        this.mName = mName;
+        this.lName = lName;
+        this.score = score;
+        this.comment = comment;
+    }
+
+    public String getComment() {
+        return comment;
+    }
+
+    public void setComment(String comment) {
+        this.comment = comment;
+    }
+
+    public String getBUID() {
+        return BUID;
+    }
+
+    public void setBUID(String bUID) {
+        BUID = bUID;
+    }
+
+    public String getfName() {
+        return fName;
+    }
+
+    public void setfName(String fName) {
+        this.fName = fName;
+    }
+
+    public String getmName() {
+        return mName;
+    }
+
+    public void setmName(String mName) {
+        this.mName = mName;
+    }
+
+    public String getlName() {
+        return lName;
+    }
+
+    public void setlName(String lName) {
+        this.lName = lName;
+    }
+
+    public double getScore() {
+        return score;
+    }
+
+    public void setScore(double score) {
+        this.score = score;
+    }
 }
