@@ -15,7 +15,7 @@ public class Login extends Application{
     public void start(Stage primaryStage) throws IOException {
 
         Parent root = FXMLLoader.load(getClass().getResource("Login.fxml"));
-        primaryStage.setTitle("Welcome!");
+        primaryStage.setTitle("Welcome to the grading system!");
         primaryStage.setScene(new Scene(root, 600, 600));
         primaryStage.show();
     }
