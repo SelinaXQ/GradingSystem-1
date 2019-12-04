@@ -6,12 +6,13 @@ import java.util.*;
 
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 
-
+import db.Operations;
 import javafx.application.Application;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import pojo.Course;
 import uitable.StudentInfo;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -20,7 +21,9 @@ import javafx.scene.Scene;
 
 public class Grading extends Application {
 	
-	List<StudentInfo> studentList = new ArrayList<>();
+	ArrayList<StudentInfo> studentList = new ArrayList<>();
+	Operations operations = new Operations();
+	Course course = operations.getCourseInfo("1");
 	
 	@Override
 	public void start(Stage primaryStage) throws IOException {
@@ -42,7 +45,7 @@ public class Grading extends Application {
 	}
 	
 	@FXML
-	private void importExcel() throws IOException, InvalidFormatException{
+	private void importExcelBtn() throws IOException, InvalidFormatException{
 		FileChooser fileChooser = new FileChooser();
 		System.out.println("importing...");
 		fileChooser.setTitle("Open Resource File");
@@ -55,8 +58,9 @@ public class Grading extends Application {
 		if(file != null) {
 			System.out.println("import success!");
 			
-			studentList = ExcelUtil.getStudentList(file);
+			studentList = (ArrayList<StudentInfo>) ExcelUtil.getStudentList(file);
 			
+			//test
 			int size = studentList.size();
 			System.out.println("student size: " + size);
 			for(int i = 0; i < size; i++) {
@@ -64,9 +68,17 @@ public class Grading extends Application {
 				System.out.println(stu.toString());
 				
 			}
+			
+			//add to sql
+			operations.saveOpUpdateStudentsInfo(studentList, course);
+			
 		}
-		
-		
+	}
+	
+	@FXML
+	private void editStudentBtn() throws IOException {
+		StudentManagement stuManagement = new StudentManagement();
+		stuManagement.start(new Stage());
 	}
 	
 	public static void main(String[] args) {
