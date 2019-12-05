@@ -117,20 +117,28 @@ public class StudentManagementController implements Initializable{
 	
 	@FXML
 	public void deleteButton() {
+		
+		course = operations.getCourseInfo("1");
+		
 		ObservableList<StudentInfo> selectedRows, allStudent;
         allStudent = tableView.getItems();
         selectedRows = tableView.getSelectionModel().getSelectedItems();
         for (StudentInfo student: selectedRows)
         {
         	allStudent.remove(student);
+
+    		operations.deleteStudentInfo(student, course);
         }
-        ArrayList<StudentInfo> studentInfo = new ArrayList<>();
-		for(int i = 0; i<allStudent.size(); i++) {
-			studentInfo.add(allStudent.get(i));
-		}
-		course = operations.getCourseInfo("1");
+//        ArrayList<StudentInfo> studentInfo = new ArrayList<>();
+//		for(int i = 0; i<allStudent.size(); i++) {
+//			studentInfo.add(allStudent.get(i));
+//		}
+//		course = operations.getCourseInfo("1");
+//		
+//		
+//		operations.saveOpUpdateStudentsInfo(studentInfo, course);  
+
 		
-		operations.saveOpUpdateStudentsInfo(studentInfo, course);   
 	}
 	
 	@FXML
@@ -143,8 +151,7 @@ public class StudentManagementController implements Initializable{
 		window.show();
 	}
 	
-	public ObservableList<StudentInfo>  getStudent()
-    {
+	public ObservableList<StudentInfo>  getStudent(){
 		
 		studentData = gradingController.getStudentData();
 //        ObservableList<StudentInfo> student = FXCollections.observableArrayList();
