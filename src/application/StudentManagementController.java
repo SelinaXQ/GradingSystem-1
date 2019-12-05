@@ -64,6 +64,7 @@ public class StudentManagementController implements Initializable{
 		tableView.setItems(getStudent());
 		
 		tableView.setEditable(true);
+		tableView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 		conditionColumn.setCellFactory(TextFieldTableCell.forTableColumn());
 
 	}
@@ -112,6 +113,24 @@ public class StudentManagementController implements Initializable{
 		
 		operations.saveOpUpdateStudentsInfo(studentInfo, course);
 		
+	}
+	
+	@FXML
+	public void deleteButton() {
+		ObservableList<StudentInfo> selectedRows, allStudent;
+        allStudent = tableView.getItems();
+        selectedRows = tableView.getSelectionModel().getSelectedItems();
+        for (StudentInfo student: selectedRows)
+        {
+        	allStudent.remove(student);
+        }
+        ArrayList<StudentInfo> studentInfo = new ArrayList<>();
+		for(int i = 0; i<allStudent.size(); i++) {
+			studentInfo.add(allStudent.get(i));
+		}
+		course = operations.getCourseInfo("1");
+		
+		operations.saveOpUpdateStudentsInfo(studentInfo, course);   
 	}
 	
 	@FXML

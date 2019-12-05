@@ -20,7 +20,7 @@
          </columnResizePolicy>
       </TableView>
       <Button layoutX="583.0" layoutY="444.0" mnemonicParsing="false" onAction="#saveStudentConditionButton" prefHeight="27.0" prefWidth="116.0" text="Save" />
-      <Button layoutX="462.0" layoutY="444.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="116.0" text="Delete" />
+      <Button layoutX="462.0" layoutY="444.0" mnemonicParsing="false" onAction="#deleteButton" prefHeight="27.0" prefWidth="116.0" text="Delete" />
       <TextField fx:id="BUIDTextField" layoutX="100.0" layoutY="396.0" prefHeight="27.0" prefWidth="116.0" promptText="BUID" />
       <TextField fx:id="firstNameTextField" layoutX="220.0" layoutY="396.0" prefHeight="27.0" prefWidth="116.0" promptText="First Name" />
       <TextField fx:id="middleNameTextField" layoutX="341.0" layoutY="396.0" prefHeight="27.0" prefWidth="116.0" promptText="Middle Name" />
