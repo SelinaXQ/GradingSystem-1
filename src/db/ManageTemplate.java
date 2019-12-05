@@ -2,12 +2,18 @@ package db;
 
 import java.util.*;
 
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
+
 import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
+import org.hibernate.query.Query;
 
+import pojo.Course;
 import pojo.GeneralCriteria;
 import pojo.TemplateDetailedCriteria;
 import pojo.TemplateGeneralCriteria;
@@ -15,22 +21,52 @@ import pojo.TemplateGeneralCriteria;
 public class ManageTemplate {
 
 	public ArrayList<TemplateGeneralCriteria> getGeneralCriteriaByCourseID(String cID) {
-		Session session = HibernateUtil.getSessionFactory().openSession();
-		List gCris = null;
-		Criteria criteria = session.createCriteria(GeneralCriteria.class);
-		criteria.add(Restrictions.eq("cID", cID));
-		gCris = (List) criteria.list();
-		session.close();
+		Session session = null;
+		Transaction tx = null;
+		List<TemplateGeneralCriteria> gCris = null;
+		try  {
+			session = HibernateUtil.getSessionFactory().openSession();
+			tx = session.beginTransaction();
+			CriteriaBuilder builder = session.getCriteriaBuilder();
+			CriteriaQuery<TemplateGeneralCriteria> query = builder.createQuery(TemplateGeneralCriteria.class);
+			Root<TemplateGeneralCriteria> root = query.from(TemplateGeneralCriteria.class);
+			query.select(root).where(builder.equal(root.get("cID"), cID));
+			Query<TemplateGeneralCriteria> q = session.createQuery(query);
+			gCris  = q.getResultList();
+			tx.commit();
+		} catch (Exception e) {
+			e.printStackTrace();
+			if (tx != null) {
+				tx.rollback();
+			}
+		}finally {
+			session.close();
+		}
 		return (ArrayList<TemplateGeneralCriteria>) gCris;
 	}
 
 	public ArrayList<TemplateDetailedCriteria> getDetailedCriterias(String gCriID) {
-		Session session = HibernateUtil.getSessionFactory().openSession();
-		List dCris = null;
-		Criteria criteria = session.createCriteria(GeneralCriteria.class);
-		criteria.add(Restrictions.eq("gCriID", gCriID));
-		dCris = (List) criteria.list();
-		session.close();
+		Session session = null;
+		Transaction tx = null;
+		List<TemplateDetailedCriteria> dCris = null;
+		try  {
+			session = HibernateUtil.getSessionFactory().openSession();
+			tx = session.beginTransaction();
+			CriteriaBuilder builder = session.getCriteriaBuilder();
+			CriteriaQuery<TemplateDetailedCriteria> query = builder.createQuery(TemplateDetailedCriteria.class);
+			Root<TemplateDetailedCriteria> root = query.from(TemplateDetailedCriteria.class);
+			query.select(root).where(builder.equal(root.get("gCriID"), gCriID));
+			Query<TemplateDetailedCriteria> q = session.createQuery(query);
+			dCris  = q.getResultList();
+			tx.commit();
+		} catch (Exception e) {
+			e.printStackTrace();
+			if (tx != null) {
+				tx.rollback();
+			}
+		}finally {
+			session.close();
+		}
 		return (ArrayList<TemplateDetailedCriteria>) dCris;
 	}
 
@@ -74,8 +110,7 @@ public class ManageTemplate {
 		Transaction tx = null;
 		try {
 			tx = session.beginTransaction();
-			TemplateDetailedCriteria dCri = (TemplateDetailedCriteria) session.get(TemplateDetailedCriteria.class, templateDetailedCriteria.getdCriID());
-			session.merge(dCri);
+			session.saveOrUpdate(templateDetailedCriteria);
 			tx.commit();
 		} catch (HibernateException e) {
 			if (tx != null)

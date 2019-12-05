@@ -21,6 +21,7 @@ public class TemplateGeneralCriteria {
 	}
 
 	public TemplateGeneralCriteria(GeneralCriteria gCri) {
+		super();
 		this.gCriID = gCri.getgCriID();
 		this.cID = gCri.getcID();
 		this.genCriType = gCri.getGenCriType();

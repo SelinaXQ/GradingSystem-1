@@ -2,34 +2,71 @@ package db;
 
 import java.util.*;
 
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
+
 import org.hibernate.Criteria;
+import org.hibernate.Hibernate;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
+import org.hibernate.query.Query;
 
 import pojo.DetailedCriteria;
 import pojo.GeneralCriteria;
 import pojo.Student;
+import pojo.TemplateGeneralCriteria;
 
 public class ManageCriteria {
 	public ArrayList<GeneralCriteria> getGeneralCriteriaByCourseID(String cID) {
-		Session session = HibernateUtil.getSessionFactory().openSession();
-		List gCris = null;
-		Criteria criteria = session.createCriteria(GeneralCriteria.class);
-		criteria.add(Restrictions.eq("cID", cID));
-		gCris = (List) criteria.list();
-		session.close();
+		Session session = null;
+		Transaction tx = null;
+		List<GeneralCriteria> gCris = null;
+		try  {
+			session = HibernateUtil.getSessionFactory().openSession();
+			tx = session.beginTransaction();
+			CriteriaBuilder builder = session.getCriteriaBuilder();
+			CriteriaQuery<GeneralCriteria> query = builder.createQuery(GeneralCriteria.class);
+			Root<GeneralCriteria> root = query.from(GeneralCriteria.class);
+			query.select(root).where(builder.equal(root.get("cID"), cID));
+			Query<GeneralCriteria> q = session.createQuery(query);
+			gCris  = q.getResultList();
+			tx.commit();
+		} catch (Exception e) {
+			e.printStackTrace();
+			if (tx != null) {
+				tx.rollback();
+			}
+		}finally {
+			session.close();
+		}
 		return (ArrayList<GeneralCriteria>) gCris;
 	}
 
 	public ArrayList<DetailedCriteria> getDetailedCriterias(String gCriID) {
-		Session session = HibernateUtil.getSessionFactory().openSession();
-		List dCris = null;
-		Criteria criteria = session.createCriteria(GeneralCriteria.class);
-		criteria.add(Restrictions.eq("gCriID", gCriID));
-		dCris = (List) criteria.list();
-		session.close();
+		Session session = null;
+		Transaction tx = null;
+		List<DetailedCriteria> dCris = null;
+		try  {
+			session = HibernateUtil.getSessionFactory().openSession();
+			tx = session.beginTransaction();
+			CriteriaBuilder builder = session.getCriteriaBuilder();
+			CriteriaQuery<DetailedCriteria> query = builder.createQuery(DetailedCriteria.class);
+			Root<DetailedCriteria> root = query.from(DetailedCriteria.class);
+			query.select(root).where(builder.equal(root.get("gCriID"), gCriID));
+			Query<DetailedCriteria> q = session.createQuery(query);
+			dCris  = q.getResultList();
+			tx.commit();
+		} catch (Exception e) {
+			e.printStackTrace();
+			if (tx != null) {
+				tx.rollback();
+			}
+		}finally {
+			session.close();
+		}
 		return (ArrayList<DetailedCriteria>) dCris;
 	}
 
@@ -48,7 +85,6 @@ public class ManageCriteria {
 		} finally {
 			session.close();
 		}
-
 	}
 
 	public void deleteDetailedCriteria(DetailedCriteria dCriteria) {
@@ -92,8 +128,7 @@ public class ManageCriteria {
 		Transaction tx = null;
 		try {
 			tx = session.beginTransaction();
-			DetailedCriteria dCri = (DetailedCriteria) session.get(DetailedCriteria.class, dCriteria.getdCriID());
-			session.merge(dCri);
+			session.saveOrUpdate(dCriteria);
 			tx.commit();
 		} catch (HibernateException e) {
 			if (tx != null)

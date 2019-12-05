@@ -13,7 +13,7 @@ commit的时候不要把自己的classpath，gignore，project这三个文件交上去
 a. 把github里classpath，gignore，project这三个文件删了试试
 b. 看看是哪个文件冲突，把自己的那个文件删掉或备份，再pull，再提交自己的修改。
 c. 很遗憾，可能要整个重新从github import了。
-
+（5）***注意事项！注意事项！当你要save一个东西，例如Criteria们，构造ArrayList的时候，<Criteria>类的第一个属性，也就是主键，也就是那个我们用哈希值（uuid）构造出来的东西，例如GCriID属性和DCriID属性，这个属性，实例化的时候要传null！不然会Row was updated or deleted by another transaction (or unsaved-value mapping was incorrect) :
 
 1. 文件结构
 -src
@@ -133,7 +133,7 @@ public ArrayList<GeneralCriteria> getGeneralCriteriasByCourseID(String cID, bool
 public boolean saveGeneralCriterias(ArrayList<GeneralCriteria> gCris, boolean ifTemplate)
 return false表示加起来的百分比不等于1
 
-public ArrayList<DetailedCriteria> getDetailedCriteriasByCourseID(String gCriID, boolean ifTemplate)
+public ArrayList<DetailedCriteria> getDetailedCriteriasByGenerCriID(String gCriID, boolean ifTemplate)
 public boolean saveDetailedCriterias(ArrayList<DetailedCriteria> dCris, boolean ifTemplate)
 
 public ArrayList<GiveDetailedGrades> getStudentsDetailedGrades(Course course, DetailedCriteria dCriteria）

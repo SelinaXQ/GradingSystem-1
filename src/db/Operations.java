@@ -3,6 +3,8 @@ package db;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import com.sun.xml.bind.v2.runtime.output.SAXOutput;
+
 import pojo.*;
 import uitable.DetailedGrade;
 import uitable.GeneralGrade;
@@ -59,8 +61,7 @@ public class Operations {
 	public ArrayList<GeneralCriteria> getGeneralCriteriasByCourseID(String cID, boolean ifTemplate) {
 		if (ifTemplate == true) {
 			ArrayList<TemplateGeneralCriteria> tGCris = mTemplate.getGeneralCriteriaByCourseID(cID);
-			ArrayList<GeneralCriteria> gCriterias = new ArrayList<GeneralCriteria>();
-			for (TemplateGeneralCriteria tGCri : tGCris) {
+			ArrayList<GeneralCriteria> gCriterias = new ArrayList<GeneralCriteria>();for (TemplateGeneralCriteria tGCri : tGCris) {
 				gCriterias.add(new GeneralCriteria(tGCri));
 			}
 			return gCriterias;
@@ -115,6 +116,7 @@ public class Operations {
 
 	public void deleteGeneralCriteria(GeneralCriteria gCriteria, boolean ifTemplate) {
 		if (ifTemplate == true) {
+			System.out.println(gCriteria.getgCriID());
 			mTemplate.deleteGeneralCriteria(new TemplateGeneralCriteria(gCriteria));
 
 		} else {
@@ -135,15 +137,15 @@ public class Operations {
 	// save the percentage of a detailed criteria,
 
 	public boolean saveDetailedCriterias(ArrayList<DetailedCriteria> dCris, boolean ifTemplate) {
-		boolean flag = false;
+		boolean flag = true;
 		double total = 0;
 		for (DetailedCriteria dCri : dCris) {
 			total += dCri.getDeCriPer();
 		}
 		if (Math.abs(total - 1) > 0.00001) {
-			flag = true;
+			flag = false;
 		}
-		if (flag == true) {
+		if (flag == false) {
 			return flag;
 		} else {
 			if (ifTemplate == true) {

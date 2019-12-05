@@ -4,12 +4,12 @@
 <!-- Generated 2019??12??2?? ????5:26:58 by Hibernate Tools 3.5.0.Final -->
 <hibernate-mapping>
     <class name="pojo.TemplateGeneralCriteria" table="TEMPLATEGENERALCRITERIA">
-        <id name="cID" type="java.lang.String" access="field">
-            <column name="CID" />
+        <id name="gCriID" type="java.lang.String" access="field">
+            <column name="GCRIID" />
             <generator class="uuid" />
         </id>
-        <property name="gCriID" type="java.lang.String" access="field">
-            <column name="GCRIID" />
+        <property name="cID" type="java.lang.String" access="field">
+            <column name="CID" />
         </property>
         <property name="genCriType" type="java.lang.String">
             <column name="GENCRITYPE" />

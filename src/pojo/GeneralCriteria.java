@@ -1,6 +1,7 @@
 package pojo;
 
 // Table General Criteria
+
 public class GeneralCriteria {
 	private String gCriID; // *, General Criteria ID, [HS], created by courseID(cID) and genenal criteria
 							// type(GenCriType)
@@ -21,6 +22,7 @@ public class GeneralCriteria {
 	}
 
 	public GeneralCriteria(TemplateGeneralCriteria tGCri) {
+		super();
 		this.gCriID = tGCri.getgCriID();
 		this.cID = tGCri.getcID();
 		this.genCriType = tGCri.getGenCriType();
