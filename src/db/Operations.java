@@ -187,12 +187,14 @@ public class Operations {
 				HashMap<String, DetailedGrade> dList = new HashMap<String, DetailedGrade>();
 				ArrayList<DetailedCriteria> dCs = mCriteria.getDetailedCriterias(gc.getgCriID());
 				for (DetailedCriteria dc : dCs) {
+					System.out.println(s.getcSID());
+					System.out.println(dc.getdCriID());
 					StudentDetailedGrade sdGrade = mOthers.getStudentDetailedGrade(s.getcSID(), dc.getdCriID()).get(0);
 					double grade = sdGrade.getScore();
 					double totalScore = dc.getTotalScore();
 					double per = dc.getDeCriPer();
 					if (grade < 0) {
-						grade = (totalScore - grade) / totalScore;
+						grade = (totalScore - Math.abs(grade)) / totalScore;
 					}
 					DetailedGrade dGrade = new DetailedGrade(dc.getdCriID(), grade, per);
 					dList.put(gc.getgCriID(), dGrade);
@@ -293,16 +295,16 @@ public class Operations {
 			mStudents.updateOrSaveStudent(student);
 			if (sInfo.getCondition().trim().equals("w") == false) {
 				ArrayList<CourseStudents> css = mStudents.getCourseStudent(sInfo.getBUID(), c.getcID());
-				if(css.size() == 0) {
+				if (css.size() == 0) {
 					CourseStudents cs = new CourseStudents();
 					cs.setbUID(sInfo.getBUID());
 					cs.setcID(c.getcID());
 					cs.setCondition(sInfo.getCondition());
 					mStudents.updateOrSaveCourseStudent(cs);
-				}else {
+				} else {
 					mStudents.updateOrSaveCourseStudent(css.get(0));
 				}
-				
+
 			}
 		}
 	}
@@ -313,7 +315,7 @@ public class Operations {
 	}
 
 	public void deleteStudentInfos(ArrayList<StudentInfo> sInfos, Course c) {
-		
+
 		for (StudentInfo sInfo : sInfos) {
 			CourseStudents cs = mStudents.getCourseStudent(sInfo.getBUID(), c.getcID()).get(0);
 			mStudents.deleteStudent(cs);

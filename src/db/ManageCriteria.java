@@ -111,7 +111,7 @@ public class ManageCriteria {
 		try {
 			tx = session.beginTransaction();
 			GeneralCriteria gCri = (GeneralCriteria) session.get(GeneralCriteria.class, gCriteria.getgCriID());
-			session.merge(gCri);
+			session.saveOrUpdate(gCri);
 			tx.commit();
 		} catch (HibernateException e) {
 			if (tx != null)

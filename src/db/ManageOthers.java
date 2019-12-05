@@ -10,6 +10,8 @@ import org.hibernate.*;
 import org.hibernate.criterion.Restrictions;
 import org.hibernate.query.Query;
 
+import com.sun.xml.bind.v2.runtime.output.SAXOutput;
+
 import pojo.Account;
 import pojo.StudentDetailedGrade;
 
@@ -64,6 +66,9 @@ public class ManageOthers {
 		}finally {
 			session.close();
 		}
+		System.out.println("CSID: " + cSID);
+		System.out.println("dcriid: " + dCriID);
+		System.out.println("SDG: " + studentDetailedGrades.size());
 		return (ArrayList<StudentDetailedGrade>) studentDetailedGrades;
 
 	}

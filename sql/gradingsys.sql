@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 80018
 File Encoding         : 65001
 
-Date: 2019-12-03 14:39:57
+Date: 2019-12-05 00:44:17
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -71,10 +71,6 @@ CREATE TABLE `coursesstudents` (
 -- Records of coursesstudents
 -- ----------------------------
 INSERT INTO `coursesstudents` VALUES ('8a80803d6eca223f016eca2246c50000', '1', 'U8899', '', null, null);
-INSERT INTO `coursesstudents` VALUES ('8a80803d6eca2241016eca2248c90000', '1', 'U8899', '', null, null);
-INSERT INTO `coursesstudents` VALUES ('8a80803d6eca230a016eca230fb60000', '1', 'U8899', '', null, null);
-INSERT INTO `coursesstudents` VALUES ('8a80803d6eca26fa016eca2700bc0000', '1', 'U8899', '', null, null);
-INSERT INTO `coursesstudents` VALUES ('8a80803d6eca2772016eca2777f20000', '1', 'U8899', '', null, null);
 
 -- ----------------------------
 -- Table structure for `detailedcriteria`
@@ -85,7 +81,7 @@ CREATE TABLE `detailedcriteria` (
   `gCriID` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT 'general criteria id (parent node id)',
   `deCriType` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   `deCriPer` double(32,2) NOT NULL,
-  `totalScore` double(32,2) DEFAULT NULL,
+  `totalScore` double(32,2) unsigned DEFAULT '0.00',
   PRIMARY KEY (`dCriID`),
   KEY `detailedcriteria_ibfk_1` (`gCriID`),
   CONSTRAINT `detailedcriteria_ibfk_1` FOREIGN KEY (`gCriID`) REFERENCES `generalcriteria` (`gCriID`)
@@ -94,6 +90,8 @@ CREATE TABLE `detailedcriteria` (
 -- ----------------------------
 -- Records of detailedcriteria
 -- ----------------------------
+INSERT INTO `detailedcriteria` VALUES ('8a80803d6ed40deb016ed40dedf70000', 'abcd', 'dh1', '0.50', '100.00');
+INSERT INTO `detailedcriteria` VALUES ('8a80803d6ed40deb016ed40dee270001', 'abcd', 'dh2', '0.50', '100.00');
 
 -- ----------------------------
 -- Table structure for `generalcriteria`
@@ -112,6 +110,7 @@ CREATE TABLE `generalcriteria` (
 -- ----------------------------
 -- Records of generalcriteria
 -- ----------------------------
+INSERT INTO `generalcriteria` VALUES ('abcd', '1', 'assginment', '0.50');
 
 -- ----------------------------
 -- Table structure for `semesters`
@@ -151,6 +150,8 @@ CREATE TABLE `studentdetailedgrade` (
 -- ----------------------------
 -- Records of studentdetailedgrade
 -- ----------------------------
+INSERT INTO `studentdetailedgrade` VALUES ('1', '8a80803d6eca223f016eca2246c50000', '8a80803d6ed40deb016ed40dedf70000', '-50.00', null);
+INSERT INTO `studentdetailedgrade` VALUES ('2', '8a80803d6eca223f016eca2246c50000', '8a80803d6ed40deb016ed40dee270001', '-50.00', null);
 
 -- ----------------------------
 -- Table structure for `students`
@@ -181,13 +182,17 @@ CREATE TABLE `templatedetailedcriteria` (
   `gCriID` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   `deCriType` varchar(15) NOT NULL,
   `deCriPer` double(32,2) NOT NULL,
-  `totalScore` double(32,2) DEFAULT NULL,
+  `totalScore` double(32,2) unsigned DEFAULT '0.00',
   PRIMARY KEY (`dCriID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='Detailed Grading Template';
 
 -- ----------------------------
 -- Records of templatedetailedcriteria
 -- ----------------------------
+INSERT INTO `templatedetailedcriteria` VALUES ('8a80803d6ed40e84016ed40e870a0000', 'abcd', 'dh1', '0.50', '0.00');
+INSERT INTO `templatedetailedcriteria` VALUES ('8a80803d6ed40e84016ed40e873d0001', 'abcd', 'dh2', '0.50', '0.00');
+INSERT INTO `templatedetailedcriteria` VALUES ('8a80803d6ed4228c016ed4228f6a0000', 'abcd', 'dh1', '0.50', '0.00');
+INSERT INTO `templatedetailedcriteria` VALUES ('8a80803d6ed4228c016ed4228f980001', 'abcd', 'dh2', '0.50', '0.00');
 
 -- ----------------------------
 -- Table structure for `templategeneralcriteria`
@@ -204,3 +209,4 @@ CREATE TABLE `templategeneralcriteria` (
 -- ----------------------------
 -- Records of templategeneralcriteria
 -- ----------------------------
+INSERT INTO `templategeneralcriteria` VALUES ('abcc', '1', 'final', '0.50');
