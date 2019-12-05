@@ -27,6 +27,6 @@
       <TextField fx:id="lastNameTextField" layoutX="462.0" layoutY="396.0" prefHeight="27.0" prefWidth="116.0" promptText="Last Name" />
       <TextField fx:id="conditionTextField" layoutX="583.0" layoutY="396.0" prefHeight="27.0" prefWidth="116.0" promptText="Condition" />
       <Button layoutX="341.0" layoutY="444.0" mnemonicParsing="false" onAction="#addStudentButton" prefHeight="27.0" prefWidth="116.0" text="Add" />
-      <Button layoutX="100.0" layoutY="444.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="116.0" text="Back" />
+      <Button layoutX="100.0" layoutY="444.0" mnemonicParsing="false" onAction="#backButton" prefHeight="27.0" prefWidth="116.0" text="Back" />
    </children>
 </AnchorPane>

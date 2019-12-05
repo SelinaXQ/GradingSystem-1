@@ -1,5 +1,6 @@
 package application;
 
+import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
 import java.time.Month;
@@ -11,12 +12,17 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.TableColumn.CellEditEvent;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.image.Image;
+import javafx.stage.Stage;
 import pojo.Course;
 import uitable.StudentInfo;
 
@@ -85,6 +91,7 @@ public class StudentManagementController implements Initializable{
 		
 	}
 	
+	@FXML
 	public void addStudentButton(ActionEvent event) {
 		StudentInfo newStudent = new StudentInfo(
 				BUIDTextField.getText(),
@@ -105,6 +112,16 @@ public class StudentManagementController implements Initializable{
 		
 		operations.saveOpUpdateStudentsInfo(studentInfo, course);
 		
+	}
+	
+	@FXML
+	public void backButton(ActionEvent event) throws IOException {
+		Parent manageStudentParent = FXMLLoader.load(getClass().getResource("Grading.fxml"));
+		Scene manageStudentScene = new Scene(manageStudentParent);
+		
+		Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
+		window.setScene(manageStudentScene);
+		window.show();
 	}
 	
 	public ObservableList<StudentInfo>  getStudent()
