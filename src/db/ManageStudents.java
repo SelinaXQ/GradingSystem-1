@@ -49,6 +49,7 @@ public class ManageStudents {
 		Transaction tx = null;
 		try {
 			tx = session.beginTransaction();
+			CourseStudents cS = (CourseStudents) session.get(CourseStudents.class, cStudents.getcSID());
 			session.delete(cStudents);
 			tx.commit();
 		} catch (HibernateException e) {
