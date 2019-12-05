@@ -61,7 +61,8 @@ public class Operations {
 	public ArrayList<GeneralCriteria> getGeneralCriteriasByCourseID(String cID, boolean ifTemplate) {
 		if (ifTemplate == true) {
 			ArrayList<TemplateGeneralCriteria> tGCris = mTemplate.getGeneralCriteriaByCourseID(cID);
-			ArrayList<GeneralCriteria> gCriterias = new ArrayList<GeneralCriteria>();for (TemplateGeneralCriteria tGCri : tGCris) {
+			ArrayList<GeneralCriteria> gCriterias = new ArrayList<GeneralCriteria>();
+			for (TemplateGeneralCriteria tGCri : tGCris) {
 				gCriterias.add(new GeneralCriteria(tGCri));
 			}
 			return gCriterias;
@@ -291,18 +292,32 @@ public class Operations {
 					sInfo.getLastName());
 			mStudents.updateOrSaveStudent(student);
 			if (sInfo.getCondition().trim().equals("w") == false) {
-				CourseStudents cs = new CourseStudents();
-				cs.setbUID(sInfo.getBUID());
-				cs.setcID(c.getcID());
-				cs.setCondition(sInfo.getCondition());
-				mStudents.updateOrSaveCourseStudent(cs);
+				ArrayList<CourseStudents> css = mStudents.getCourseStudent(sInfo.getBUID(), c.getcID());
+				if(css.size() == 0) {
+					CourseStudents cs = new CourseStudents();
+					cs.setbUID(sInfo.getBUID());
+					cs.setcID(c.getcID());
+					cs.setCondition(sInfo.getCondition());
+					mStudents.updateOrSaveCourseStudent(cs);
+				}else {
+					mStudents.updateOrSaveCourseStudent(css.get(0));
+				}
+				
 			}
 		}
 	}
-	
-	public void deleteStudentInfo(StudentInfo sInfo) {
-		CourseStudents cStudents = mStudents.getStudentCSID(sInfo.getBUID()).get(0);
-		mStudents.deleteStudent(cStudents);
+
+	public void deleteStudentInfo(StudentInfo sInfo, Course c) {
+		CourseStudents cs = mStudents.getCourseStudent(sInfo.getBUID(), c.getcID()).get(0);
+		mStudents.deleteStudent(cs);
+	}
+
+	public void deleteStudentInfos(ArrayList<StudentInfo> sInfos, Course c) {
+		
+		for (StudentInfo sInfo : sInfos) {
+			CourseStudents cs = mStudents.getCourseStudent(sInfo.getBUID(), c.getcID()).get(0);
+			mStudents.deleteStudent(cs);
+		}
 	}
 
 }

@@ -2,8 +2,13 @@ package db;
 
 import java.util.*;
 
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
+
 import org.hibernate.*;
 import org.hibernate.criterion.Restrictions;
+import org.hibernate.query.Query;
 
 import pojo.*;
 
@@ -44,8 +49,7 @@ public class ManageStudents {
 		Transaction tx = null;
 		try {
 			tx = session.beginTransaction();
-			CourseStudents student = (CourseStudents) session.get(CourseStudents.class, cStudents.getcSID());
-			session.delete(student);
+			session.delete(cStudents);
 			tx.commit();
 		} catch (HibernateException e) {
 			if (tx != null)
@@ -85,12 +89,9 @@ public class ManageStudents {
 		Transaction tx = null;
 		try {
 			tx = session.beginTransaction();
-			System.out.println(cs.getcSID());
 			session.saveOrUpdate(cs);
 			tx.commit();
 		} catch (HibernateException e) {
-			
-			System.out.println(cs.getcSID());
 			if (tx != null)
 				tx.rollback();
 			e.printStackTrace();
@@ -107,5 +108,30 @@ public class ManageStudents {
 		students = (List) criteria.list();
 		session.close();
 		return (ArrayList<CourseStudents>) students;
+	}
+
+	public ArrayList<CourseStudents> getCourseStudent(String buid, String cID) {
+		Session session = null;
+		Transaction tx = null;
+		List<CourseStudents> cs = null;
+		try  {
+			session = HibernateUtil.getSessionFactory().openSession();
+			tx = session.beginTransaction();
+			CriteriaBuilder builder = session.getCriteriaBuilder();
+			CriteriaQuery<CourseStudents> query = builder.createQuery(CourseStudents.class);
+			Root<CourseStudents> root = query.from(CourseStudents.class);
+			query.select(root).where(builder.equal(root.get("bUID"),buid), builder.equal(root.get("cID"), cID));
+			Query<CourseStudents> q = session.createQuery(query);
+			cs  = q.getResultList();
+			tx.commit();
+		} catch (Exception e) {
+			e.printStackTrace();
+			if (tx != null) {
+				tx.rollback();
+			}
+		}finally {
+			session.close();
+		}
+		return (ArrayList<CourseStudents>) cs;
 	}
 }
