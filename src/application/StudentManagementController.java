@@ -27,6 +27,7 @@ public class StudentManagementController implements Initializable{
 	Operations operations = new Operations();
 	Course course = new Course();
 	
+	//table
 	@FXML private TableView<StudentInfo> tableView;
 	@FXML private TableColumn<StudentInfo, String> BUIDColumn;
 	@FXML private TableColumn<StudentInfo, String> firstNameColumn;
@@ -34,6 +35,13 @@ public class StudentManagementController implements Initializable{
 	@FXML private TableColumn<StudentInfo, String> lastNameColumn;
 	@FXML private TableColumn<StudentInfo, String> conditionColumn;
 	
+	
+	//add new students
+	@FXML private TextField BUIDTextField;
+	@FXML private TextField firstNameTextField;
+	@FXML private TextField middleNameTextField;
+	@FXML private TextField lastNameTextField;
+	@FXML private TextField conditionTextField;
 	
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
@@ -74,6 +82,28 @@ public class StudentManagementController implements Initializable{
 		
 		operations.saveOpUpdateStudentsInfo(studentInfo, course);
 		
+		
+	}
+	
+	public void addStudentButton(ActionEvent event) {
+		StudentInfo newStudent = new StudentInfo(
+				BUIDTextField.getText(),
+				firstNameTextField.getText(),
+				middleNameTextField.getText(),
+				lastNameTextField.getText(),
+				conditionTextField.getText()
+				);
+		tableView.getItems().add(newStudent);
+		//studentData.add(newStudent);
+		
+		
+		ArrayList<StudentInfo> studentInfo = new ArrayList<>();
+		for(int i = 0; i<studentData.size(); i++) {
+			studentInfo.add(studentData.get(i));
+		}
+		course = operations.getCourseInfo("1");
+		
+		operations.saveOpUpdateStudentsInfo(studentInfo, course);
 		
 	}
 	
