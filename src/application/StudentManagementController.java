@@ -10,11 +10,13 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import javafx.scene.control.TableColumn.CellEditEvent;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.image.Image;
 import uitable.StudentInfo;
 
-public class studentManagementController implements Initializable{
+public class StudentManagementController implements Initializable{
 
 	GradingController gradingController = new GradingController();
 	ObservableList<StudentInfo> studentData = FXCollections.observableArrayList();
@@ -25,7 +27,6 @@ public class studentManagementController implements Initializable{
 	@FXML private TableColumn<StudentInfo, String> middleNameColumn;
 	@FXML private TableColumn<StudentInfo, String> lastNameColumn;
 	@FXML private TableColumn<StudentInfo, String> conditionColumn;
-	
 	
 	
 	@Override
@@ -39,14 +40,24 @@ public class studentManagementController implements Initializable{
 		lastNameColumn.setCellValueFactory(new PropertyValueFactory<StudentInfo, String>("lastName"));
 		conditionColumn.setCellValueFactory(new PropertyValueFactory<StudentInfo, String>("condition"));
 		
-//		System.out.println("studentData size:" + studentData.size());
-//		for(int i = 0; i<studentData.size(); i++) {
-//			System.out.println(studentData.toString());
-//		}
+
 		tableView.setItems(getStudent());
 		
 		tableView.setEditable(true);
+		conditionColumn.setCellFactory(TextFieldTableCell.forTableColumn());
+//		firstNameColumn.setCellFactory(TextFieldTableCell.forTableColumn());
 	}
+	
+	@FXML
+	public void changeConditionCellEvent(CellEditEvent edittedCell) {
+		StudentInfo studentSelected = tableView.getSelectionModel().getSelectedItem();
+		studentSelected.setCondition(edittedCell.getNewValue().toString());
+	}
+//	@FXML
+//	public void changeFirstNameCellEvent(CellEditEvent edittedCell) {
+//		StudentInfo studentSelected = tableView.getSelectionModel().getSelectedItem();
+//		studentSelected.setFirstName(edittedCell.getNewValue().toString());
+//	}
 	
 	public ObservableList<StudentInfo>  getStudent()
     {

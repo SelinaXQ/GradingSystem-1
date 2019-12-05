@@ -32,7 +32,7 @@ public class GradingController implements Initializable{
 	ArrayList<StudentInfo> studentList = new ArrayList<>();
 	@FXML
 	public void editStudentButtonPushed(ActionEvent event) throws IOException {
-		Parent studentmManagementParent = FXMLLoader.load(getClass().getResource("studentManagement.fxml"));
+		Parent studentmManagementParent = FXMLLoader.load(getClass().getResource("StudentManagement.fxml"));
 		Scene studentManagementScene = new Scene(studentmManagementParent);
 		Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
 		window.setScene(studentManagementScene);
