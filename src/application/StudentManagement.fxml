@@ -7,7 +7,7 @@
 
 <AnchorPane prefHeight="500.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.StudentManagementController">
    <children>
-      <TableView fx:id="tableView" layoutX="100.0" layoutY="50.0" prefHeight="400.0" prefWidth="600.0">
+      <TableView fx:id="tableView" layoutX="100.0" layoutY="50.0" prefHeight="348.0" prefWidth="600.0">
         <columns>
           <TableColumn fx:id="BUIDColumn" prefWidth="75.0" text="BUID" />
           <TableColumn fx:id="firstNameColumn" prefWidth="75.0" text="First Name" />
@@ -19,5 +19,6 @@
             <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
          </columnResizePolicy>
       </TableView>
+      <Button layoutX="638.0" layoutY="423.0" mnemonicParsing="false" onAction="#saveStudentConditionButton" prefHeight="27.0" prefWidth="62.0" text="Save" />
    </children>
 </AnchorPane>
