@@ -1,13 +1,16 @@
 package pojo;
 
+import javafx.beans.property.SimpleDoubleProperty;
+import javafx.beans.property.SimpleStringProperty;
+
 public class DetailedCriteria {
 	private String dCriID; // *, Detailed Criteria ID, [HS], created by General Criteria ID(gCriID)[HS] and
 							// detailed criteria type(deCriType)
 	private String gCriID; // General Criteria ID, [HS], created by courseID(cID) and genenal criteria
 							// type(GenCriType)
-	private String deCriType; // Detailed Criteria Type, Assignment1, Assignment2
-	private double deCriPer; // Detailed Criteria Type 's Percentage
-	private double totalScore;
+	private SimpleStringProperty deCriType; // Detailed Criteria Type, Assignment1, Assignment2
+	private SimpleDoubleProperty deCriPer; // Detailed Criteria Type 's Percentage
+	private SimpleDoubleProperty totalScore;
 
 	public DetailedCriteria() {
 
@@ -17,25 +20,25 @@ public class DetailedCriteria {
 		super();
 		this.dCriID = dCriID;
 		this.gCriID = gCriID;
-		this.deCriType = deCriType;
-		this.deCriPer = deCriPer;
-		this.totalScore = totalScore;
+		this.deCriType = new SimpleStringProperty(deCriType);
+		this.deCriPer = new SimpleDoubleProperty(deCriPer);
+		this.totalScore = new SimpleDoubleProperty(totalScore);
 	}
 
 	public DetailedCriteria(TemplateDetailedCriteria tDCri) {
 		this.dCriID = tDCri.getdCriID();
 		this.gCriID = tDCri.getgCriID();
-		this.deCriType = tDCri.getDeCriType();
-		this.deCriPer = tDCri.getDeCriPer();
-		this.totalScore = tDCri.getTotalScore();
+		this.deCriType = new SimpleStringProperty(tDCri.getDeCriType());
+		this.deCriPer = new SimpleDoubleProperty(tDCri.getDeCriPer());
+		this.totalScore = new SimpleDoubleProperty(tDCri.getTotalScore());
 	}
 
 	public double getTotalScore() {
-		return totalScore;
+		return totalScore.get();
 	}
 
 	public void setTotalScore(double totalScore) {
-		this.totalScore = totalScore;
+		this.totalScore = new SimpleDoubleProperty(totalScore);
 	}
 
 	public String getdCriID() {
@@ -55,18 +58,18 @@ public class DetailedCriteria {
 	}
 
 	public String getDeCriType() {
-		return deCriType;
+		return deCriType.get();
 	}
 
 	public void setDeCriType(String deCriType) {
-		this.deCriType = deCriType;
+		this.deCriType = new SimpleStringProperty(deCriType);
 	}
 
 	public double getDeCriPer() {
-		return deCriPer;
+		return deCriPer.get();
 	}
 
 	public void setDeCriPer(double deCriPer) {
-		this.deCriPer = deCriPer;
+		this.deCriPer = new SimpleDoubleProperty(deCriPer);
 	}
 }
