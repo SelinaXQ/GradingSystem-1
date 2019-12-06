@@ -151,6 +151,28 @@ public class GradingController implements Initializable{
 	@FXML
 	public void saveGeneralCriteriaButton(ActionEvent event) {
 		
+//		saveGeneralCriterias
+		System.out.println("Button clicked");
+		System.out.println("general size:" + generalCriteria.size());
+		ArrayList<GeneralCriteria> temp = new ArrayList<>();
+		for(int i = 0; i < generalCriteria.size(); i++) {
+			GeneralCriteria tempGenaral = generalCriteria.get(i);
+
+			tempGenaral.setcID(null);
+			temp.add(tempGenaral);
+//			System.out.println(generalCriteria.get(i).toString());
+		}
+		
+		if(operations.saveGeneralCriterias(temp, false)) {
+			System.out.println("Save successfully");
+			
+		}else {
+			System.out.println("Added up should be 100%!!");
+			//refresh
+			generalTableView.refresh();
+			//reset table
+		}
+		
 	}
 	
 	/*
