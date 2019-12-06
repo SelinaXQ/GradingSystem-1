@@ -43,9 +43,11 @@ public class GradingController implements Initializable{
 	ObservableList<StudentInfo> studentData = FXCollections.observableArrayList();
 	ArrayList<StudentInfo> studentList = new ArrayList<>();
 	
-	//criteria
+	// general criteria
 	ObservableList<GeneralCriteria> generalCriteria = FXCollections.observableArrayList();
 	ArrayList<GeneralCriteria> generalArr = operations.getGeneralCriteriasByCourseID(courseid, false);
+	
+	//detailed criteria
 	ObservableList<DetailedCriteria> detailedCriteria = FXCollections.observableArrayList();
 	
 	//give grade
