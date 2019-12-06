@@ -30,8 +30,9 @@ public class StudentManagementController implements Initializable{
 
 	GradingController gradingController = new GradingController();
 	ObservableList<StudentInfo> studentData = FXCollections.observableArrayList();
+	
 	Operations operations = new Operations();
-	Course course = new Course();
+	Course course = operations.getCourseInfo("1");
 	
 	//table
 	@FXML private TableView<StudentInfo> tableView;
@@ -84,8 +85,9 @@ public class StudentManagementController implements Initializable{
 		ArrayList<StudentInfo> studentInfo = new ArrayList<>();
 		for(int i = 0; i<studentData.size(); i++) {
 			studentInfo.add(studentData.get(i));
+			System.out.println(studentInfo.get(i).toString());
 		}
-		course = operations.getCourseInfo("1");
+//		course = operations.getCourseInfo("1");
 		
 		operations.saveOpUpdateStudentsInfo(studentInfo, course);
 		
@@ -108,8 +110,9 @@ public class StudentManagementController implements Initializable{
 		ArrayList<StudentInfo> studentInfo = new ArrayList<>();
 		for(int i = 0; i<studentData.size(); i++) {
 			studentInfo.add(studentData.get(i));
+//			System.out.println(studentInfo.get(i).toString());
 		}
-		course = operations.getCourseInfo("1");
+//		course = operations.getCourseInfo("1");
 		
 		operations.saveOpUpdateStudentsInfo(studentInfo, course);
 		
@@ -137,6 +140,7 @@ public class StudentManagementController implements Initializable{
 		Scene manageStudentScene = new Scene(manageStudentParent);
 		
 		Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
+		
 		window.setScene(manageStudentScene);
 		window.show();
 	}

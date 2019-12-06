@@ -1,12 +1,14 @@
 package pojo;
 
+import javafx.beans.property.SimpleDoubleProperty;
+
 // Table TemplateGeneralCriteria
 public class TemplateGeneralCriteria {
 	private String gCriID; // *, General Criteria ID, [HS], created by courseID(cID) and genenal criteria
 							// type(GenCriType)
 	private String cID; // courseID, [HS], created by coursename and semester
 	private String genCriType; // General Criteria Type, Assignment, Quiz, Exam
-	private double genCriPer; // General Criteria Type 's Percentage
+	private SimpleDoubleProperty genCriPer; // General Criteria Type 's Percentage
 
 	public TemplateGeneralCriteria() {
 
@@ -17,7 +19,7 @@ public class TemplateGeneralCriteria {
 		this.gCriID = gCriID;
 		this.cID = cID;
 		this.genCriType = genCriType;
-		this.genCriPer = genCriPer;
+		this.genCriPer = new SimpleDoubleProperty(genCriPer);
 	}
 
 	public TemplateGeneralCriteria(GeneralCriteria gCri) {
@@ -25,7 +27,7 @@ public class TemplateGeneralCriteria {
 		this.gCriID = gCri.getgCriID();
 		this.cID = gCri.getcID();
 		this.genCriType = gCri.getGenCriType();
-		this.genCriPer = gCri.getGenCriPer();
+		this.genCriPer = new SimpleDoubleProperty(gCri.getGenCriPer());
 	}
 
 	public String getgCriID() {
@@ -53,10 +55,10 @@ public class TemplateGeneralCriteria {
 	}
 
 	public double getGenCriPer() {
-		return genCriPer;
+		return genCriPer.get();
 	}
 
 	public void setGenCriPer(double genCriPer) {
-		this.genCriPer = genCriPer;
+		this.genCriPer = new SimpleDoubleProperty(genCriPer);
 	}
 }
