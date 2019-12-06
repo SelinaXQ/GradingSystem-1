@@ -45,7 +45,7 @@
       <Label layoutX="100.0" layoutY="102.0" text="General Criteria:" />
       <Label layoutX="373.0" layoutY="102.0" text="Detailed Criteria:" />
       <Button layoutX="293.0" layoutY="344.0" mnemonicParsing="false" onAction="#saveGeneralCriteriaButton" text="Save" />
-      <Button layoutX="652.0" layoutY="344.0" mnemonicParsing="false" text="Save" />
+      <Button layoutX="652.0" layoutY="344.0" mnemonicParsing="false" onAction="#saveDetailedCriteriaButton" text="Save" />
       <Button layoutX="652.0" layoutY="654.0" mnemonicParsing="false" text="Save" />
       <Button layoutX="541.0" layoutY="344.0" mnemonicParsing="false" text="Give grades" />
    </children>
