@@ -128,17 +128,7 @@ public class StudentManagementController implements Initializable{
         	allStudent.remove(student);
 
     		operations.deleteStudentInfo(student, course);
-        }
-//        ArrayList<StudentInfo> studentInfo = new ArrayList<>();
-//		for(int i = 0; i<allStudent.size(); i++) {
-//			studentInfo.add(allStudent.get(i));
-//		}
-//		course = operations.getCourseInfo("1");
-//		
-//		
-//		operations.saveOpUpdateStudentsInfo(studentInfo, course);  
-
-		
+        }		
 	}
 	
 	@FXML
@@ -156,7 +146,7 @@ public class StudentManagementController implements Initializable{
 		studentData = gradingController.getStudentData();
 //        ObservableList<StudentInfo> student = FXCollections.observableArrayList();
 //        student.add(new StudentInfo("U96796201","Qian","", "Xiang", ""));
-//        
+		
         return studentData;
     }
 
