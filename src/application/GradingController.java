@@ -165,12 +165,12 @@ public class GradingController implements Initializable{
 		
 		if(operations.saveGeneralCriterias(temp, false)) {
 			System.out.println("Save successfully");
+			generalTableView.refresh();
 			
 		}else {
 			System.out.println("Added up should be 100%!!");
 			//refresh
 			generalTableView.refresh();
-			//reset table
 		}
 		
 	}
@@ -181,6 +181,27 @@ public class GradingController implements Initializable{
 	
 	@FXML
 	public void saveDetailedCriteriaButton(ActionEvent event) {
+//		saveDetailedCriterias
+		System.out.println("Button clicked");
+		System.out.println("detailed size:" + detailedCriteria.size());
+		ArrayList<DetailedCriteria> temp = new ArrayList<>();
+		for(int i = 0; i < detailedCriteria.size(); i++) {
+			DetailedCriteria tempDetailed = detailedCriteria.get(i);
+
+			tempDetailed.setdCriID(null);;
+			temp.add(tempDetailed);
+		}
+		
+		if(operations.saveDetailedCriterias(temp, false)) {
+			System.out.println("Save successfully");
+			detailedTableView.refresh();
+			
+		}else {
+			System.out.println("Added up should be 100%!!");
+			//refresh
+			detailedTableView.refresh();
+		}
+		
 		
 	}
 	
