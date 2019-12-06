@@ -1,5 +1,7 @@
 package uitable;
 
+import javafx.beans.property.SimpleDoubleProperty;
+
 // this class is for the window which could give detailed score to students
 // each attribute is corresponding to a column in that table
 
@@ -8,7 +10,7 @@ public class GiveDetailedGrades {
     private String fName;
     private String mName;
     private String lName;
-    private double score;
+    private SimpleDoubleProperty score;
     private String comment;
 
     public GiveDetailedGrades(String bUID, String fName, String mName, String lName, double score) {
@@ -16,7 +18,7 @@ public class GiveDetailedGrades {
         this.fName = fName;
         this.mName = mName;
         this.lName = lName;
-        this.score = score;
+        this.score = new SimpleDoubleProperty(score);
     }
 
     public GiveDetailedGrades(String bUID, String fName, String mName, String lName, double score, String comment) {
@@ -24,7 +26,7 @@ public class GiveDetailedGrades {
         this.fName = fName;
         this.mName = mName;
         this.lName = lName;
-        this.score = score;
+        this.score = new SimpleDoubleProperty(score);
         this.comment = comment;
     }
 
@@ -69,10 +71,10 @@ public class GiveDetailedGrades {
     }
 
     public double getScore() {
-        return score;
+        return score.get();
     }
 
     public void setScore(double score) {
-        this.score = score;
+        this.score = new SimpleDoubleProperty(score);
     }
 }

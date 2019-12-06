@@ -64,6 +64,9 @@ public class GradingController implements Initializable{
 	@FXML private TableColumn<DetailedCriteria, Double> detailedPercentageColumn;
 	@FXML private TableColumn<DetailedCriteria, Double> detailedTotalScoreColumn;
 	
+	//table grade
+	@FXML private TableView<GiveDetailedGrades> gradeTableView;
+	@FXML private TableColumn<GiveDetailedGrades, Double> gradeScoreColumn;
 	
 	/*
 	 * initialize table
@@ -167,6 +170,7 @@ public class GradingController implements Initializable{
 	public void editStudentButtonPushed(ActionEvent event) throws IOException {
 		Parent studentmManagementParent = FXMLLoader.load(getClass().getResource("StudentManagement.fxml"));
 		Scene studentManagementScene = new Scene(studentmManagementParent);
+		
 		Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
 		
 		window.setScene(studentManagementScene);
