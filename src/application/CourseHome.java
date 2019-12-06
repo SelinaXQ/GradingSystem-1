@@ -1,21 +1,19 @@
 package application;
 
-import java.io.IOException;
-
-
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
-import javafx.stage.Stage;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.layout.BorderPane;
+import javafx.stage.Stage;
 
-public class Login extends Application{
+import java.io.IOException;
+
+public class CourseHome extends Application{
     @Override
     public void start(Stage primaryStage) throws IOException {
 
-        Parent root = FXMLLoader.load(getClass().getResource("Login.fxml"));
-        primaryStage.setTitle("Login");
+        Parent root = FXMLLoader.load(getClass().getResource("CourseHome.fxml"));
+        primaryStage.setTitle("Current Courses");
         primaryStage.setScene(new Scene(root, 400, 240));
         primaryStage.show();
     }
