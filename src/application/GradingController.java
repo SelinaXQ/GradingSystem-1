@@ -46,7 +46,7 @@ public class GradingController implements Initializable{
 	// general criteria
 	ObservableList<GeneralCriteria> generalCriteria = FXCollections.observableArrayList();
 	ArrayList<GeneralCriteria> generalArr = operations.getGeneralCriteriasByCourseID(courseid, false);
-	
+	GeneralCriteria generalCur = new GeneralCriteria();
 	//detailed criteria
 	ObservableList<DetailedCriteria> detailedCriteria = FXCollections.observableArrayList();
 	
@@ -114,7 +114,7 @@ public class GradingController implements Initializable{
 		System.out.println("general clicked!");
 		detailedCriteria = FXCollections.observableArrayList();
 		
-		GeneralCriteria generalCur = generalTableView.getSelectionModel().getSelectedItem();
+		generalCur = generalTableView.getSelectionModel().getSelectedItem();
 		
 		ArrayList<DetailedCriteria> detailedArr = new ArrayList<>();
 		detailedArr = operations.getDetailedCriteriasByGenerCriID(generalCur.getgCriID(), false);
@@ -270,8 +270,6 @@ public class GradingController implements Initializable{
 		ArrayList<DetailedCriteria> temp = new ArrayList<>();
 		for(int i = 0; i < detailedCriteria.size(); i++) {
 			DetailedCriteria tempDetailed = detailedCriteria.get(i);
-
-			tempDetailed.setdCriID(null);;
 			temp.add(tempDetailed);
 		}
 		
@@ -282,6 +280,14 @@ public class GradingController implements Initializable{
 		}else {
 			System.out.println("Added up should be 100%!!");
 			//refresh
+			detailedCriteria = FXCollections.observableArrayList();
+			ArrayList<DetailedCriteria> detailedArr = new ArrayList<>();
+			detailedArr = operations.getDetailedCriteriasByGenerCriID(generalCur.getgCriID(), false);
+			
+			for(int i = 0; i < detailedArr.size(); i++) {
+				detailedCriteria.add(detailedArr.get(i));
+			}
+			detailedTableView.setItems(detailedCriteria);
 			detailedTableView.refresh();
 		}
 	}
