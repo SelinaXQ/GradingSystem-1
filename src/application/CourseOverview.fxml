@@ -5,19 +5,25 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-
-<AnchorPane prefHeight="600.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8">
+<AnchorPane prefHeight="530.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Label layoutX="56.0" layoutY="48.0" text="cs 591 overview" />
-      <TableView layoutX="55.0" layoutY="89.0" prefHeight="364.0" prefWidth="504.0">
+      <Label layoutX="42.0" layoutY="33.0" prefHeight="17.0" prefWidth="107.0" text="CS 591 Overview" />
+      <TableView layoutX="42.0" layoutY="74.0" prefHeight="364.0" prefWidth="717.0">
         <columns>
-          <TableColumn prefWidth="75.0" text="C1" />
-          <TableColumn prefWidth="75.0" text="C2" />
+          <TableColumn prefWidth="75.0" text="BU ID" />
+          <TableColumn text="First Name" />
+            <TableColumn text="Middle Name" />
+            <TableColumn text="Last Name" />
+            <TableColumn text="Quiz" />
+            <TableColumn text="Assignment" />
+            <TableColumn text="Bonus" />
+            <TableColumn text="Composite" />
+            <TableColumn text="Grade" />
         </columns>
       </TableView>
-      <Button layoutX="55.0" layoutY="492.0" mnemonicParsing="false" text="close the course" />
-      <TextField layoutX="284.0" layoutY="492.0" prefHeight="27.0" prefWidth="99.0" />
-      <Button layoutX="404.0" layoutY="492.0" mnemonicParsing="false" text="Curve" />
-      <Button layoutX="485.0" layoutY="492.0" mnemonicParsing="false" text="Compute" />
+      <Button layoutX="56.0" layoutY="466.0" mnemonicParsing="false" text="close the course" />
+      <TextField layoutX="366.0" layoutY="466.0" prefHeight="27.0" prefWidth="99.0" />
+      <Button layoutX="504.0" layoutY="466.0" mnemonicParsing="false" text="Curve" />
+      <Button layoutX="641.0" layoutY="466.0" mnemonicParsing="false" text="Compute" />
    </children>
 </AnchorPane>

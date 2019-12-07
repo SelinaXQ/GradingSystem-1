@@ -20,6 +20,6 @@
       <Button alignment="CENTER" layoutX="111.0" layoutY="165.0" mnemonicParsing="false" text="Cancel" />
       <Button alignment="CENTER" layoutX="228.0" layoutY="165.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="27.0" prefWidth="57.0" text="OK" />
       <TextField layoutX="182.0" layoutY="75.0" prefHeight="27.0" prefWidth="136.0" />
-      <TextField layoutX="182.0" layoutY="118.0" prefHeight="27.0" prefWidth="136.0" />
+      <PasswordField layoutX="182.0" layoutY="118.0" prefHeight="27.0" prefWidth="136.0" />
    </children>
 </AnchorPane>

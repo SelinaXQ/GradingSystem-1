@@ -15,8 +15,8 @@ public class CourseOverview extends Application{
 	public void start(Stage primaryStage) throws IOException {
 
 		Parent root = FXMLLoader.load(getClass().getResource("courseOverview.fxml"));
-        primaryStage.setTitle("current semester");
-        primaryStage.setScene(new Scene(root, 600, 600));
+        primaryStage.setTitle("Course Overview");
+        primaryStage.setScene(new Scene(root, 800, 530));
         primaryStage.show();
 	}
 	
