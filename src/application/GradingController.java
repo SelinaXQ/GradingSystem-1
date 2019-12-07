@@ -199,13 +199,11 @@ public class GradingController implements Initializable{
 //		saveGeneralCriterias
 		System.out.println("Button clicked");
 		System.out.println("general size:" + generalCriteria.size());
+		
 		ArrayList<GeneralCriteria> temp = new ArrayList<>();
 		for(int i = 0; i < generalCriteria.size(); i++) {
-			GeneralCriteria tempGenaral = generalCriteria.get(i);
-
-			tempGenaral.setcID(null);
-			temp.add(tempGenaral);
-//			System.out.println(generalCriteria.get(i).toString());
+			GeneralCriteria tempGeneral = generalCriteria.get(i);
+			temp.add(tempGeneral);
 		}
 		
 		if(operations.saveGeneralCriterias(temp, false)) {
@@ -215,8 +213,48 @@ public class GradingController implements Initializable{
 		}else {
 			System.out.println("Added up should be 100%!!");
 			//refresh
+			generalCriteria = FXCollections.observableArrayList();
+			generalTableView.setItems(getGeneralCriteria());
 			generalTableView.refresh();
 		}
+		
+//		//save before change
+//		ObservableList<GeneralCriteria> generalCriteriaTemp = FXCollections.observableArrayList();
+//		ArrayList<GeneralCriteria> generalArrTemp = operations.getGeneralCriteriasByCourseID(courseid, false);
+//		for(int i = 0; i<generalArrTemp.size(); i++) {
+//			generalCriteriaTemp.add(generalArrTemp.get(i));
+//		}
+//		
+//		
+//		//save current and delete in database
+//		ArrayList<GeneralCriteria> temp = new ArrayList<>();
+//		for(int i = 0; i < generalCriteria.size(); i++) {
+//			GeneralCriteria tempGenaral = generalCriteria.get(i);
+//			operations.deleteGeneralCriteria(generalCriteria.get(i), false);
+//			tempGenaral.setcID(null);
+//			temp.add(tempGenaral);	
+//		}
+//		
+//		//try to save 
+//		
+//		if(operations.saveGeneralCriterias(temp, false)) {
+//			//refresh table
+//			generalCriteria = FXCollections.observableArrayList();
+//			generalTableView.setItems(getGeneralCriteria());
+//			System.out.println("Save successfully");
+////			generalTableView.refresh();
+//			
+//		}else {
+//			System.out.println("Added up should be 100%!!");
+//			//refresh
+//			//add back to database
+//			operations.saveGeneralCriterias(generalArrTemp, false);
+//			generalCriteria = FXCollections.observableArrayList();
+//			for(int i = 0; i<generalCriteriaTemp.size(); i++) {
+//				generalCriteria.add(generalCriteriaTemp.get(i));
+//			}
+//			generalTableView.setItems(generalCriteria);
+//		}
 		
 	}
 	
@@ -331,7 +369,7 @@ public class GradingController implements Initializable{
 	 */
 	
 	public ObservableList<GeneralCriteria> getGeneralCriteria(){
-		
+		generalArr = operations.getGeneralCriteriasByCourseID(courseid, false);
 		for(int i = 0; i < generalArr.size(); i++) {
 			generalCriteria.add(generalArr.get(i));
 		}
