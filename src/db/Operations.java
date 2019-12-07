@@ -89,15 +89,17 @@ public class Operations {
 	// save the percentage of a general criterias
 
 	public boolean saveGeneralCriterias(ArrayList<GeneralCriteria> gCris, boolean ifTemplate) {
+		System.out.println(gCris.get(0).getgCriID());
 		boolean flag = false;
 		double total = 0;
 		for (GeneralCriteria gCri : gCris) {
 			total += gCri.getGenCriPer();
 		}
-		if (Math.abs(total - 1) > 0.00001) {
+		System.out.println(total);
+		if (Math.abs(total - 1) < 0.00001) {
 			flag = true;
 		}
-		if (flag == true) {
+		if (flag == false) {
 			return flag;
 		} else {
 			if (ifTemplate == true) {

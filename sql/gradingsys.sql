@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 80018
 File Encoding         : 65001
 
-Date: 2019-12-05 00:44:17
+Date: 2019-12-07 09:44:51
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -64,13 +64,15 @@ CREATE TABLE `coursesstudents` (
   PRIMARY KEY (`csid`),
   KEY `cid` (`cid`),
   KEY `buid` (`buid`),
-  CONSTRAINT `coursesstudents_ibfk_2` FOREIGN KEY (`buid`) REFERENCES `students` (`buid`)
+  CONSTRAINT `coursesstudents_ibfk_2` FOREIGN KEY (`buid`) REFERENCES `students` (`buid`) ON DELETE RESTRICT ON UPDATE RESTRICT
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='Information of students enrolled in all the courses, including their status, grade and comment';
 
 -- ----------------------------
 -- Records of coursesstudents
 -- ----------------------------
-INSERT INTO `coursesstudents` VALUES ('8a80803d6eca223f016eca2246c50000', '1', 'U8899', '', null, null);
+INSERT INTO `coursesstudents` VALUES ('8a80803d6eddc58c016eddc5f46f0002', '1', 'U96796203', '', null, null);
+INSERT INTO `coursesstudents` VALUES ('8a80803d6eddce49016eddce4f850001', '1', 'U96796202', 'w', null, null);
+INSERT INTO `coursesstudents` VALUES ('8a80803d6eddce49016eddce4fc80003', '1', 'U96796205', '', null, null);
 
 -- ----------------------------
 -- Table structure for `detailedcriteria`
@@ -143,15 +145,13 @@ CREATE TABLE `studentdetailedgrade` (
   PRIMARY KEY (`sdgid`),
   KEY `studentdetailedgrade_ibfk_2` (`dCriID`),
   KEY `studentdetailedgrade_ibfk_1` (`csid`),
-  CONSTRAINT `studentdetailedgrade_ibfk_1` FOREIGN KEY (`csid`) REFERENCES `coursesstudents` (`csid`),
+  CONSTRAINT `studentdetailedgrade_ibfk_1` FOREIGN KEY (`csid`) REFERENCES `coursesstudents` (`csid`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `studentdetailedgrade_ibfk_2` FOREIGN KEY (`dCriID`) REFERENCES `detailedcriteria` (`dCriID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='Students’ grade for each assignment, quiz etc.';
 
 -- ----------------------------
 -- Records of studentdetailedgrade
 -- ----------------------------
-INSERT INTO `studentdetailedgrade` VALUES ('1', '8a80803d6eca223f016eca2246c50000', '8a80803d6ed40deb016ed40dedf70000', '-50.00', null);
-INSERT INTO `studentdetailedgrade` VALUES ('2', '8a80803d6eca223f016eca2246c50000', '8a80803d6ed40deb016ed40dee270001', '-50.00', null);
 
 -- ----------------------------
 -- Table structure for `students`
@@ -172,6 +172,11 @@ INSERT INTO `students` VALUES ('B', 'F', 'M', 'L');
 INSERT INTO `students` VALUES ('BAA', 'F', 'M', 'L');
 INSERT INTO `students` VALUES ('U', 'FAA', 'M', 'L');
 INSERT INTO `students` VALUES ('U8899', 'FAA', 'M', 'L');
+INSERT INTO `students` VALUES ('U96796201', 'Qian', '', 'Xiang');
+INSERT INTO `students` VALUES ('U96796202', 'haha', 'hey', 'Li');
+INSERT INTO `students` VALUES ('U96796203', 'Victoria', '', 'Ming');
+INSERT INTO `students` VALUES ('U96796204', 'Jimin', 'King', 'Park');
+INSERT INTO `students` VALUES ('U96796205', 'Lin', 'A', 'oo');
 
 -- ----------------------------
 -- Table structure for `templatedetailedcriteria`
