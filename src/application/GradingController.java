@@ -129,6 +129,9 @@ public class GradingController implements Initializable{
 		System.out.println("detailed clicked!");
 		grade = FXCollections.observableArrayList();
 		DetailedCriteria detailedCur = detailedTableView.getSelectionModel().getSelectedItem();
+		
+		System.out.println(detailedCur.toString());
+		
 		ArrayList<GiveDetailedGrades> gradeArr = operations.getStudentsDetailedGrades(course, detailedCur);
 		System.out.println("grade size:" + gradeArr.size());
 		for(int i = 0; i < gradeArr.size(); i++) {
