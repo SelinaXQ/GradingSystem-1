@@ -63,4 +63,8 @@ public class GeneralCriteria {
 	public void setGenCriPer(double genCriPer) {
 		this.genCriPer = new SimpleDoubleProperty(genCriPer);
 	}
+	
+	public String toString() {
+		return "gCriID: " + gCriID + "cID: " + cID + "genCriType: " + genCriType + "genCriPer: " + genCriPer;
+	}
 }

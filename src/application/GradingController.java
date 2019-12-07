@@ -206,6 +206,7 @@ public class GradingController implements Initializable{
 
 			System.out.println("UII:"+tempGeneral.getGenCriPer());
 			temp.add(tempGeneral);
+			System.out.println(temp.get(i).toString());
 		}
 		
 		if(operations.saveGeneralCriterias(temp, false)) {
@@ -283,6 +284,7 @@ public class GradingController implements Initializable{
 			System.out.println("Added up should be 100%!!");
 			//refresh
 			detailedCriteria = FXCollections.observableArrayList();
+			
 			ArrayList<DetailedCriteria> detailedArr = new ArrayList<>();
 			detailedArr = operations.getDetailedCriteriasByGenerCriID(generalCur.getgCriID(), false);
 			
@@ -304,6 +306,7 @@ public class GradingController implements Initializable{
 	public void editStudentButtonPushed(ActionEvent event) throws IOException {
 		Parent studentmManagementParent = FXMLLoader.load(getClass().getResource("StudentManagement.fxml"));
 		Scene studentManagementScene = new Scene(studentmManagementParent);
+		
 		Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
 		
 		window.setScene(studentManagementScene);
