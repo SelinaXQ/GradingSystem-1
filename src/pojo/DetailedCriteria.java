@@ -72,4 +72,9 @@ public class DetailedCriteria {
 	public void setDeCriPer(double deCriPer) {
 		this.deCriPer = new SimpleDoubleProperty(deCriPer);
 	}
+	
+	public String toString() {
+		return "dCriID: " + dCriID + "gCriID: " + gCriID + "deCriType: " + 
+	deCriType + "deCriPer: " + deCriPer + "totalScore: " + totalScore;
+	}
 }

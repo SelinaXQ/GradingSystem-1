@@ -274,6 +274,7 @@ public class GradingController implements Initializable{
 		for(int i = 0; i < detailedCriteria.size(); i++) {
 			DetailedCriteria tempDetailed = detailedCriteria.get(i);
 			temp.add(tempDetailed);
+			System.out.println(temp.get(i).toString());
 		}
 		
 		if(operations.saveDetailedCriterias(temp, false)) {
