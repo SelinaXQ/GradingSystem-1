@@ -203,10 +203,7 @@ public class GradingController implements Initializable{
 		ArrayList<GeneralCriteria> temp = new ArrayList<>();
 		for(int i = 0; i < generalCriteria.size(); i++) {
 			GeneralCriteria tempGeneral = generalCriteria.get(i);
-
-			System.out.println("UII:"+tempGeneral.getGenCriPer());
 			temp.add(tempGeneral);
-			System.out.println(temp.get(i).toString());
 		}
 		
 		if(operations.saveGeneralCriterias(temp, false)) {

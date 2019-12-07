@@ -110,10 +110,10 @@ public class ManageCriteria {
 		Transaction tx = null;
 		try {
 			tx = session.beginTransaction();
-			System.out.println(gCriteria.getgCriID());
-			GeneralCriteria gCri = (GeneralCriteria) session.get(GeneralCriteria.class, gCriteria.getgCriID());
-			System.out.println("Database:" + gCri.getgCriID());
-			session.saveOrUpdate(gCri);
+		//	GeneralCriteria gCri = (GeneralCriteria) session.get(GeneralCriteria.class, gCriteria.getgCriID());
+		//	System.out.println("Database:" + gCri.getgCriID());
+		//	session.merge(gCri);
+			session.saveOrUpdate(gCriteria);
 			tx.commit();
 		} catch (HibernateException e) {
 			if (tx != null)
