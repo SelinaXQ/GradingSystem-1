@@ -66,6 +66,10 @@ public class GradingController implements Initializable{
 	
 	//table grade
 	@FXML private TableView<GiveDetailedGrades> gradeTableView;
+	@FXML private TableColumn<GiveDetailedGrades, String> BUIDColumn;
+	@FXML private TableColumn<GiveDetailedGrades, String> firstNameColumn;
+	@FXML private TableColumn<GiveDetailedGrades, String> middleNameColumn;
+	@FXML private TableColumn<GiveDetailedGrades, String> lastNameColumn;
 	@FXML private TableColumn<GiveDetailedGrades, Double> gradeScoreColumn;
 	
 	/*
@@ -75,6 +79,7 @@ public class GradingController implements Initializable{
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		// TODO Auto-generated method stub
+		//general table
 		generalTypeColumn.setCellValueFactory(new PropertyValueFactory<GeneralCriteria, String>("genCriType"));
 		generalPercentageColumn.setCellValueFactory(new PropertyValueFactory<GeneralCriteria, Double>("genCriPer"));
 		generalTableView.setItems(getGeneralCriteria());
@@ -82,14 +87,54 @@ public class GradingController implements Initializable{
 		generalTypeColumn.setCellFactory(TextFieldTableCell.forTableColumn());
 		generalPercentageColumn.setCellFactory(TextFieldTableCell.forTableColumn(new DoubleStringConverter()));
 		
+		//detailed table
 		detailedTypeColumn.setCellValueFactory(new PropertyValueFactory<DetailedCriteria, String>("deCriType"));
 		detailedPercentageColumn.setCellValueFactory(new PropertyValueFactory<DetailedCriteria, Double>("deCriPer"));
 		detailedTotalScoreColumn.setCellValueFactory(new PropertyValueFactory<DetailedCriteria, Double>("totalScore"));
-		detailedTableView.setItems(getDetailedCriteria(generalArr));
+		
+//		detailedTableView.setItems(getDetailedCriteria(generalArr));
+		
 		detailedTableView.setEditable(true);
 		detailedTypeColumn.setCellFactory(TextFieldTableCell.forTableColumn());
 		detailedPercentageColumn.setCellFactory(TextFieldTableCell.forTableColumn(new DoubleStringConverter()));
 		detailedTotalScoreColumn.setCellFactory(TextFieldTableCell.forTableColumn(new DoubleStringConverter()));
+		
+		//grade table
+		BUIDColumn.setCellValueFactory(new PropertyValueFactory<GiveDetailedGrades, String>("BUID"));
+		firstNameColumn.setCellValueFactory(new PropertyValueFactory<GiveDetailedGrades, String>("fName"));
+		middleNameColumn.setCellValueFactory(new PropertyValueFactory<GiveDetailedGrades, String>("mName"));
+		lastNameColumn.setCellValueFactory(new PropertyValueFactory<GiveDetailedGrades, String>("lName"));
+		gradeScoreColumn.setCellValueFactory(new PropertyValueFactory<GiveDetailedGrades, Double>("score"));
+		gradeTableView.setEditable(true);
+		gradeScoreColumn.setCellFactory(TextFieldTableCell.forTableColumn(new DoubleStringConverter()));
+		
+	}
+	
+	public void userClickedOnGeneralTable() {
+		System.out.println("general clicked!");
+		detailedCriteria = FXCollections.observableArrayList();
+		
+		GeneralCriteria generalCur = generalTableView.getSelectionModel().getSelectedItem();
+		
+		ArrayList<DetailedCriteria> detailedArr = new ArrayList<>();
+		detailedArr = operations.getDetailedCriteriasByGenerCriID(generalCur.getgCriID(), false);
+		
+		for(int i = 0; i < detailedArr.size(); i++) {
+			detailedCriteria.add(detailedArr.get(i));
+		}
+		detailedTableView.setItems(detailedCriteria);
+	}
+	
+	public void userClickOnDetailedTable() {
+		System.out.println("detailed clicked!");
+		grade = FXCollections.observableArrayList();
+		DetailedCriteria detailedCur = detailedTableView.getSelectionModel().getSelectedItem();
+		ArrayList<GiveDetailedGrades> gradeArr = operations.getStudentsDetailedGrades(course, detailedCur);
+		System.out.println("grade size:" + gradeArr.size());
+		for(int i = 0; i < gradeArr.size(); i++) {
+			grade.add(gradeArr.get(i));
+		}
+		gradeTableView.setItems(grade);
 		
 	}
 	
@@ -201,9 +246,9 @@ public class GradingController implements Initializable{
 			//refresh
 			detailedTableView.refresh();
 		}
-		
-		
 	}
+	
+	
 	
 	/*
 	 * Edit student
@@ -213,7 +258,6 @@ public class GradingController implements Initializable{
 	public void editStudentButtonPushed(ActionEvent event) throws IOException {
 		Parent studentmManagementParent = FXMLLoader.load(getClass().getResource("StudentManagement.fxml"));
 		Scene studentManagementScene = new Scene(studentmManagementParent);
-		
 		Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
 		
 		window.setScene(studentManagementScene);
