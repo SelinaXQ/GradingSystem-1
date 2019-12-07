@@ -83,8 +83,8 @@ public class ManageCourse {
 		Transaction tx = null;
 		try {
 			tx = session.beginTransaction();
-			Course course = (Course) session.get(Course.class, c.getcID());
-			session.saveOrUpdate(course);
+		//	Course course = (Course) session.get(Course.class, c.getcID());
+			session.saveOrUpdate(c);
 			tx.commit();
 		} catch (HibernateException e) {
 			if (tx != null)

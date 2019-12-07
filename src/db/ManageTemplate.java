@@ -93,8 +93,8 @@ public class ManageTemplate {
 		Transaction tx = null;
 		try {
 			tx = session.beginTransaction();
-			TemplateGeneralCriteria gCri = (TemplateGeneralCriteria) session.get(TemplateGeneralCriteria.class, templateGeneralCriteria.getgCriID());
-			session.saveOrUpdate(gCri);
+			// TemplateGeneralCriteria gCri = (TemplateGeneralCriteria) session.get(TemplateGeneralCriteria.class, templateGeneralCriteria.getgCriID());
+			session.saveOrUpdate(templateGeneralCriteria);
 			tx.commit();
 		} catch (HibernateException e) {
 			if (tx != null)
