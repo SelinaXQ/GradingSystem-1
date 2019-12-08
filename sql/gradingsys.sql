@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 80018
 File Encoding         : 65001
 
-Date: 2019-12-07 09:44:51
+Date: 2019-12-08 13:51:01
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -71,8 +71,7 @@ CREATE TABLE `coursesstudents` (
 -- Records of coursesstudents
 -- ----------------------------
 INSERT INTO `coursesstudents` VALUES ('8a80803d6eddc58c016eddc5f46f0002', '1', 'U96796203', '', null, null);
-INSERT INTO `coursesstudents` VALUES ('8a80803d6eddce49016eddce4f850001', '1', 'U96796202', 'w', null, null);
-INSERT INTO `coursesstudents` VALUES ('8a80803d6eddce49016eddce4fc80003', '1', 'U96796205', '', null, null);
+INSERT INTO `coursesstudents` VALUES ('8a80803d6ee6c093016ee6c0bce20000', '1', 'U96796201', '', null, null);
 
 -- ----------------------------
 -- Table structure for `detailedcriteria`
@@ -112,7 +111,7 @@ CREATE TABLE `generalcriteria` (
 -- ----------------------------
 -- Records of generalcriteria
 -- ----------------------------
-INSERT INTO `generalcriteria` VALUES ('abcd', '1', 'assginment', '0.50');
+INSERT INTO `generalcriteria` VALUES ('abcd', '1', 'assginment', '1.00');
 
 -- ----------------------------
 -- Table structure for `semesters`
@@ -152,6 +151,10 @@ CREATE TABLE `studentdetailedgrade` (
 -- ----------------------------
 -- Records of studentdetailedgrade
 -- ----------------------------
+INSERT INTO `studentdetailedgrade` VALUES ('aaaa', '8a80803d6eddc58c016eddc5f46f0002', '8a80803d6ed40deb016ed40dedf70000', '0.00', null);
+INSERT INTO `studentdetailedgrade` VALUES ('bbbb', '8a80803d6eddc58c016eddc5f46f0002', '8a80803d6ed40deb016ed40dee270001', '0.00', null);
+INSERT INTO `studentdetailedgrade` VALUES ('cccc', '8a80803d6ee6c093016ee6c0bce20000', '8a80803d6ed40deb016ed40dedf70000', '0.00', null);
+INSERT INTO `studentdetailedgrade` VALUES ('dddd', '8a80803d6ee6c093016ee6c0bce20000', '8a80803d6ed40deb016ed40dee270001', '0.00', null);
 
 -- ----------------------------
 -- Table structure for `students`
@@ -171,6 +174,7 @@ CREATE TABLE `students` (
 INSERT INTO `students` VALUES ('B', 'F', 'M', 'L');
 INSERT INTO `students` VALUES ('BAA', 'F', 'M', 'L');
 INSERT INTO `students` VALUES ('U', 'FAA', 'M', 'L');
+INSERT INTO `students` VALUES ('U8243567654', 'Qia', '', 'QUI');
 INSERT INTO `students` VALUES ('U8899', 'FAA', 'M', 'L');
 INSERT INTO `students` VALUES ('U96796201', 'Qian', '', 'Xiang');
 INSERT INTO `students` VALUES ('U96796202', 'haha', 'hey', 'Li');
