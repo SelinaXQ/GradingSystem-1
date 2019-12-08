@@ -134,6 +134,7 @@ public class GradingController implements Initializable{
 		
 		ArrayList<GiveDetailedGrades> gradeArr = operations.getStudentsDetailedGrades(course, detailedCur);
 		System.out.println("grade size:" + gradeArr.size());
+		System.out.println(gradeArr.get(0).getfName());
 		for(int i = 0; i < gradeArr.size(); i++) {
 			grade.add(gradeArr.get(i));
 		}

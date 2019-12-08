@@ -3,8 +3,6 @@ package db;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import com.sun.xml.bind.v2.runtime.output.SAXOutput;
-
 import pojo.*;
 import uitable.DetailedGrade;
 import uitable.GeneralGrade;
@@ -113,7 +111,6 @@ public class Operations {
 		}
 	}
 
-
 	// delete a general criteria
 
 	public void deleteGeneralCriteria(GeneralCriteria gCriteria, boolean ifTemplate) {
@@ -133,12 +130,12 @@ public class Operations {
 
 	public void saveCriteriaAsTemplate(ArrayList<GeneralCriteria> gCris, ArrayList<DetailedCriteria> dCris) {
 		saveGeneralCriterias(gCris, true);
-		saveDetailedCriterias(dCris, true);
+		saveDetailedCriterias(null, dCris, true);
 	}
 
 	// save the percentage of a detailed criteria,
 
-	public boolean saveDetailedCriterias(ArrayList<DetailedCriteria> dCris, boolean ifTemplate) {
+	public boolean saveDetailedCriterias(Course c, ArrayList<DetailedCriteria> dCris, boolean ifTemplate) {
 		boolean flag = true;
 		double total = 0;
 		for (DetailedCriteria dCri : dCris) {
@@ -157,6 +154,14 @@ public class Operations {
 			} else {
 				for (DetailedCriteria dCri : dCris) {
 					mCriteria.updateOrSaveDetailedCriteria(dCri);
+					if (c == null) {
+						ArrayList<CourseStudents> csStudents = mStudents.getStudentsByCId(c);
+						for (CourseStudents cs : csStudents) {
+							StudentDetailedGrade sdg = new StudentDetailedGrade(cs.getcSID(), dCri.getdCriID(), 0.00,
+									null);
+							mOthers.updateOrSaveStudentDetailedGrade(sdg);
+						}
+					}
 				}
 			}
 			return flag;
@@ -262,6 +267,7 @@ public class Operations {
 			StudentDetailedGrade sDetailedGrade = mOthers.getStudentDetailedGrade(cs.getcSID(), dCriteria.getdCriID())
 					.get(0);
 			Student s = mStudents.getStudentByBUID(cs.getbUID()).get(0);
+
 			GiveDetailedGrades giveDetailedGrade = new GiveDetailedGrades(s.getBUID(), s.getFirstName(),
 					s.getMiddleName(), s.getLastName(), sDetailedGrade.getScore());
 			// GiveDetailedGrades giveDetailedGrade = new GiveDetailedGrades(s.getBUID(),
@@ -296,7 +302,9 @@ public class Operations {
 			mStudents.updateOrSaveStudent(student);
 			System.out.println(sInfo.getCondition());
 			ArrayList<CourseStudents> css = mStudents.getCourseStudent(sInfo.getBUID(), c.getcID());
+			System.out.println(css.size());
 			if (css.size() == 0) {
+				System.out.println("Save students!");
 				CourseStudents cs = new CourseStudents();
 				cs.setbUID(sInfo.getBUID());
 				cs.setcID(c.getcID());

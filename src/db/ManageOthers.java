@@ -53,6 +53,7 @@ public class ManageOthers {
 			CriteriaQuery<StudentDetailedGrade> query = builder.createQuery(StudentDetailedGrade.class);
 			Root<StudentDetailedGrade> root = query.from(StudentDetailedGrade.class);
 			query.select(root).where(builder.equal(root.get("cSID"), cSID), builder.equal(root.get("dCriID"), dCriID));
+		//	query.select(root).where(builder.equal(root.get("cSID"), cSID));
 			query.orderBy(builder.asc(root.get("cSID")));
 			Query<StudentDetailedGrade> q = session.createQuery(query);
 			studentDetailedGrades = q.getResultList();
@@ -66,15 +67,23 @@ public class ManageOthers {
 		}finally {
 			session.close();
 		}
-		System.out.println("CSID: " + cSID);
-		System.out.println("dcriid: " + dCriID);
-		System.out.println("SDG: " + studentDetailedGrades.size());
 		return (ArrayList<StudentDetailedGrade>) studentDetailedGrades;
 
 	}
 
 	public void updateOrSaveStudentDetailedGrade(StudentDetailedGrade studentDetailedGrade) {
-		// TODO Auto-generated method stub
-
+		Session session = HibernateUtil.getSessionFactory().openSession();
+		Transaction tx = null;
+		try {
+			tx = session.beginTransaction();
+			session.saveOrUpdate(studentDetailedGrade);
+			tx.commit();
+		} catch (HibernateException e) {
+			if (tx != null)
+				tx.rollback();
+			e.printStackTrace();
+		} finally {
+			session.close();
+		}
 	}
 }
