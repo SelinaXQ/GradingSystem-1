@@ -154,7 +154,7 @@ public class Operations {
 			} else {
 				for (DetailedCriteria dCri : dCris) {
 					mCriteria.updateOrSaveDetailedCriteria(dCri);
-					if (c == null) {
+					if (c != null) {
 						ArrayList<CourseStudents> csStudents = mStudents.getStudentsByCId(c);
 						for (CourseStudents cs : csStudents) {
 							StudentDetailedGrade sdg = new StudentDetailedGrade(cs.getcSID(), dCri.getdCriID(), 0.00,
