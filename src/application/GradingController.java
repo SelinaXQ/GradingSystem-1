@@ -276,6 +276,8 @@ public class GradingController implements Initializable{
 //		detailedCriteria
 		ArrayList<GiveDetailedGrades> temp = new ArrayList<>();
 		for(int i = 0; i < grade.size(); i++) {
+			
+//			if(grade)
 			temp.add(grade.get(i));
 			System.out.println(temp.get(i));
 		}
@@ -300,7 +302,7 @@ public class GradingController implements Initializable{
 	}
 	
 	/*
-	 * Import student
+	 * Import studentc
 	 */
 	
 	@FXML
