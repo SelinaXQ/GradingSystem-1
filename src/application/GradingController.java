@@ -331,7 +331,7 @@ public class GradingController implements Initializable{
 			
 			//add to sql
 //			course = operations.getCourseInfo("1");
-			operations.saveOpUpdateStudentsInfo(studentList, course);
+			operations.saveStudentsInfo(studentList, course);
 			
 			studentList = operations.getStudentsByCourseID(course);
 			for(int i = 0; i<studentList.size(); i++) {

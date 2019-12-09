@@ -3,6 +3,8 @@ package db;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import javax.persistence.Id;
+
 import pojo.*;
 import uitable.DetailedGrade;
 import uitable.GeneralGrade;
@@ -154,14 +156,6 @@ public class Operations {
 			} else {
 				for (DetailedCriteria dCri : dCris) {
 					mCriteria.updateOrSaveDetailedCriteria(dCri);
-					if (c != null) {
-						ArrayList<CourseStudents> csStudents = mStudents.getStudentsByCId(c);
-						for (CourseStudents cs : csStudents) {
-							StudentDetailedGrade sdg = new StudentDetailedGrade(cs.getcSID(), dCri.getdCriID(), 0.00,
-									null);
-							mOthers.updateOrSaveStudentDetailedGrade(sdg);
-						}
-					}
 				}
 			}
 			return flag;
@@ -248,7 +242,6 @@ public class Operations {
 					gdg.getScore(), gdg.getComment());
 			mOthers.updateOrSaveStudentDetailedGrade(studentDetailedGrade);
 		}
-
 	}
 
 	// close a course
@@ -295,30 +288,64 @@ public class Operations {
 
 	// Save Information from Manage student information window
 
-	public void saveOpUpdateStudentsInfo(ArrayList<StudentInfo> sInfos, Course c) {
+	public void saveStudentsInfo(ArrayList<StudentInfo> sInfos, Course c) {
 		for (StudentInfo sInfo : sInfos) {
 			Student student = new Student(sInfo.getBUID(), sInfo.getFirstName(), sInfo.getMiddleName(),
 					sInfo.getLastName());
 			mStudents.updateOrSaveStudent(student);
-			System.out.println(sInfo.getCondition());
 			ArrayList<CourseStudents> css = mStudents.getCourseStudent(sInfo.getBUID(), c.getcID());
-			System.out.println(css.size());
+			CourseStudents cs = new CourseStudents();
+			cs.setbUID(sInfo.getBUID());
+			cs.setcID(c.getcID());
+			cs.setCondition(sInfo.getCondition());
 			if (css.size() == 0) {
-				System.out.println("Save students!");
-				CourseStudents cs = new CourseStudents();
-				cs.setbUID(sInfo.getBUID());
-				cs.setcID(c.getcID());
-				cs.setCondition(sInfo.getCondition());
 				mStudents.updateOrSaveCourseStudent(cs);
-			} else {
-				CourseStudents cs = new CourseStudents();
+				initDetailedGrades(cs, c);
+			}
+			else {
 				cs.setcSID(css.get(0).getcSID());
-				cs.setbUID(sInfo.getBUID());
-				cs.setcID(c.getcID());
-				cs.setCondition(sInfo.getCondition());
 				mStudents.updateOrSaveCourseStudent(cs);
 			}
+		}
+	}
 
+	private void initDetailedGrades(CourseStudents cs, Course c) {
+		CourseStudents cStudent = mStudents.getCourseStudent(cs.getbUID(), c.getcID()).get(0);
+		ArrayList<GeneralCriteria> gCriterias = getGeneralCriteriasByCourseID(c.getcID(), false);
+		for (GeneralCriteria gc : gCriterias) {
+			ArrayList<DetailedCriteria> dcs = getDetailedCriteriasByGenerCriID(gc.getgCriID(), false);
+			for (DetailedCriteria dc : dcs) {
+				StudentDetailedGrade sdg = new StudentDetailedGrade(cStudent.getcSID(), dc.getdCriID(), null);
+				mOthers.updateOrSaveStudentDetailedGrade(sdg);
+			}
+		}
+	}
+
+	public void updateStudentInfo(ArrayList<StudentInfo> sInfos, Course c) {
+		for (StudentInfo sInfo : sInfos) {
+			CourseStudents cs = mStudents.getCourseStudent(sInfo.getBUID(), c.getcID()).get(0);
+			CourseStudents cStudents = new CourseStudents();
+			cs.setcSID(cs.getcSID());
+			cs.setbUID(sInfo.getBUID());
+			cs.setcID(c.getcID());
+			cs.setCondition(sInfo.getCondition());
+			mStudents.updateOrSaveCourseStudent(cs);
+
+			if (sInfo.getCondition().trim().equals("w")) {
+				deleteDetailedGrades(cs, c);
+			}
+		}
+	}
+
+	private void deleteDetailedGrades(CourseStudents cs, Course c) {
+		CourseStudents cStudent = mStudents.getCourseStudent(cs.getbUID(), c.getcID()).get(0);
+		ArrayList<GeneralCriteria> gCriterias = getGeneralCriteriasByCourseID(c.getcID(), false);
+		for (GeneralCriteria gc : gCriterias) {
+			ArrayList<DetailedCriteria> dcs = getDetailedCriteriasByGenerCriID(gc.getgCriID(), false);
+			for (DetailedCriteria dc : dcs) {
+				StudentDetailedGrade sdg = mOthers.getStudentDetailedGrade(cStudent.getcSID(), dc.getdCriID()).get(0);
+				mOthers.deleteDetailedGrade(sdg);
+			}
 		}
 	}
 

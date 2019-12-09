@@ -87,7 +87,7 @@ public class StudentManagementController implements Initializable{
 		}
 		course = operations.getCourseInfo("1");
 		
-		operations.saveOpUpdateStudentsInfo(studentInfo, course);
+		operations.updateStudentInfo(studentInfo, course);
 		
 		
 	}
@@ -111,7 +111,7 @@ public class StudentManagementController implements Initializable{
 		}
 		course = operations.getCourseInfo("1");
 		
-		operations.saveOpUpdateStudentsInfo(studentInfo, course);
+		operations.saveStudentsInfo(studentInfo, course);
 		
 	}
 	
