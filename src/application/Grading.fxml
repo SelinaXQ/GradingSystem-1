@@ -12,10 +12,10 @@
       <Button layoutX="447.0" layoutY="58.0" mnemonicParsing="false" onAction="#editStudentButtonPushed" text="Edit Student" />
       <TableView fx:id="gradeTableView" layoutX="100.0" layoutY="390.0" prefHeight="250.0" prefWidth="600.0">
         <columns>
-          <TableColumn fx:id="BUIDColumn" prefWidth="75.0" text="BUID" />
-          <TableColumn fx:id="firstNameColumn" prefWidth="75.0" text="First Name" />
-            <TableColumn fx:id="middleNameColumn" prefWidth="75.0" text="Middle Name" />
-            <TableColumn fx:id="lastNameColumn" prefWidth="75.0" text="Last Name" />
+          <TableColumn fx:id="gradeBUIDColumn" prefWidth="75.0" text="BUID" />
+          <TableColumn fx:id="gradeFirstNameColumn" prefWidth="75.0" text="First Name" />
+            <TableColumn fx:id="gradeMiddleNameColumn" prefWidth="75.0" text="Middle Name" />
+            <TableColumn fx:id="gradeLastNameColumn" prefWidth="75.0" text="Last Name" />
             <TableColumn fx:id="gradeScoreColumn" prefWidth="75.0" text="Score" />
         </columns>
          <columnResizePolicy>

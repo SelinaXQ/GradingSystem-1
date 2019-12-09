@@ -66,10 +66,10 @@ public class GradingController implements Initializable{
 	
 	//table grade
 	@FXML private TableView<GiveDetailedGrades> gradeTableView;
-	@FXML private TableColumn<GiveDetailedGrades, String> BUIDColumn;
-	@FXML private TableColumn<GiveDetailedGrades, String> firstNameColumn;
-	@FXML private TableColumn<GiveDetailedGrades, String> middleNameColumn;
-	@FXML private TableColumn<GiveDetailedGrades, String> lastNameColumn;
+	@FXML private TableColumn<GiveDetailedGrades, String> gradeBUIDColumn;
+	@FXML private TableColumn<GiveDetailedGrades, String> gradeFirstNameColumn;
+	@FXML private TableColumn<GiveDetailedGrades, String> gradeMiddleNameColumn;
+	@FXML private TableColumn<GiveDetailedGrades, String> gradeLastNameColumn;
 	@FXML private TableColumn<GiveDetailedGrades, Double> gradeScoreColumn;
 	
 	/*
@@ -100,10 +100,10 @@ public class GradingController implements Initializable{
 		detailedTotalScoreColumn.setCellFactory(TextFieldTableCell.forTableColumn(new DoubleStringConverter()));
 		
 		//grade table
-		BUIDColumn.setCellValueFactory(new PropertyValueFactory<GiveDetailedGrades, String>("BUID"));
-		firstNameColumn.setCellValueFactory(new PropertyValueFactory<GiveDetailedGrades, String>("fName"));
-		middleNameColumn.setCellValueFactory(new PropertyValueFactory<GiveDetailedGrades, String>("mName"));
-		lastNameColumn.setCellValueFactory(new PropertyValueFactory<GiveDetailedGrades, String>("lName"));
+		gradeBUIDColumn.setCellValueFactory(new PropertyValueFactory<GiveDetailedGrades, String>("BUID"));
+		gradeFirstNameColumn.setCellValueFactory(new PropertyValueFactory<GiveDetailedGrades, String>("fName"));
+		gradeMiddleNameColumn.setCellValueFactory(new PropertyValueFactory<GiveDetailedGrades, String>("mName"));
+		gradeLastNameColumn.setCellValueFactory(new PropertyValueFactory<GiveDetailedGrades, String>("lName"));
 		gradeScoreColumn.setCellValueFactory(new PropertyValueFactory<GiveDetailedGrades, Double>("score"));
 		gradeTableView.setEditable(true);
 		gradeScoreColumn.setCellFactory(TextFieldTableCell.forTableColumn(new DoubleStringConverter()));
@@ -113,7 +113,6 @@ public class GradingController implements Initializable{
 	public void userClickedOnGeneralTable() {
 		System.out.println("general clicked!");
 		detailedCriteria = FXCollections.observableArrayList();
-		
 		generalCur = generalTableView.getSelectionModel().getSelectedItem();
 		
 		ArrayList<DetailedCriteria> detailedArr = new ArrayList<>();
@@ -134,9 +133,10 @@ public class GradingController implements Initializable{
 		
 		ArrayList<GiveDetailedGrades> gradeArr = operations.getStudentsDetailedGrades(course, detailedCur);
 		System.out.println("grade size:" + gradeArr.size());
-		System.out.println(gradeArr.get(0).getfName());
+//		System.out.println(gradeArr.get(0).getfName());
 		for(int i = 0; i < gradeArr.size(); i++) {
 			grade.add(gradeArr.get(i));
+			System.out.println(grade.toString());
 		}
 		gradeTableView.setItems(grade);
 		
@@ -222,44 +222,6 @@ public class GradingController implements Initializable{
 			generalTableView.refresh();
 		}
 		
-//		//save before change
-//		ObservableList<GeneralCriteria> generalCriteriaTemp = FXCollections.observableArrayList();
-//		ArrayList<GeneralCriteria> generalArrTemp = operations.getGeneralCriteriasByCourseID(courseid, false);
-//		for(int i = 0; i<generalArrTemp.size(); i++) {
-//			generalCriteriaTemp.add(generalArrTemp.get(i));
-//		}
-//		
-//		
-//		//save current and delete in database
-//		ArrayList<GeneralCriteria> temp = new ArrayList<>();
-//		for(int i = 0; i < generalCriteria.size(); i++) {
-//			GeneralCriteria tempGenaral = generalCriteria.get(i);
-//			operations.deleteGeneralCriteria(generalCriteria.get(i), false);
-//			tempGenaral.setcID(null);
-//			temp.add(tempGenaral);	
-//		}
-//		
-//		//try to save 
-//		
-//		if(operations.saveGeneralCriterias(temp, false)) {
-//			//refresh table
-//			generalCriteria = FXCollections.observableArrayList();
-//			generalTableView.setItems(getGeneralCriteria());
-//			System.out.println("Save successfully");
-////			generalTableView.refresh();
-//			
-//		}else {
-//			System.out.println("Added up should be 100%!!");
-//			//refresh
-//			//add back to database
-//			operations.saveGeneralCriterias(generalArrTemp, false);
-//			generalCriteria = FXCollections.observableArrayList();
-//			for(int i = 0; i<generalCriteriaTemp.size(); i++) {
-//				generalCriteria.add(generalCriteriaTemp.get(i));
-//			}
-//			generalTableView.setItems(generalCriteria);
-//		}
-		
 	}
 	
 	/*
@@ -278,7 +240,8 @@ public class GradingController implements Initializable{
 			System.out.println(temp.get(i).toString());
 		}
 		
-		if(operations.saveDetailedCriterias(temp, false)) {
+		if(operations.saveDetailedCriterias(null, temp, false)) {
+			
 			System.out.println("Save successfully");
 			detailedTableView.refresh();
 			
