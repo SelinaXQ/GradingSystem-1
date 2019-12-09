@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 80018
 File Encoding         : 65001
 
-Date: 2019-12-08 13:51:01
+Date: 2019-12-09 09:37:10
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -70,8 +70,11 @@ CREATE TABLE `coursesstudents` (
 -- ----------------------------
 -- Records of coursesstudents
 -- ----------------------------
-INSERT INTO `coursesstudents` VALUES ('8a80803d6eddc58c016eddc5f46f0002', '1', 'U96796203', '', null, null);
-INSERT INTO `coursesstudents` VALUES ('8a80803d6ee6c093016ee6c0bce20000', '1', 'U96796201', '', null, null);
+INSERT INTO `coursesstudents` VALUES ('8a80803d6eeb15b9016eeb15d4ad0000', '1', 'U96796201', '', null, null);
+INSERT INTO `coursesstudents` VALUES ('8a80803d6eeb15b9016eeb15d4d50003', '1', 'U96796202', '', null, null);
+INSERT INTO `coursesstudents` VALUES ('8a80803d6eeb15b9016eeb15d4e80006', '1', 'U96796203', '', null, null);
+INSERT INTO `coursesstudents` VALUES ('8a80803d6eeb15b9016eeb15d4fc0009', '1', 'U96796204', '', null, null);
+INSERT INTO `coursesstudents` VALUES ('8a80803d6eeb15b9016eeb15d50e000c', '1', 'U96796205', '', null, null);
 
 -- ----------------------------
 -- Table structure for `detailedcriteria`
@@ -151,10 +154,16 @@ CREATE TABLE `studentdetailedgrade` (
 -- ----------------------------
 -- Records of studentdetailedgrade
 -- ----------------------------
-INSERT INTO `studentdetailedgrade` VALUES ('aaaa', '8a80803d6eddc58c016eddc5f46f0002', '8a80803d6ed40deb016ed40dedf70000', '0.00', null);
-INSERT INTO `studentdetailedgrade` VALUES ('bbbb', '8a80803d6eddc58c016eddc5f46f0002', '8a80803d6ed40deb016ed40dee270001', '0.00', null);
-INSERT INTO `studentdetailedgrade` VALUES ('cccc', '8a80803d6ee6c093016ee6c0bce20000', '8a80803d6ed40deb016ed40dedf70000', '0.00', null);
-INSERT INTO `studentdetailedgrade` VALUES ('dddd', '8a80803d6ee6c093016ee6c0bce20000', '8a80803d6ed40deb016ed40dee270001', '0.00', null);
+INSERT INTO `studentdetailedgrade` VALUES ('8a80803d6eeb15b9016eeb15d4ca0001', '8a80803d6eeb15b9016eeb15d4ad0000', '8a80803d6ed40deb016ed40dedf70000', '0.00', null);
+INSERT INTO `studentdetailedgrade` VALUES ('8a80803d6eeb15b9016eeb15d4cd0002', '8a80803d6eeb15b9016eeb15d4ad0000', '8a80803d6ed40deb016ed40dee270001', '0.00', null);
+INSERT INTO `studentdetailedgrade` VALUES ('8a80803d6eeb15b9016eeb15d4dd0004', '8a80803d6eeb15b9016eeb15d4d50003', '8a80803d6ed40deb016ed40dedf70000', '0.00', null);
+INSERT INTO `studentdetailedgrade` VALUES ('8a80803d6eeb15b9016eeb15d4e00005', '8a80803d6eeb15b9016eeb15d4d50003', '8a80803d6ed40deb016ed40dee270001', '0.00', null);
+INSERT INTO `studentdetailedgrade` VALUES ('8a80803d6eeb15b9016eeb15d4f10007', '8a80803d6eeb15b9016eeb15d4e80006', '8a80803d6ed40deb016ed40dedf70000', '0.00', null);
+INSERT INTO `studentdetailedgrade` VALUES ('8a80803d6eeb15b9016eeb15d4f50008', '8a80803d6eeb15b9016eeb15d4e80006', '8a80803d6ed40deb016ed40dee270001', '0.00', null);
+INSERT INTO `studentdetailedgrade` VALUES ('8a80803d6eeb15b9016eeb15d505000a', '8a80803d6eeb15b9016eeb15d4fc0009', '8a80803d6ed40deb016ed40dedf70000', '0.00', null);
+INSERT INTO `studentdetailedgrade` VALUES ('8a80803d6eeb15b9016eeb15d508000b', '8a80803d6eeb15b9016eeb15d4fc0009', '8a80803d6ed40deb016ed40dee270001', '0.00', null);
+INSERT INTO `studentdetailedgrade` VALUES ('8a80803d6eeb15b9016eeb15d516000d', '8a80803d6eeb15b9016eeb15d50e000c', '8a80803d6ed40deb016ed40dedf70000', '0.00', null);
+INSERT INTO `studentdetailedgrade` VALUES ('8a80803d6eeb15b9016eeb15d518000e', '8a80803d6eeb15b9016eeb15d50e000c', '8a80803d6ed40deb016ed40dee270001', '0.00', null);
 
 -- ----------------------------
 -- Table structure for `students`
@@ -171,11 +180,6 @@ CREATE TABLE `students` (
 -- ----------------------------
 -- Records of students
 -- ----------------------------
-INSERT INTO `students` VALUES ('B', 'F', 'M', 'L');
-INSERT INTO `students` VALUES ('BAA', 'F', 'M', 'L');
-INSERT INTO `students` VALUES ('U', 'FAA', 'M', 'L');
-INSERT INTO `students` VALUES ('U8243567654', 'Qia', '', 'QUI');
-INSERT INTO `students` VALUES ('U8899', 'FAA', 'M', 'L');
 INSERT INTO `students` VALUES ('U96796201', 'Qian', '', 'Xiang');
 INSERT INTO `students` VALUES ('U96796202', 'haha', 'hey', 'Li');
 INSERT INTO `students` VALUES ('U96796203', 'Victoria', '', 'Ming');
