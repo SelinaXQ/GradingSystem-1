@@ -49,7 +49,7 @@ public class GradingController implements Initializable{
 	GeneralCriteria generalCur = new GeneralCriteria();
 	//detailed criteria
 	ObservableList<DetailedCriteria> detailedCriteria = FXCollections.observableArrayList();
-	
+	DetailedCriteria detailedCur = new DetailedCriteria();
 	//give grade
 	ObservableList<GiveDetailedGrades> grade = FXCollections.observableArrayList();
 	
@@ -127,7 +127,7 @@ public class GradingController implements Initializable{
 	public void userClickOnDetailedTable() {
 		System.out.println("detailed clicked!");
 		grade = FXCollections.observableArrayList();
-		DetailedCriteria detailedCur = detailedTableView.getSelectionModel().getSelectedItem();
+		detailedCur = detailedTableView.getSelectionModel().getSelectedItem();
 		
 		System.out.println(detailedCur.toString());
 		
@@ -140,6 +140,15 @@ public class GradingController implements Initializable{
 		}
 		gradeTableView.setItems(grade);
 		
+	}
+	
+	@FXML
+	public void changeGradeScoreCellEvent(CellEditEvent edittedCell) {
+		GiveDetailedGrades detailedGradeSelected = gradeTableView.getSelectionModel().getSelectedItem();
+		int index = gradeTableView.getSelectionModel().getSelectedIndex();
+		
+		detailedGradeSelected.setScore(Double.valueOf(edittedCell.getNewValue().toString()));
+		grade.get(index).setScore(Double.valueOf(edittedCell.getNewValue().toString()));
 	}
 	
 	@FXML
@@ -261,6 +270,17 @@ public class GradingController implements Initializable{
 		}
 	}
 	
+	@FXML
+	public void saveGradeScoreButton(ActionEvent event) {
+//		updateStudentsDetailedGrade
+//		detailedCriteria
+		ArrayList<GiveDetailedGrades> temp = new ArrayList<>();
+		for(int i = 0; i < grade.size(); i++) {
+			temp.add(grade.get(i));
+			System.out.println(temp.get(i));
+		}
+		operations.updateStudentsDetailedGrade(detailedCur, temp);
+	}
 	
 	
 	/*

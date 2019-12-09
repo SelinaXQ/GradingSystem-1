@@ -80,6 +80,6 @@ public class GiveDetailedGrades {
     }
     
     public String toString() {
-    	return "BUID: " + BUID + "fName: " + fName +  "mName: " + mName + "lName: " + lName + "score: " + score;
+    	return "BUID: " + BUID + "fName: " + fName +  "mName: " + mName + "lName: " + lName + "score: " + score + "comment: " + comment;
     }
 }
