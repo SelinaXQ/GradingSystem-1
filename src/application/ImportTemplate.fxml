@@ -20,7 +20,7 @@
       <ChoiceBox layoutX="63.0" layoutY="48.0" prefWidth="150.0" />
       <TableView layoutX="38.0" layoutY="85.0" prefHeight="200.0" prefWidth="200.0">
         <columns>
-          <TableColumn prefWidth="199.0" text="Choose Course" />
+          <TableColumn editable="false" prefWidth="199.0" resizable="false" text="Choose Course" />
         </columns>
       </TableView>
    </children>
