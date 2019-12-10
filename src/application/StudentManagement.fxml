@@ -9,11 +9,11 @@
    <children>
       <TableView fx:id="tableView" layoutX="100.0" layoutY="50.0" prefHeight="322.0" prefWidth="600.0">
         <columns>
-          <TableColumn fx:id="BUIDColumn" prefWidth="75.0" text="BUID" />
-          <TableColumn fx:id="firstNameColumn" prefWidth="75.0" text="First Name" />
-            <TableColumn fx:id="middleNameColumn" prefWidth="75.0" text="Middle Name" />
-            <TableColumn fx:id="lastNameColumn" prefWidth="75.0" text="Last Name" />
-            <TableColumn fx:id="conditionColumn" onEditCommit="#changeConditionCellEvent" prefWidth="75.0" text="Condition" />
+          <TableColumn fx:id="BUIDColumn" prefWidth="127.0" resizable="false" text="BUID" />
+          <TableColumn fx:id="firstNameColumn" prefWidth="120.0" resizable="false" text="First Name" />
+            <TableColumn fx:id="middleNameColumn" prefWidth="120.0" resizable="false" text="Middle Name" />
+            <TableColumn fx:id="lastNameColumn" prefWidth="120.0" resizable="false" text="Last Name" />
+            <TableColumn fx:id="conditionColumn" onEditCommit="#changeConditionCellEvent" prefWidth="112.0" resizable="false" text="Condition" />
         </columns>
          <columnResizePolicy>
             <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
@@ -28,6 +28,6 @@
       <TextField fx:id="conditionTextField" layoutX="583.0" layoutY="396.0" prefHeight="27.0" prefWidth="116.0" promptText="Condition" />
       <Button layoutX="341.0" layoutY="444.0" mnemonicParsing="false" onAction="#addStudentButton" prefHeight="27.0" prefWidth="116.0" text="Add" />
       <Button layoutX="100.0" layoutY="444.0" mnemonicParsing="false" onAction="#backButton" prefHeight="27.0" prefWidth="116.0" text="Back" />
-      <Label layoutX="333.0" layoutY="20.0" text="Student Management" />
+      <Label alignment="CENTER" layoutX="334.0" layoutY="14.0" prefHeight="27.0" prefWidth="130.0" text="Student Management" />
    </children>
 </AnchorPane>

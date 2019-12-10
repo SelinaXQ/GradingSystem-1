@@ -5,12 +5,11 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-
-<AnchorPane prefHeight="200.0" prefWidth="300.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8">
+<AnchorPane prefHeight="200.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Label layoutX="120.0" layoutY="19.0" text="Comment" />
+      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="84.0" layoutY="16.0" prefHeight="17.0" prefWidth="132.0" text="Comments" />
       <TextArea layoutX="50.0" layoutY="47.0" prefHeight="99.0" prefWidth="200.0" />
-      <Button layoutX="50.0" layoutY="159.0" mnemonicParsing="false" text="Cancel" />
-      <Button layoutX="202.0" layoutY="159.0" mnemonicParsing="false" text="Save" />
+      <Button layoutX="50.0" layoutY="159.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="57.0" text="Cancel" />
+      <Button layoutX="202.0" layoutY="159.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="57.0" text="Save" />
    </children>
 </AnchorPane>
