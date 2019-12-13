@@ -302,7 +302,7 @@ public class GradingController implements Initializable{
 	}
 	
 	/*
-	 * Import studentc
+	 * Import student
 	 */
 	
 	@FXML

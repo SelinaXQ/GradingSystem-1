@@ -8,8 +8,8 @@
 
 <AnchorPane prefHeight="700.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.GradingController">
    <children>
-      <Button layoutX="229.0" layoutY="58.0" mnemonicParsing="false" onAction="#importStudentButtonPushed" prefHeight="27.0" prefWidth="100.0" text="Import Student" />
-      <Button layoutX="447.0" layoutY="58.0" mnemonicParsing="false" onAction="#editStudentButtonPushed" prefHeight="27.0" prefWidth="100.0" text="Edit Student" />
+      <Button layoutX="208.0" layoutY="58.0" mnemonicParsing="false" onAction="#importStudentButtonPushed" prefHeight="27.0" prefWidth="131.0" text="Import Student" />
+      <Button layoutX="447.0" layoutY="58.0" mnemonicParsing="false" onAction="#editStudentButtonPushed" prefHeight="27.0" prefWidth="108.0" text="Edit Student" />
       <TableView fx:id="gradeTableView" layoutX="100.0" layoutY="390.0" prefHeight="250.0" prefWidth="600.0">
         <columns>
           <TableColumn fx:id="gradeBUIDColumn" prefWidth="168.0" resizable="false" text="BUID" />
@@ -44,8 +44,8 @@
       </TableView>
       <Label layoutX="100.0" layoutY="102.0" prefHeight="17.0" prefWidth="100.0" text="General Criteria:" />
       <Label layoutX="373.0" layoutY="102.0" prefHeight="17.0" prefWidth="108.0" text="Detailed Criteria:" />
-      <Button layoutX="293.0" layoutY="344.0" mnemonicParsing="false" onAction="#saveGeneralCriteriaButton" prefHeight="27.0" prefWidth="46.0" text="Save" />
-      <Button layoutX="652.0" layoutY="344.0" mnemonicParsing="false" onAction="#saveDetailedCriteriaButton" prefHeight="27.0" prefWidth="46.0" text="Save" />
-      <Button layoutX="652.0" layoutY="654.0" mnemonicParsing="false" onAction="#saveGradeScoreButton" prefHeight="27.0" prefWidth="46.0" text="Save" />
+      <Button layoutX="277.0" layoutY="344.0" mnemonicParsing="false" onAction="#saveGeneralCriteriaButton" prefHeight="27.0" prefWidth="62.0" text="Save" />
+      <Button layoutX="636.0" layoutY="344.0" mnemonicParsing="false" onAction="#saveDetailedCriteriaButton" prefHeight="27.0" prefWidth="62.0" text="Save" />
+      <Button layoutX="636.0" layoutY="654.0" mnemonicParsing="false" onAction="#saveGradeScoreButton" prefHeight="27.0" prefWidth="62.0" text="Save" />
    </children>
 </AnchorPane>
