@@ -106,6 +106,7 @@ public class Operations {
 				}
 			} else {
 				for (GeneralCriteria gCri : gCris) {
+					System.out.println("Error:"+gCri.getgCriID());
 					mCriteria.updateOrSaveGeneralCriteria(gCri);
 				}
 			}
@@ -356,5 +357,10 @@ public class Operations {
 		// cs.getbUID(), cs.getCondition(),
 		// cs.getGrade(), cs.getComment());
 		mStudents.deleteStudent(cs);
+	}
+
+	public void deleteGeneralCriteriaByCourseID(String cid) {
+		// TODO Auto-generated method stub
+		
 	}
 }

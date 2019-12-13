@@ -1,25 +1,33 @@
 package application;
 
+import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
-
+import db.Operations;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
+import javafx.scene.control.TableColumn.CellEditEvent;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.control.cell.TextFieldTableCell;
+import javafx.stage.Stage;
+import javafx.util.converter.DoubleStringConverter;
 import pojo.Course;
+import pojo.DetailedCriteria;
+import pojo.GeneralCriteria;
 
 public class CourseInfoController implements Initializable {
-	
-	@FXML
-	private Label semesterText;
-	@FXML
-	private TableView<Course> coursesTextView;
-	@FXML
-	private TableColumn<Course, String> courseIDColumn;
+
 	@FXML
 	private Button saveDetailedCriteria;
 	@FXML
@@ -38,63 +46,317 @@ public class CourseInfoController implements Initializable {
 	private Button addGeneralCriteria;
 	@FXML
 	private Button saveCourseInfo;
-	
+	@FXML
+	private TextField generalCriteriaType;
+	@FXML
+	private TextField generalCriteriaPer;
+	@FXML
+	private TextField detailedCriteriaPer;
+	@FXML
+	private TextField detailedCriteriaType;
+	@FXML
+	private TextField semester;
+	@FXML
+	private ChoiceBox<String> college = new ChoiceBox<String>();
+	@FXML
+	private TextField credit;
+	@FXML
+	private TextField courseName;
+
+	private boolean ifTemplate;
+
 	private Course course;
+
+	Operations operations;
+
+	// general criteria
+	ObservableList<GeneralCriteria> generalCriteria;
+	ArrayList<GeneralCriteria> generalArr;
+	GeneralCriteria generalCur;
+	// detailed criteria
+	ObservableList<DetailedCriteria> detailedCriteria;
+	DetailedCriteria detailedCur;
+
+	// table general
+	@FXML
+	private TableView<GeneralCriteria> generalTableView;
+	@FXML
+	private TableColumn<GeneralCriteria, String> generalTypeColumn;
+	@FXML
+	private TableColumn<GeneralCriteria, Double> generalPercentageColumn;
+
+	// table detailed
+	@FXML
+	private TableView<DetailedCriteria> detailedTableView;
+	@FXML
+	private TableColumn<DetailedCriteria, String> detailedTypeColumn;
+	@FXML
+	private TableColumn<DetailedCriteria, Double> detailedPercentageColumn;
+	@FXML
+	private TableColumn<DetailedCriteria, Double> detailedTotalScoreColumn;
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
+
+		ArrayList<String> collegeStr = new ArrayList<String>();
+		collegeStr.add("CAS");
+		collegeStr.add("GRS");
+		ObservableList<String> colleges = FXCollections.observableArrayList(collegeStr);
+		college.setItems(colleges);
+
+		operations = new Operations();
+		Login loginController = new Login();
+		String semesterStr = loginController.getSemester();
+		semester.setText(semesterStr);
+		semester.setEditable(false);
+
+		generalCriteria = FXCollections.observableArrayList();
+		detailedCriteria = FXCollections.observableArrayList();
+		generalCur = new GeneralCriteria();
+		detailedCur = new DetailedCriteria();
+
+		TemplateInfoController tController = new TemplateInfoController();
+		ifTemplate = tController.getIfTemplate();
+
 		CourseHomeController courseHomeController = new CourseHomeController();
 		boolean addOrEdit = courseHomeController.getAddOrEdit();
-		if (addOrEdit == true) {
+		// TODO
+		if (addOrEdit == true) { // ADD
 			course = new Course();
-		} else {
-			course = courseHomeController.getCourse();
+			generalArr = new ArrayList<GeneralCriteria>();
+			// new Criterias
+		} else { // EDIT
+			// TODO
+			// course = courseHomeController.getCourse();
+			System.out.println("I dont think we would get here");
+			generalArr = operations.getGeneralCriteriasByCourseID("1", false);
 		}
-		
+
+		if (ifTemplate == true) {
+			generalArr = tController.getGeneralCriteriaFromTemplate();
+			for(GeneralCriteria gc:generalArr)
+				gc.setgCriID(null);
+		}
+
+		generalTypeColumn.setCellValueFactory(new PropertyValueFactory<GeneralCriteria, String>("genCriType"));
+		generalPercentageColumn.setCellValueFactory(new PropertyValueFactory<GeneralCriteria, Double>("genCriPer"));
+		generalTableView.setItems(getGeneralCriteria());
+		generalTableView.setEditable(true);
+		generalTypeColumn.setCellFactory(TextFieldTableCell.forTableColumn());
+		generalPercentageColumn.setCellFactory(TextFieldTableCell.forTableColumn(new DoubleStringConverter()));
+
+		// detailed table
+		detailedTypeColumn.setCellValueFactory(new PropertyValueFactory<DetailedCriteria, String>("deCriType"));
+		detailedPercentageColumn.setCellValueFactory(new PropertyValueFactory<DetailedCriteria, Double>("deCriPer"));
+		detailedTotalScoreColumn.setCellValueFactory(new PropertyValueFactory<DetailedCriteria, Double>("totalScore"));
+
+//		detailedTableView.setItems(getDetailedCriteria(generalArr));
+
+		detailedTableView.setEditable(true);
+		detailedTypeColumn.setCellFactory(TextFieldTableCell.forTableColumn());
+		detailedPercentageColumn.setCellFactory(TextFieldTableCell.forTableColumn(new DoubleStringConverter()));
+		detailedTotalScoreColumn.setCellFactory(TextFieldTableCell.forTableColumn(new DoubleStringConverter()));
+
 	}
-	
+
+	public void userClickedOnGeneralTable() {
+		System.out.println("general clicked!");
+		detailedCriteria = FXCollections.observableArrayList();
+		generalCur = generalTableView.getSelectionModel().getSelectedItem();
+
+		ArrayList<DetailedCriteria> detailedArr = new ArrayList<>();
+		detailedArr = operations.getDetailedCriteriasByGenerCriID(generalCur.getgCriID(), ifTemplate);
+
+		for (int i = 0; i < detailedArr.size(); i++) {
+			detailedCriteria.add(detailedArr.get(i));
+		}
+		detailedTableView.setItems(detailedCriteria);
+	}
+
+	private ObservableList<GeneralCriteria> getGeneralCriteria() {
+		for (int i = 0; i < generalArr.size(); i++) {
+			generalCriteria.add(generalArr.get(i));
+		}
+		return generalCriteria;
+	}
+
 	@FXML
 	public void saveGeneralCriteriaButton(ActionEvent event) {
+		operations.deleteGeneralCriteriaByCourseID("1");
+	//	operations.deleteGeneralCriteriaByCourseID(course.getCID());
 		
+		ArrayList<GeneralCriteria> temp = new ArrayList<>();
+		for (int i = 0; i < generalCriteria.size(); i++) {
+			GeneralCriteria tempGeneral = generalCriteria.get(i);
+			System.out.println(tempGeneral.getgCriID());
+			temp.add(tempGeneral);
+		}
+
+		if (operations.saveGeneralCriterias(temp, false)) {
+			System.out.println("Save successfully");
+			generalTableView.refresh();
+
+		} else {
+			System.out.println("Added up should be 100%!!");
+			// refresh
+			generalCriteria = FXCollections.observableArrayList();
+			generalTableView.setItems(getGeneralCriteria());
+			generalTableView.refresh();
+		}
 	}
 
 	@FXML
 	public void addGeneralCriteriaButton(ActionEvent event) {
-		
+		GeneralCriteria gCriteria = new GeneralCriteria(null, "1", generalCriteriaType.getText(),
+				Double.parseDouble(generalCriteriaPer.getText()));
+		generalTableView.getItems().add(gCriteria);
 	}
-	
+
 	@FXML
 	public void deleteGeneralCriteriaButton(ActionEvent event) {
-		
+		ObservableList<GeneralCriteria> allGeCriterias, selectedGeCriterias;
+		allGeCriterias = generalTableView.getItems();
+		selectedGeCriterias = generalTableView.getSelectionModel().getSelectedItems();
+		for (GeneralCriteria gc : selectedGeCriterias) {
+			allGeCriterias.remove(gc);
+			if (ifTemplate == false) {
+				operations.deleteGeneralCriteria(gc, false);
+			}
+		}
 	}
-	
+
 	@FXML
 	public void importFromTemplateButton(ActionEvent event) {
-		
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("ImportTemplate.fxml"));
+		// SemesterController controller = new SemesterController();
+		// loader.setController(this);
+		Stage importTemplate = new Stage();
+
+		Scene scene;
+		try {
+			scene = new Scene(loader.load());
+			importTemplate.setScene(scene);
+			importTemplate.setTitle("Import from a template");
+			// initData();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+		importTemplate.show();
+
+		Stage main = (Stage) importFromTemplate.getScene().getWindow();
+		main.close();
 	}
-	
+
 	@FXML
 	public void saveAsTemplateButton(ActionEvent event) {
-		
+		// operations.saveCriteriaAsTemplate(gCris, dCris);
 	}
-	
+
 	@FXML
 	public void saveDetailedCriteriaButton(ActionEvent event) {
-		
+		ArrayList<DetailedCriteria> temp = new ArrayList<>();
+		for (int i = 0; i < detailedCriteria.size(); i++) {
+			DetailedCriteria tempDetailed = detailedCriteria.get(i);
+			temp.add(tempDetailed);
+			System.out.println(temp.get(i).toString());
+		}
+
+		if (operations.saveDetailedCriterias(null, temp, ifTemplate)) {
+
+			System.out.println("Save successfully");
+			detailedTableView.refresh();
+
+		} else {
+			System.out.println("Added up should be 100%!!");
+			// refresh
+			detailedCriteria = FXCollections.observableArrayList();
+
+			ArrayList<DetailedCriteria> detailedArr = new ArrayList<>();
+			detailedArr = operations.getDetailedCriteriasByGenerCriID(generalCur.getgCriID(), ifTemplate);
+
+			for (int i = 0; i < detailedArr.size(); i++) {
+				detailedCriteria.add(detailedArr.get(i));
+			}
+			detailedTableView.setItems(detailedCriteria);
+			detailedTableView.refresh();
+		}
 	}
 
 	@FXML
 	public void addDetailedCriteriaButton(ActionEvent event) {
-		
+		DetailedCriteria dCriteria = new DetailedCriteria(null, generalCur.getgCriID(), detailedCriteriaType.getText(),
+				Double.parseDouble(detailedCriteriaPer.getText()), 0.00);
+		detailedTableView.getItems().add(dCriteria);
 	}
-	
+
 	@FXML
 	public void deleteDetailedCriteriaButton(ActionEvent event) {
-		
+		ObservableList<DetailedCriteria> allDeCriterias, selectedDeCriterias;
+		allDeCriterias = detailedTableView.getItems();
+		selectedDeCriterias = detailedTableView.getSelectionModel().getSelectedItems();
+		for (DetailedCriteria dc : selectedDeCriterias) {
+			allDeCriterias.remove(dc);
+			if (ifTemplate == false) {
+				operations.deleteDetailedCriteria(dc, false);
+			}
+		}
 	}
-	
+
 	@FXML
 	public void saveCourseInfoButton(ActionEvent event) {
-		
+
 	}
+
+	@FXML
+	public void changeGeneralTypeCellEvent(CellEditEvent edittedCell) {
+		GeneralCriteria generalCriteriaSelected = generalTableView.getSelectionModel().getSelectedItem();
+		int index = generalTableView.getSelectionModel().getFocusedIndex();
+
+		generalCriteriaSelected.setGenCriType(edittedCell.getNewValue().toString());
+
+		generalCriteria.get(index).setGenCriType(edittedCell.getNewValue().toString());
+
+	}
+
+	@FXML
+	void changeGeneralPercentageCellEvent(CellEditEvent edittedCell) {
+		GeneralCriteria generalCriteriaSelected = generalTableView.getSelectionModel().getSelectedItem();
+		int index = generalTableView.getSelectionModel().getFocusedIndex();
+
+		generalCriteriaSelected.setGenCriPer(Double.valueOf(edittedCell.getNewValue().toString()));
+		generalCriteria.get(index).setGenCriPer(Double.valueOf(edittedCell.getNewValue().toString()));
+
+	}
+
+	@FXML
+	public void changeDetailedTypeCellEvent(CellEditEvent edittedCell) {
+		DetailedCriteria detailedCriteriaSelected = detailedTableView.getSelectionModel().getSelectedItem();
+		int index = detailedTableView.getSelectionModel().getFocusedIndex();
+
+		detailedCriteriaSelected.setDeCriType(edittedCell.getNewValue().toString());
+
+		detailedCriteria.get(index).setDeCriType(edittedCell.getNewValue().toString());
+	}
+
+	@FXML
+	public void changeDetailedPercentageCellEvent(CellEditEvent edittedCell) {
+		DetailedCriteria detailedCriteriaSelected = detailedTableView.getSelectionModel().getSelectedItem();
+		int index = detailedTableView.getSelectionModel().getFocusedIndex();
+
+		detailedCriteriaSelected.setDeCriPer(Double.valueOf(edittedCell.getNewValue().toString()));
+
+		detailedCriteria.get(index).setDeCriPer(Double.valueOf(edittedCell.getNewValue().toString()));
+	}
+
+	@FXML
+	public void changeDetailedScoreCellEvent(CellEditEvent edittedCell) {
+		DetailedCriteria detailedCriteriaSelected = detailedTableView.getSelectionModel().getSelectedItem();
+		int index = detailedTableView.getSelectionModel().getFocusedIndex();
+
+		detailedCriteriaSelected.setTotalScore(Double.valueOf(edittedCell.getNewValue().toString()));
+
+		detailedCriteria.get(index).setTotalScore(Double.valueOf(edittedCell.getNewValue().toString()));
+	}
+
 }

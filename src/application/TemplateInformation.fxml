@@ -8,7 +8,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane prefHeight="800.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.Login">
+<AnchorPane prefHeight="800.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.TemplateInfoController">
    <children>
       <Label alignment="CENTER" layoutX="174.0" layoutY="27.0" prefHeight="27.0" prefWidth="155.0" text="Template Information" textAlignment="CENTER" AnchorPane.topAnchor="27.0">
          <font>
@@ -26,17 +26,17 @@
             <Font size="14.0" />
          </font>
       </Label>
-      <TableView layoutX="45.0" layoutY="220.0" prefHeight="200.0" prefWidth="407.0">
+      <TableView fx:id="generalTableView" onMouseClicked="#userClickedOnGeneralTable"  layoutX="45.0" layoutY="220.0" prefHeight="200.0" prefWidth="407.0">
         <columns>
-          <TableColumn prefWidth="240.0" resizable="false" text="Type" />
-          <TableColumn prefWidth="166.0" resizable="false" text="Percentage" />
+          <TableColumn  fx:id="generalTypeColumn"  prefWidth="240.0" resizable="false" text="Type" />
+          <TableColumn  fx:id="generalPercentageColumn"  prefWidth="166.0" resizable="false" text="Percentage" />
         </columns>
       </TableView>
-      <TableView layoutX="48.0" layoutY="499.0" prefHeight="182.0" prefWidth="407.0">
+      <TableView  fx:id="detailedTableView"  layoutX="48.0" layoutY="499.0" prefHeight="182.0" prefWidth="407.0">
          <columns>
-            <TableColumn prefWidth="154.0" resizable="false" text="Items" />
-            <TableColumn prefWidth="122.0" resizable="false" text="Percentage" />
-            <TableColumn prefWidth="130.0" resizable="false" text="Total Score" />
+            <TableColumn  fx:id="detailedTypeColumn"  prefWidth="154.0" resizable="false" text="Type" />
+            <TableColumn fx:id="detailedPercentageColumn" prefWidth="122.0" resizable="false" text="Percentage" />
+            <TableColumn fx:id="detailedTotalScoreColumn" prefWidth="130.0" resizable="false" text="Total Score" />
          </columns>
       </TableView>
       <Label alignment="CENTER" layoutX="174.0" layoutY="446.0" prefHeight="27.0" prefWidth="155.0" text="Detailed Criteria" textAlignment="CENTER">
@@ -46,7 +46,7 @@
       </Label>
       <TextField editable="false" layoutX="112.0" layoutY="82.0" prefHeight="13.0" prefWidth="122.0" />
       <TextField editable="false" layoutX="112.0" layoutY="113.0" prefHeight="13.0" prefWidth="122.0" />
-      <Button layoutX="102.0" layoutY="719.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="72.0" text="Cancel" />
-      <Button layoutX="308.0" layoutY="719.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="72.0" text="Import" />
+      <Button fx:id="cancelTemplate" onAction="#cancelTemplateButton" layoutX="102.0" layoutY="719.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="72.0" text="Cancel" />
+      <Button fx:id="importTemplate" onAction="#importTemplateButton" layoutX="308.0" layoutY="719.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="72.0" text="Import" />
    </children>
 </AnchorPane>

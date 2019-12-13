@@ -42,7 +42,7 @@ public class CourseHomeController implements Initializable {
 	@FXML
 	private Button viewHistory;
 
-	private boolean addOrEdit = true; // T = add F = edit
+	private static boolean addOrEdit = true; // T = add F = edit
 
 	private Operations operations = new Operations();
 	private ArrayList<Course> courses;
@@ -71,10 +71,9 @@ public class CourseHomeController implements Initializable {
 		return coursesList;
 	}
 	
-	
+	@FXML
 	public void clickCourse() {
 		course = coursesTextView.getSelectionModel().getSelectedItem();
-		System.out.println(course);
 	}
 	
 	@FXML
