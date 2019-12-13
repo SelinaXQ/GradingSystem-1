@@ -140,4 +140,9 @@ public class ManageCriteria {
 			session.close();
 		}
 	}
+
+	public void deleteGeneralCriteriasByCID(String cid) {
+		// TODO Auto-generated method stub
+		
+	}
 }

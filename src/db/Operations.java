@@ -360,7 +360,6 @@ public class Operations {
 	}
 
 	public void deleteGeneralCriteriaByCourseID(String cid) {
-		// TODO Auto-generated method stub
-		
+		mCriteria.deleteGeneralCriteriasByCID(cid);
 	}
 }
