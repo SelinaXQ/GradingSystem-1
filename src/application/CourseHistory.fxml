@@ -17,9 +17,9 @@
       <ChoiceBox layoutX="125.0" layoutY="78.0" prefHeight="27.0" prefWidth="150.0" />
       <TableView layoutX="76.0" layoutY="137.0" prefHeight="200.0" prefWidth="248.0">
         <columns>
-          <TableColumn prefWidth="69.0" resizable="false" text="College" />
-          <TableColumn prefWidth="99.0" resizable="false" text="Course ID" />
-            <TableColumn prefWidth="79.0" resizable="false" text="Status" />
+          <TableColumn fx:id="courseIDColumn" prefWidth="69.0" resizable="false" text="College" />
+          <TableColumn  fx:id="collegeColumn"  prefWidth="99.0" resizable="false" text="Course ID" />
+            <TableColumn fx:id="stateColumn" prefWidth="79.0" resizable="false" text="Status" />
         </columns>
       </TableView>
    </children>
