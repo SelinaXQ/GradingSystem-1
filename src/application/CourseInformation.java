@@ -14,7 +14,7 @@ public class CourseInformation extends Application{
 
         Parent root = FXMLLoader.load(getClass().getResource("CourseInformation.fxml"));
         primaryStage.setTitle("Course Information");
-        primaryStage.setScene(new Scene(root, 500, 620));
+        primaryStage.setScene(new Scene(root));
         primaryStage.show();
     }
 

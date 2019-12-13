@@ -180,7 +180,7 @@ public class Operations {
 		ArrayList<CourseStudents> students = mStudents.getStudentsByCId(course);
 		for (CourseStudents s : students) {
 			Student student = mStudents.getStudentByBUID(s.getbUID()).get(0);
-			ArrayList<GeneralCriteria> gcs = mCriteria.getGeneralCriteriaByCourseID(course.getcID());
+			ArrayList<GeneralCriteria> gcs = mCriteria.getGeneralCriteriaByCourseID(course.getCID());
 			ArrayList<HashMap<String, DetailedGrade>> dgs = new ArrayList<HashMap<String, DetailedGrade>>();
 			ArrayList<GeneralGrade> genGrades = new ArrayList<GeneralGrade>();
 			for (GeneralCriteria gc : gcs) {
@@ -295,10 +295,10 @@ public class Operations {
 					sInfo.getLastName());
 			mStudents.updateOrSaveStudent(student);
 
-			ArrayList<CourseStudents> css = mStudents.getCourseStudent(sInfo.getBUID(), c.getcID());
+			ArrayList<CourseStudents> css = mStudents.getCourseStudent(sInfo.getBUID(), c.getCID());
 			CourseStudents cs = new CourseStudents();
 			cs.setbUID(sInfo.getBUID());
-			cs.setcID(c.getcID());
+			cs.setcID(c.getCID());
 			cs.setCondition(sInfo.getCondition());
 			if (css.size() == 0) {
 				mStudents.updateOrSaveCourseStudent(cs);
@@ -311,8 +311,8 @@ public class Operations {
 	}
 
 	private void initDetailedGrades(CourseStudents cs, Course c) {
-		CourseStudents cStudent = mStudents.getCourseStudent(cs.getbUID(), c.getcID()).get(0);
-		ArrayList<GeneralCriteria> gCriterias = getGeneralCriteriasByCourseID(c.getcID(), false);
+		CourseStudents cStudent = mStudents.getCourseStudent(cs.getbUID(), c.getCID()).get(0);
+		ArrayList<GeneralCriteria> gCriterias = getGeneralCriteriasByCourseID(c.getCID(), false);
 		for (GeneralCriteria gc : gCriterias) {
 			ArrayList<DetailedCriteria> dcs = getDetailedCriteriasByGenerCriID(gc.getgCriID(), false);
 			for (DetailedCriteria dc : dcs) {
@@ -324,11 +324,11 @@ public class Operations {
 
 	public void updateStudentInfo(ArrayList<StudentInfo> sInfos, Course c) {
 		for (StudentInfo sInfo : sInfos) {
-			CourseStudents cs = mStudents.getCourseStudent(sInfo.getBUID(), c.getcID()).get(0);
+			CourseStudents cs = mStudents.getCourseStudent(sInfo.getBUID(), c.getCID()).get(0);
 			CourseStudents cStudents = new CourseStudents();
 			cStudents.setcSID(cs.getcSID());
 			cStudents.setbUID(sInfo.getBUID());
-			cStudents.setcID(c.getcID());
+			cStudents.setcID(c.getCID());
 			cStudents.setCondition(sInfo.getCondition());
 			mStudents.updateOrSaveCourseStudent(cStudents);
 
@@ -339,8 +339,8 @@ public class Operations {
 	}
 
 	private void deleteDetailedGrades(CourseStudents cs, Course c) {
-		CourseStudents cStudent = mStudents.getCourseStudent(cs.getbUID(), c.getcID()).get(0);
-		ArrayList<GeneralCriteria> gCriterias = getGeneralCriteriasByCourseID(c.getcID(), false);
+		CourseStudents cStudent = mStudents.getCourseStudent(cs.getbUID(), c.getCID()).get(0);
+		ArrayList<GeneralCriteria> gCriterias = getGeneralCriteriasByCourseID(c.getCID(), false);
 		for (GeneralCriteria gc : gCriterias) {
 			ArrayList<DetailedCriteria> dcs = getDetailedCriteriasByGenerCriID(gc.getgCriID(), false);
 			for (DetailedCriteria dc : dcs) {
@@ -351,7 +351,7 @@ public class Operations {
 	}
 
 	public void deleteStudentInfo(StudentInfo sInfo, Course c) {
-		CourseStudents cs = mStudents.getCourseStudent(sInfo.getBUID(), c.getcID()).get(0);
+		CourseStudents cs = mStudents.getCourseStudent(sInfo.getBUID(), c.getCID()).get(0);
 		// CourseStudents courseStudents = new CourseStudents(null, cs.getcID(),
 		// cs.getbUID(), cs.getCondition(),
 		// cs.getGrade(), cs.getComment());

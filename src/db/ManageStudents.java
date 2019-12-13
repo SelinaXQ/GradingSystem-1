@@ -29,7 +29,7 @@ public class ManageStudents {
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		List students = null;
 		Criteria criteria = session.createCriteria(CourseStudents.class);
-		criteria.add(Restrictions.eq("cID", course.getcID()));
+		criteria.add(Restrictions.eq("cID", course.getCID()));
 		students = (List) criteria.list();
 		session.close();
 		return (ArrayList<CourseStudents>) students;

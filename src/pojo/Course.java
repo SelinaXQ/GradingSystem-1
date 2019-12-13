@@ -21,19 +21,19 @@ public class Course {
 		this.state = state;
 	}
 
-	public String getcID() {
+	public String getCID() {
 		return cID;
 	}
 
-	public void setcID(String cID) {
+	public void setCID(String cID) {
 		this.cID = cID;
 	}
 
-	public String getcName() {
+	public String getCName() {
 		return cName;
 	}
 
-	public void setcName(String cName) {
+	public void setCName(String cName) {
 		this.cName = cName;
 	}
 

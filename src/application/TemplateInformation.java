@@ -13,8 +13,8 @@ public class TemplateInformation extends Application{
 	public void start(Stage primaryStage) throws IOException {
 
 		Parent root = FXMLLoader.load(getClass().getResource("TemplateInformation.fxml"));
-        primaryStage.setTitle("TemplateInformation:");
-        primaryStage.setScene(new Scene(root, 460, 590));
+        primaryStage.setTitle("TemplateInformation");
+        primaryStage.setScene(new Scene(root, 500, 800));
         primaryStage.show();
 	}
 	

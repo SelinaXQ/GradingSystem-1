@@ -29,10 +29,6 @@ public class Login extends Application implements Initializable {
 	private PasswordField password;
 	@FXML
 	private Button login;
-	
-	@FXML
-	private Label semesterText;
-
 	@Override
 	public void start(Stage primaryStage) throws IOException {
 
@@ -48,7 +44,7 @@ public class Login extends Application implements Initializable {
 
 	@FXML
 	public void cancelButton(ActionEvent event) {
-
+		// close window
 	}
 
 	@FXML
@@ -64,14 +60,14 @@ public class Login extends Application implements Initializable {
 		if (flag == true) {
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("CourseHome.fxml"));
 			// SemesterController controller = new SemesterController();
-			loader.setController(this);
+			// loader.setController(this);
 			Stage courseHome = new Stage();
-			courseHome.setTitle("Course Home");
+			courseHome.setTitle("Current Courses");
 			Scene scene;
 			try {
 				scene = new Scene(loader.load(), 400, 240);
 				courseHome.setScene(scene);
-				initData();
+				// initData();
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
@@ -87,26 +83,17 @@ public class Login extends Application implements Initializable {
 
 	}
 
-	class SemesterController implements Initializable {
-		SemesterController(){
-			System.out.println("HERE");
-		}
-
-		
-
-		@Override
-		public void initialize(URL arg0, ResourceBundle arg1) {
-		}
-
-		
-	}
-
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 	}
 	
-	public void initData() {
-		semesterText.setText(semester.toString());
-		
+	public String getSemester() {
+		return semester.toString();
 	}
+	
+	/*
+	 * public void initData() { semesterText.setText(semester.toString());
+	 * 
+	 * }
+	 */
 }

@@ -38,7 +38,7 @@ public class GradingController implements Initializable{
 	
 	Operations operations = new Operations();
 	Course course = operations.getCourseInfo("1");
-	String courseid = course.getcID();
+	String courseid = course.getCID();
 	//student info
 	ObservableList<StudentInfo> studentData = FXCollections.observableArrayList();
 	ArrayList<StudentInfo> studentList = new ArrayList<>();

@@ -8,18 +8,18 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane prefHeight="240.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane prefHeight="240.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.CourseHomeController">
    <children>
-      <Button layoutX="218.0" layoutY="93.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="57.0" text="Add" />
-      <Button layoutX="295.0" layoutY="93.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="57.0" text="Go" />
-      <Button layoutX="218.0" layoutY="132.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="57.0" text="Edit" />
-      <Button layoutX="295.0" layoutY="132.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="57.0" text="History" />
+      <Button fx:id="add" onAction="#addCourseButton" layoutX="218.0" layoutY="93.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="57.0" text="Add" />
+      <Button fx:id="grading" onAction="#goToGradingButton" layoutX="295.0" layoutY="93.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="57.0" text="Go" />
+      <Button fx:id="edit" onAction="#editCourseButton" layoutX="218.0" layoutY="132.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="57.0" text="Edit" />
+      <Button fx:id="viewHistory" onAction="#viewCourseHistoryButton" layoutX="295.0" layoutY="132.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="57.0" text="History" />
       <Label fx:id="semesterText" alignment="CENTER" layoutX="126.0" layoutY="14.0" prefHeight="43.0" prefWidth="148.0" text="Fall 2019" textAlignment="CENTER" AnchorPane.topAnchor="14.0">
          <font>
             <Font size="15.0" />
          </font>
       </Label>
-      <TableView fx:id="coursesTextField" layoutX="27.0" layoutY="50.0" prefHeight="165.0" prefWidth="173.0">
+      <TableView fx:id="coursesTextView" onMouseClicked="#clickCourse" layoutX="27.0" layoutY="50.0" prefHeight="165.0" prefWidth="173.0">
         <columns>
           <TableColumn fx:id="courseIDColumn" editable="false" prefWidth="172.0" resizable="false" sortable="false" text="Choose Course" />
         </columns>
