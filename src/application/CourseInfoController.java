@@ -4,6 +4,9 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
+
+import org.apache.xmlbeans.impl.xb.xsdschema.All;
+
 import db.Operations;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -127,15 +130,28 @@ public class CourseInfoController implements Initializable {
 			// new Criterias
 		} else { // EDIT
 			// TODO
-			// course = courseHomeController.getCourse();
-			System.out.println("I dont think we would get here");
+			course = courseHomeController.getCourse();
+			System.out.println("Hi! "+course.getCID());
 			generalArr = operations.getGeneralCriteriasByCourseID("1", false);
 		}
 
 		if (ifTemplate == true) {
 			generalArr = tController.getGeneralCriteriaFromTemplate();
-			for(GeneralCriteria gc:generalArr)
+			operations.deleteGeneralCriteriaByCourseID("1");
+			for (GeneralCriteria gc : generalArr) {
+				System.out.println(gc.getgCriID());
+				ArrayList<DetailedCriteria> detailedArr = operations.getDetailedCriteriasByGenerCriID(gc.getgCriID(),
+						true);
 				gc.setgCriID(null);
+
+				String uuid = operations.saveGeneralCriteria(gc);
+				for (DetailedCriteria dc : detailedArr) {
+					dc.setgCriID(uuid);
+					dc.setdCriID(null);
+				}
+				operations.saveDetailedCriterias(course, detailedArr, false);
+			}
+			ifTemplate = false;
 		}
 
 		generalTypeColumn.setCellValueFactory(new PropertyValueFactory<GeneralCriteria, String>("genCriType"));
@@ -182,9 +198,7 @@ public class CourseInfoController implements Initializable {
 
 	@FXML
 	public void saveGeneralCriteriaButton(ActionEvent event) {
-		operations.deleteGeneralCriteriaByCourseID("1");
-	//	operations.deleteGeneralCriteriaByCourseID(course.getCID());
-		
+
 		ArrayList<GeneralCriteria> temp = new ArrayList<>();
 		for (int i = 0; i < generalCriteria.size(); i++) {
 			GeneralCriteria tempGeneral = generalCriteria.get(i);
@@ -262,7 +276,7 @@ public class CourseInfoController implements Initializable {
 			System.out.println(temp.get(i).toString());
 		}
 
-		if (operations.saveDetailedCriterias(null, temp, ifTemplate)) {
+		if (operations.saveDetailedCriterias(null, temp, false)) {
 
 			System.out.println("Save successfully");
 			detailedTableView.refresh();
@@ -305,7 +319,7 @@ public class CourseInfoController implements Initializable {
 
 	@FXML
 	public void saveCourseInfoButton(ActionEvent event) {
-
+		// TODO
 	}
 
 	@FXML

@@ -362,4 +362,18 @@ public class Operations {
 	public void deleteGeneralCriteriaByCourseID(String cid) {
 		mCriteria.deleteGeneralCriteriasByCID(cid);
 	}
+	
+	public String saveGeneralCriteria(GeneralCriteria gCriteria) {
+		return mCriteria.updateOrSaveGeneralCriteria(gCriteria);
+	}
+	
+	public boolean saveComment(DetailedCriteria dCriteria, GiveDetailedGrades gdg) {
+		Student s = mStudents.getStudentByBUID(gdg.getBUID()).get(0);
+		CourseStudents cs = mStudents.getStudentCSID(s.getBUID()).get(0);
+		StudentDetailedGrade sdg = mOthers.getStudentDetailedGrade(cs.getcSID(), dCriteria.getdCriID()).get(0);
+		StudentDetailedGrade studentDetailedGrade = new StudentDetailedGrade(sdg.getSDGID(), cs.getcSID(),
+				dCriteria.getdCriID(), gdg.getScore(), gdg.getComment());
+		mOthers.updateOrSaveStudentDetailedGrade(studentDetailedGrade);
+		return true;
+	}
 }

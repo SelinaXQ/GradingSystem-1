@@ -48,7 +48,7 @@ public class CourseHomeController implements Initializable {
 	private ArrayList<Course> courses;
 
 	private ObservableList<Course> coursesList = FXCollections.observableArrayList();
-	private Course course;
+	private static Course course;
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
