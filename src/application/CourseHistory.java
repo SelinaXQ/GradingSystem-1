@@ -14,7 +14,7 @@ public class CourseHistory extends Application{
 
         Parent root = FXMLLoader.load(getClass().getResource("CourseHistory.fxml"));
         primaryStage.setTitle("History Courses");
-        primaryStage.setScene(new Scene(root, 400, 500));
+        primaryStage.setScene(new Scene(root));
         primaryStage.show();
     }
 
