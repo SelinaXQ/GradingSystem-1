@@ -75,7 +75,8 @@ public class ImportTemplateController implements Initializable {
 				}
 			}
 		});
-		
+
+		semestersList.getSelectionModel().selectFirst();
 		CourseHomeController cHomeController = new CourseHomeController();
 		addOrEdit = cHomeController.getAddOrEdit();
 

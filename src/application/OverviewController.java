@@ -10,15 +10,39 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import pojo.Course;
 
 public class OverviewController implements Initializable {
+	
+
+	@FXML
+	private TextField curveValue;
 	@FXML
 	private Button closeCourse;
+	@FXML
+	private Button curve;
+	@FXML
+	private Button statistic;
+	
+	private Course course = new Course();
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		// TODO Auto-generated method stub
+		CourseHistoryController cHistoryController = new CourseHistoryController();
+		boolean ifFromHistory = cHistoryController.getIfFromHistory();
+		if(ifFromHistory == true) {
+			course = cHistoryController.getCourse();
+			ifFromHistory = false;
+			closeCourse.setVisible(false);
+			curve.setVisible(false);
+			curveValue.setVisible(false);
+			statistic.setVisible(false);
+		}
+		else {
+			// when you open this window from grading.xml
+		}
 
 	}
 
@@ -38,5 +62,15 @@ public class OverviewController implements Initializable {
 		}
 
 		closeCourse.show();
+	}
+	
+	@FXML
+	public void curveButton(ActionEvent event) {
+		
+	}
+	
+	@FXML
+	public void statisticButton(ActionEvent event) {
+		
 	}
 }

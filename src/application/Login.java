@@ -65,7 +65,7 @@ public class Login extends Application implements Initializable {
 			courseHome.setTitle("Current Courses");
 			Scene scene;
 			try {
-				scene = new Scene(loader.load(), 400, 240);
+				scene = new Scene(loader.load());
 				courseHome.setScene(scene);
 				// initData();
 			} catch (IOException e) {
