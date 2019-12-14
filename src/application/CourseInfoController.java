@@ -3,6 +3,7 @@ package application;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Locale;
 import java.util.ResourceBundle;
 
 import org.apache.xmlbeans.impl.xb.xsdschema.All;
@@ -15,6 +16,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TableColumn;
@@ -23,6 +25,10 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.TableColumn.CellEditEvent;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
+import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
+import javafx.scene.text.Text;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.util.converter.DoubleStringConverter;
 import pojo.Course;
@@ -68,7 +74,7 @@ public class CourseInfoController implements Initializable {
 
 	private boolean ifTemplate;
 
-	private Course course;
+	private static Course course = new Course();
 
 	Operations operations;
 
@@ -106,6 +112,7 @@ public class CourseInfoController implements Initializable {
 		collegeStr.add("GRS");
 		ObservableList<String> colleges = FXCollections.observableArrayList(collegeStr);
 		college.setItems(colleges);
+		college.getSelectionModel().selectFirst();
 
 		operations = new Operations();
 		Login loginController = new Login();
@@ -125,25 +132,30 @@ public class CourseInfoController implements Initializable {
 		boolean addOrEdit = courseHomeController.getAddOrEdit();
 		// TODO
 		if (addOrEdit == true) { // ADD
-			course = new Course();
 			generalArr = new ArrayList<GeneralCriteria>();
 			// new Criterias
 		} else { // EDIT
-			// TODO
 			course = courseHomeController.getCourse();
-			System.out.println("Hi! "+course.getCID());
-			generalArr = operations.getGeneralCriteriasByCourseID("1", false);
+			generalArr = operations.getGeneralCriteriasByCourseID(course.getCID(), false);
+			credit.setText("4.0");
+			if(course.getCollege().equals("CAS")) {
+				college.getSelectionModel().select(0);
+			}else {
+				college.getSelectionModel().select(1);
+			}
+			courseName.setText(course.getCName());
 		}
 
 		if (ifTemplate == true) {
+
 			generalArr = tController.getGeneralCriteriaFromTemplate();
-			operations.deleteGeneralCriteriaByCourseID("1");
+			operations.deleteGeneralCriteriaByCourseID(course.getCID());
 			for (GeneralCriteria gc : generalArr) {
 				System.out.println(gc.getgCriID());
 				ArrayList<DetailedCriteria> detailedArr = operations.getDetailedCriteriasByGenerCriID(gc.getgCriID(),
 						true);
 				gc.setgCriID(null);
-
+				gc.setcID(course.getCID());
 				String uuid = operations.saveGeneralCriteria(gc);
 				for (DetailedCriteria dc : detailedArr) {
 					dc.setgCriID(uuid);
@@ -181,15 +193,17 @@ public class CourseInfoController implements Initializable {
 		generalCur = generalTableView.getSelectionModel().getSelectedItem();
 
 		ArrayList<DetailedCriteria> detailedArr = new ArrayList<>();
-		detailedArr = operations.getDetailedCriteriasByGenerCriID(generalCur.getgCriID(), ifTemplate);
-
-		for (int i = 0; i < detailedArr.size(); i++) {
-			detailedCriteria.add(detailedArr.get(i));
+		if (generalArr.size() != 0) {
+			detailedArr = operations.getDetailedCriteriasByGenerCriID(generalCur.getgCriID(), ifTemplate);
+			for (int i = 0; i < detailedArr.size(); i++) {
+				detailedCriteria.add(detailedArr.get(i));
+			}
+			detailedTableView.setItems(detailedCriteria);
 		}
-		detailedTableView.setItems(detailedCriteria);
 	}
 
 	private ObservableList<GeneralCriteria> getGeneralCriteria() {
+		generalArr = operations.getGeneralCriteriasByCourseID(course.getCID(), false);
 		for (int i = 0; i < generalArr.size(); i++) {
 			generalCriteria.add(generalArr.get(i));
 		}
@@ -207,11 +221,20 @@ public class CourseInfoController implements Initializable {
 		}
 
 		if (operations.saveGeneralCriterias(temp, false)) {
-			System.out.println("Save successfully");
+			Alert info = new Alert(Alert.AlertType.INFORMATION);
+		    Pane pane = new Pane();
+		    info.setContentText("Save successfully!!");
+		    info.getDialogPane().setExpandableContent(pane);
+		    info.show();
 			generalTableView.refresh();
 
 		} else {
-			System.out.println("Added up should be 100%!!");
+			Alert info = new Alert(Alert.AlertType.ERROR);
+		    Pane pane = new Pane();
+		    info.setContentText("General criterias added up should be 100%!!");
+		    info.getDialogPane().setExpandableContent(pane);
+		    info.show();
+		   
 			// refresh
 			generalCriteria = FXCollections.observableArrayList();
 			generalTableView.setItems(getGeneralCriteria());
@@ -221,7 +244,7 @@ public class CourseInfoController implements Initializable {
 
 	@FXML
 	public void addGeneralCriteriaButton(ActionEvent event) {
-		GeneralCriteria gCriteria = new GeneralCriteria(null, "1", generalCriteriaType.getText(),
+		GeneralCriteria gCriteria = new GeneralCriteria(null, course.getCID(), generalCriteriaType.getText(),
 				Double.parseDouble(generalCriteriaPer.getText()));
 		generalTableView.getItems().add(gCriteria);
 	}
@@ -264,7 +287,13 @@ public class CourseInfoController implements Initializable {
 
 	@FXML
 	public void saveAsTemplateButton(ActionEvent event) {
-		// operations.saveCriteriaAsTemplate(gCris, dCris);
+		ArrayList<GeneralCriteria> generalCriterias = operations.getGeneralCriteriasByCourseID(course.getCID(), false);
+		for (GeneralCriteria gc : generalCriterias) {
+			ArrayList<DetailedCriteria> dCris = operations.getDetailedCriteriasByGenerCriID(gc.getgCriID(), false);
+			operations.saveDetailedCriterias(course, dCris, true);
+		}
+		operations.saveGeneralCriterias(generalCriterias, true);
+
 	}
 
 	@FXML
@@ -277,12 +306,20 @@ public class CourseInfoController implements Initializable {
 		}
 
 		if (operations.saveDetailedCriterias(null, temp, false)) {
-
-			System.out.println("Save successfully");
+			Alert info = new Alert(Alert.AlertType.INFORMATION);
+		    Pane pane = new Pane();
+		    info.setContentText("Save successfully!!");
+		    info.getDialogPane().setExpandableContent(pane);
+		    info.show();
 			detailedTableView.refresh();
 
 		} else {
 			System.out.println("Added up should be 100%!!");
+			Alert info = new Alert(Alert.AlertType.ERROR);
+		    Pane pane = new Pane();
+		    info.setContentText("Detailed criterias added up should be 100%!!!!");
+		    info.getDialogPane().setExpandableContent(pane);
+		    info.show();
 			// refresh
 			detailedCriteria = FXCollections.observableArrayList();
 
@@ -319,7 +356,11 @@ public class CourseInfoController implements Initializable {
 
 	@FXML
 	public void saveCourseInfoButton(ActionEvent event) {
-		// TODO
+		course.setCName(courseName.getText());
+		course.setCollege(college.getSelectionModel().getSelectedItem());
+		course.setState(1);
+		course.setSemID(semester.getText());
+		operations.saveCourseInfo(course);
 	}
 
 	@FXML

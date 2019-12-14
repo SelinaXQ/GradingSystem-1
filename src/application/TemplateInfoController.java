@@ -14,8 +14,10 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.stage.Stage;
@@ -25,7 +27,15 @@ import pojo.DetailedCriteria;
 import pojo.GeneralCriteria;
 
 public class TemplateInfoController implements Initializable {
-
+	
+	@FXML
+	private TextField semester;
+	@FXML
+	private TextField college;
+	@FXML
+	private TextField credit;
+	@FXML
+	private TextField courseName;
 	@FXML
 	private Button cancelTemplate;
 	@FXML
@@ -66,12 +76,16 @@ public class TemplateInfoController implements Initializable {
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		// TODO
 		CourseHomeController cHomeController = new CourseHomeController();
 		addOrEdit = cHomeController.getAddOrEdit();
 		
 		ImportTemplateController iController = new ImportTemplateController();
 		course = iController.getCourse();
+		courseName.setText(course.getCName());
+		college.setText(course.getCollege());
+		credit.setText("4.0");
+		semester.setText(course.getSemID());
+		
 		operations = new Operations();
 		generalArr = operations.getGeneralCriteriasByCourseID(course.getCID(), true);
 

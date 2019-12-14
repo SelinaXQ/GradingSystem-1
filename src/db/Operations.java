@@ -31,9 +31,11 @@ public class Operations {
 
 	public boolean login(String userName, String pwd) {
 		boolean flag = false;
-		Account account = mOthers.getAccount(userName).get(0);
-		if (account.getPassword().equals(pwd)) {
-			flag = true;
+		ArrayList<Account> accounts = mOthers.getAccount(userName);
+		if (accounts.size() != 0) {
+			if (accounts.get(0).getPassword().equals(pwd)) {
+				flag = true;
+			}
 		}
 		return flag;
 	}
@@ -54,6 +56,10 @@ public class Operations {
 
 	public Course getCourseInfo(String cID) {
 		return mCourse.getCoursesByCID(cID).get(0);
+	}
+
+	public void saveCourseInfo(Course course) {
+		mCourse.updateOrSaveCourse(course);
 	}
 
 	// get General Criterias By course ID
@@ -106,7 +112,6 @@ public class Operations {
 				}
 			} else {
 				for (GeneralCriteria gCri : gCris) {
-					System.out.println("Error:"+gCri.getgCriID());
 					mCriteria.updateOrSaveGeneralCriteria(gCri);
 				}
 			}
@@ -125,15 +130,6 @@ public class Operations {
 			mCriteria.deleteGeneralCriteria(gCriteria);
 
 		}
-	}
-
-	// click save as template.
-	// if not save as template, but just the course' s criteria, click 'save' in two
-	// steps
-
-	public void saveCriteriaAsTemplate(ArrayList<GeneralCriteria> gCris, ArrayList<DetailedCriteria> dCris) {
-		saveGeneralCriterias(gCris, true);
-		saveDetailedCriterias(null, dCris, true);
 	}
 
 	// save the percentage of a detailed criteria,
@@ -362,11 +358,11 @@ public class Operations {
 	public void deleteGeneralCriteriaByCourseID(String cid) {
 		mCriteria.deleteGeneralCriteriasByCID(cid);
 	}
-	
+
 	public String saveGeneralCriteria(GeneralCriteria gCriteria) {
 		return mCriteria.updateOrSaveGeneralCriteria(gCriteria);
 	}
-	
+
 	public boolean saveComment(DetailedCriteria dCriteria, GiveDetailedGrades gdg) {
 		Student s = mStudents.getStudentByBUID(gdg.getBUID()).get(0);
 		CourseStudents cs = mStudents.getStudentCSID(s.getBUID()).get(0);

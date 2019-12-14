@@ -2,6 +2,7 @@ package application;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.Locale;
 import java.util.ResourceBundle;
 
 import db.Operations;
@@ -14,10 +15,12 @@ import javafx.stage.Stage;
 import pojo.Semester;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.Pane;
 
 public class Login extends Application implements Initializable {
 
@@ -34,23 +37,24 @@ public class Login extends Application implements Initializable {
 
 		Parent root = FXMLLoader.load(getClass().getResource("Login.fxml"));
 		primaryStage.setTitle("Login");
-		primaryStage.setScene(new Scene(root, 400, 240));
+		primaryStage.setScene(new Scene(root));
 		primaryStage.show();
 	}
 
 	public static void main(String[] args) {
+		Locale.setDefault(new Locale("en", "US"));
 		launch(args);
 	}
 
 	@FXML
 	public void cancelButton(ActionEvent event) {
-		// close window
+
+		Stage main = (Stage) login.getScene().getWindow();
+		main.close();
 	}
 
 	@FXML
 	public void loginButton(ActionEvent event) {
-
-		System.out.println("Button clicked");
 
 		String user = userName.getText().trim();
 		String pwd = password.getText().trim();
@@ -77,8 +81,11 @@ public class Login extends Application implements Initializable {
 			Stage main = (Stage) login.getScene().getWindow();
 			main.close();
 		} else {
-			// window
-			// TODO
+			Alert info = new Alert(Alert.AlertType.ERROR);
+		    Pane pane = new Pane();
+		    info.setContentText("Username: cpk  Password: cpk");
+		    info.getDialogPane().setExpandableContent(pane);
+		    info.show();
 		}
 
 	}
