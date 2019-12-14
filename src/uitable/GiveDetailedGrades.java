@@ -13,6 +13,10 @@ public class GiveDetailedGrades {
     private SimpleStringProperty lName;
     private SimpleDoubleProperty score;
     private String comment;
+    
+    public GiveDetailedGrades() {
+		
+	}
 
     public GiveDetailedGrades(String bUID, String fName, String mName, String lName, double score) {
         this.BUID = new SimpleStringProperty(bUID);
@@ -31,7 +35,9 @@ public class GiveDetailedGrades {
         this.comment = comment;
     }
 
-    public String getComment() {
+    
+
+	public String getComment() {
         return comment;
     }
 

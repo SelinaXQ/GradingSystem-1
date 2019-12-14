@@ -17,6 +17,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TableColumn.CellEditEvent;
@@ -52,6 +53,7 @@ public class GradingController implements Initializable{
 	DetailedCriteria detailedCur = new DetailedCriteria();
 	//give grade
 	ObservableList<GiveDetailedGrades> grade = FXCollections.observableArrayList();
+	GiveDetailedGrades gradeCur = new GiveDetailedGrades();
 	
 	//table general
 	@FXML private TableView<GeneralCriteria> generalTableView;
@@ -71,6 +73,8 @@ public class GradingController implements Initializable{
 	@FXML private TableColumn<GiveDetailedGrades, String> gradeMiddleNameColumn;
 	@FXML private TableColumn<GiveDetailedGrades, String> gradeLastNameColumn;
 	@FXML private TableColumn<GiveDetailedGrades, Double> gradeScoreColumn;
+	
+	@FXML private Button commentButton;
 	
 	/*
 	 * initialize table
@@ -108,6 +112,7 @@ public class GradingController implements Initializable{
 		gradeTableView.setEditable(true);
 		gradeScoreColumn.setCellFactory(TextFieldTableCell.forTableColumn(new DoubleStringConverter()));
 		
+		this.commentButton.setDisable(true);
 	}
 	
 	public void userClickedOnGeneralTable() {
@@ -139,6 +144,28 @@ public class GradingController implements Initializable{
 			System.out.println(grade.toString());
 		}
 		gradeTableView.setItems(grade);
+		
+	}
+	
+	public void userClickOnGradeTable() {
+		//show comment button
+		this.commentButton.setDisable(false);
+		gradeCur = gradeTableView.getSelectionModel().getSelectedItem();
+		
+	}
+	
+	@FXML
+	public void commentButtonClicked(ActionEvent event) throws IOException {
+		
+		//initialize window
+	    Parent commentParent = FXMLLoader.load(getClass().getResource("Comment.fxml"));
+	    
+		Scene commentScene = new Scene(commentParent);
+				
+		Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
+				
+	    window.setScene(commentScene);
+		window.show();
 		
 	}
 	
@@ -387,6 +414,11 @@ public class GradingController implements Initializable{
 			}
 		}		
 		return detailedCriteria;
+	}
+	
+	public GiveDetailedGrades getCurGrade() {
+		
+		return gradeCur;
 	}
 	
 }
