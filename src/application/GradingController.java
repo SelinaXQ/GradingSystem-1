@@ -188,7 +188,7 @@ public class GradingController implements Initializable{
 	public void userClickOnGradeTable() {
 		//show comment button
 		this.commentButton.setDisable(false);
-		this.gradeCur = gradeTableView.getSelectionModel().getSelectedItem();
+		gradeCur = gradeTableView.getSelectionModel().getSelectedItem();
 		System.out.println(gradeCur);
 		
 	}
