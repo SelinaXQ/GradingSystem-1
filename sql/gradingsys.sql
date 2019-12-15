@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 80018
 File Encoding         : 65001
 
-Date: 2019-12-08 13:51:01
+Date: 2019-12-14 22:40:13
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -49,6 +49,8 @@ CREATE TABLE `courses` (
 -- ----------------------------
 INSERT INTO `courses` VALUES ('1', 'CS 500', 'Fall 2019', 'CAS', '1');
 INSERT INTO `courses` VALUES ('123455', 'CS 400', 'Fall 2018', 'GRS', '0');
+INSERT INTO `courses` VALUES ('1ba98beb6f0682d0016f0683098d0000', 'CS 611', 'Fall 2019', 'GRS', '1');
+INSERT INTO `courses` VALUES ('2', 'CS 600', 'Fall 2019', 'GRS', '1');
 
 -- ----------------------------
 -- Table structure for `coursesstudents`
@@ -70,8 +72,11 @@ CREATE TABLE `coursesstudents` (
 -- ----------------------------
 -- Records of coursesstudents
 -- ----------------------------
-INSERT INTO `coursesstudents` VALUES ('8a80803d6eddc58c016eddc5f46f0002', '1', 'U96796203', '', null, null);
-INSERT INTO `coursesstudents` VALUES ('8a80803d6ee6c093016ee6c0bce20000', '1', 'U96796201', '', null, null);
+INSERT INTO `coursesstudents` VALUES ('1ba9d93c6eebc54f016eebc597410000', '1', 'U96796201', '', null, null);
+INSERT INTO `coursesstudents` VALUES ('1ba9d93c6eebc54f016eebc5979f0003', '1', 'U96796202', '', null, null);
+INSERT INTO `coursesstudents` VALUES ('1ba9d93c6eebc54f016eebc597d70006', '1', 'U96796203', '', null, null);
+INSERT INTO `coursesstudents` VALUES ('1ba9d93c6eebc54f016eebc598030009', '1', 'U96796204', '', null, null);
+INSERT INTO `coursesstudents` VALUES ('1ba9d93c6eebc54f016eebc5982a000c', '1', 'U96796205', '', null, null);
 
 -- ----------------------------
 -- Table structure for `detailedcriteria`
@@ -85,14 +90,21 @@ CREATE TABLE `detailedcriteria` (
   `totalScore` double(32,2) unsigned DEFAULT '0.00',
   PRIMARY KEY (`dCriID`),
   KEY `detailedcriteria_ibfk_1` (`gCriID`),
-  CONSTRAINT `detailedcriteria_ibfk_1` FOREIGN KEY (`gCriID`) REFERENCES `generalcriteria` (`gCriID`)
+  CONSTRAINT `detailedcriteria_ibfk_1` FOREIGN KEY (`gCriID`) REFERENCES `generalcriteria` (`gCriID`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='Detailed Criteria (Grading Criteria Level 1)';
 
 -- ----------------------------
 -- Records of detailedcriteria
 -- ----------------------------
-INSERT INTO `detailedcriteria` VALUES ('8a80803d6ed40deb016ed40dedf70000', 'abcd', 'dh1', '0.50', '100.00');
-INSERT INTO `detailedcriteria` VALUES ('8a80803d6ed40deb016ed40dee270001', 'abcd', 'dh2', '0.50', '100.00');
+INSERT INTO `detailedcriteria` VALUES ('1ba98beb6f0682d0016f068622ce0002', '1ba98beb6f0682d0016f068622ca0001', 'a1', '0.50', '100.00');
+INSERT INTO `detailedcriteria` VALUES ('1ba98beb6f0682d0016f068622d20003', '1ba98beb6f0682d0016f068622ca0001', 'a2', '0.50', '900.00');
+INSERT INTO `detailedcriteria` VALUES ('1ba98beb6f0682d0016f068622dc0005', '1ba98beb6f0682d0016f068622d80004', 'dh1', '0.50', '0.00');
+INSERT INTO `detailedcriteria` VALUES ('1ba98beb6f0682d0016f068622df0006', '1ba98beb6f0682d0016f068622d80004', 'dh2', '0.50', '0.00');
+INSERT INTO `detailedcriteria` VALUES ('1ba98beb6f06a4e3016f06a514e70001', '1ba98beb6f06a4e3016f06a514dc0000', 'a1', '0.50', '100.00');
+INSERT INTO `detailedcriteria` VALUES ('1ba98beb6f06a4e3016f06a514eb0002', '1ba98beb6f06a4e3016f06a514dc0000', 'a2', '0.50', '900.00');
+INSERT INTO `detailedcriteria` VALUES ('1ba98beb6f06a4e3016f06a514f60004', '1ba98beb6f06a4e3016f06a514f30003', 'dh1', '0.50', '0.00');
+INSERT INTO `detailedcriteria` VALUES ('1ba98beb6f06a4e3016f06a514f90005', '1ba98beb6f06a4e3016f06a514f30003', 'dh2', '0.50', '0.00');
+INSERT INTO `detailedcriteria` VALUES ('1ba98beb6f06a791016f06a99bf70001', '1ba98beb6f06a4e3016f06a56d3e0006', 'quiz2', '1.00', '50.00');
 
 -- ----------------------------
 -- Table structure for `generalcriteria`
@@ -105,13 +117,18 @@ CREATE TABLE `generalcriteria` (
   `genCriPer` double(32,2) NOT NULL COMMENT 'general criteria percentage',
   PRIMARY KEY (`gCriID`),
   KEY `generalcriteria_ibfk_1` (`cid`),
-  CONSTRAINT `generalcriteria_ibfk_1` FOREIGN KEY (`cid`) REFERENCES `courses` (`cid`)
+  CONSTRAINT `generalcriteria_ibfk_1` FOREIGN KEY (`cid`) REFERENCES `courses` (`cid`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='General Criteria (Grading Criteria Level 1)';
 
 -- ----------------------------
 -- Records of generalcriteria
 -- ----------------------------
-INSERT INTO `generalcriteria` VALUES ('abcd', '1', 'assginment', '1.00');
+INSERT INTO `generalcriteria` VALUES ('1ba98beb6f0682d0016f068622ca0001', '1', 'final', '0.50');
+INSERT INTO `generalcriteria` VALUES ('1ba98beb6f0682d0016f068622d80004', '1', 'assignment', '0.50');
+INSERT INTO `generalcriteria` VALUES ('1ba98beb6f06a4e3016f06a514dc0000', '1ba98beb6f0682d0016f0683098d0000', 'final', '0.50');
+INSERT INTO `generalcriteria` VALUES ('1ba98beb6f06a4e3016f06a514f30003', '1ba98beb6f0682d0016f0683098d0000', 'assignment', '0.30');
+INSERT INTO `generalcriteria` VALUES ('1ba98beb6f06a4e3016f06a56d3e0006', '1ba98beb6f0682d0016f0683098d0000', 'quiz', '0.20');
+INSERT INTO `generalcriteria` VALUES ('1ba98beb6f06a791016f06a7f3430000', '1ba98beb6f0682d0016f0683098d0000', 'bonus', '0.00');
 
 -- ----------------------------
 -- Table structure for `semesters`
@@ -145,16 +162,12 @@ CREATE TABLE `studentdetailedgrade` (
   KEY `studentdetailedgrade_ibfk_2` (`dCriID`),
   KEY `studentdetailedgrade_ibfk_1` (`csid`),
   CONSTRAINT `studentdetailedgrade_ibfk_1` FOREIGN KEY (`csid`) REFERENCES `coursesstudents` (`csid`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `studentdetailedgrade_ibfk_2` FOREIGN KEY (`dCriID`) REFERENCES `detailedcriteria` (`dCriID`)
+  CONSTRAINT `studentdetailedgrade_ibfk_2` FOREIGN KEY (`dCriID`) REFERENCES `detailedcriteria` (`dCriID`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='Students’ grade for each assignment, quiz etc.';
 
 -- ----------------------------
 -- Records of studentdetailedgrade
 -- ----------------------------
-INSERT INTO `studentdetailedgrade` VALUES ('aaaa', '8a80803d6eddc58c016eddc5f46f0002', '8a80803d6ed40deb016ed40dedf70000', '0.00', null);
-INSERT INTO `studentdetailedgrade` VALUES ('bbbb', '8a80803d6eddc58c016eddc5f46f0002', '8a80803d6ed40deb016ed40dee270001', '0.00', null);
-INSERT INTO `studentdetailedgrade` VALUES ('cccc', '8a80803d6ee6c093016ee6c0bce20000', '8a80803d6ed40deb016ed40dedf70000', '0.00', null);
-INSERT INTO `studentdetailedgrade` VALUES ('dddd', '8a80803d6ee6c093016ee6c0bce20000', '8a80803d6ed40deb016ed40dee270001', '0.00', null);
 
 -- ----------------------------
 -- Table structure for `students`
@@ -171,11 +184,6 @@ CREATE TABLE `students` (
 -- ----------------------------
 -- Records of students
 -- ----------------------------
-INSERT INTO `students` VALUES ('B', 'F', 'M', 'L');
-INSERT INTO `students` VALUES ('BAA', 'F', 'M', 'L');
-INSERT INTO `students` VALUES ('U', 'FAA', 'M', 'L');
-INSERT INTO `students` VALUES ('U8243567654', 'Qia', '', 'QUI');
-INSERT INTO `students` VALUES ('U8899', 'FAA', 'M', 'L');
 INSERT INTO `students` VALUES ('U96796201', 'Qian', '', 'Xiang');
 INSERT INTO `students` VALUES ('U96796202', 'haha', 'hey', 'Li');
 INSERT INTO `students` VALUES ('U96796203', 'Victoria', '', 'Ming');
@@ -198,10 +206,10 @@ CREATE TABLE `templatedetailedcriteria` (
 -- ----------------------------
 -- Records of templatedetailedcriteria
 -- ----------------------------
+INSERT INTO `templatedetailedcriteria` VALUES ('1', 'abcc', 'a1', '0.50', '100.00');
+INSERT INTO `templatedetailedcriteria` VALUES ('2', 'abcc', 'a2', '0.50', '900.00');
 INSERT INTO `templatedetailedcriteria` VALUES ('8a80803d6ed40e84016ed40e870a0000', 'abcd', 'dh1', '0.50', '0.00');
 INSERT INTO `templatedetailedcriteria` VALUES ('8a80803d6ed40e84016ed40e873d0001', 'abcd', 'dh2', '0.50', '0.00');
-INSERT INTO `templatedetailedcriteria` VALUES ('8a80803d6ed4228c016ed4228f6a0000', 'abcd', 'dh1', '0.50', '0.00');
-INSERT INTO `templatedetailedcriteria` VALUES ('8a80803d6ed4228c016ed4228f980001', 'abcd', 'dh2', '0.50', '0.00');
 
 -- ----------------------------
 -- Table structure for `templategeneralcriteria`
@@ -219,3 +227,4 @@ CREATE TABLE `templategeneralcriteria` (
 -- Records of templategeneralcriteria
 -- ----------------------------
 INSERT INTO `templategeneralcriteria` VALUES ('abcc', '1', 'final', '0.50');
+INSERT INTO `templategeneralcriteria` VALUES ('abcd', '1', 'assignment', '0.50');
