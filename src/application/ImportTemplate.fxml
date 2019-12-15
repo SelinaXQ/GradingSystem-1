@@ -8,19 +8,19 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane prefHeight="338.0" prefWidth="276.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.Login">
+<AnchorPane prefHeight="437.0" prefWidth="318.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.ImportTemplateController">
    <children>
-      <Button layoutX="68.0" layoutY="293.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="57.0" text="Cancel" />
-      <Button layoutX="156.0" layoutY="293.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="57.0" text="View" />
-      <Label alignment="CENTER" layoutX="68.0" layoutY="14.0" prefHeight="34.0" prefWidth="140.0" text="Import the Template" textAlignment="CENTER" AnchorPane.topAnchor="14.0">
+      <Button fx:id="cancel" layoutX="83.0" layoutY="357.0" mnemonicParsing="false" onAction="#cancelButton" prefHeight="27.0" prefWidth="57.0" text="Cancel" />
+      <Button fx:id="view" layoutX="176.0" layoutY="357.0" mnemonicParsing="false" onAction="#viewButton" prefHeight="27.0" prefWidth="57.0" text="View" />
+      <Label alignment="CENTER" layoutX="64.0" layoutY="23.0" prefHeight="34.0" prefWidth="191.0" text="Import the Template" textAlignment="CENTER" AnchorPane.topAnchor="23.0">
          <font>
             <Font size="15.0" />
          </font>
       </Label>
-      <ChoiceBox layoutX="63.0" layoutY="48.0" prefWidth="150.0" />
-      <TableView layoutX="38.0" layoutY="85.0" prefHeight="200.0" prefWidth="200.0">
+      <ChoiceBox fx:id="semestersList" layoutX="58.0" layoutY="75.0" prefHeight="36.0" prefWidth="200.0" />
+      <TableView fx:id="coursesTextView" layoutX="59.0" layoutY="134.0" onMouseClicked="#clickCourse" prefHeight="200.0" prefWidth="200.0">
         <columns>
-          <TableColumn prefWidth="199.0" text="Choose Course" />
+          <TableColumn fx:id="courseIDColumn" editable="false" prefWidth="199.0" resizable="false" text="Choose Course" />
         </columns>
       </TableView>
    </children>

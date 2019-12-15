@@ -13,7 +13,9 @@ import org.hibernate.query.Query;
 import com.sun.xml.bind.v2.runtime.output.SAXOutput;
 
 import pojo.Account;
+import pojo.CourseStudents;
 import pojo.StudentDetailedGrade;
+import uitable.DetailedGrade;
 
 public class ManageOthers {
 	public ArrayList<Account> getAccount(String userName) {
@@ -85,5 +87,24 @@ public class ManageOthers {
 		} finally {
 			session.close();
 		}
+	}
+
+	public void deleteDetailedGrade(StudentDetailedGrade sdg) {
+		Session session = HibernateUtil.getSessionFactory().openSession();
+		Transaction tx = null;
+		try {
+			tx = session.beginTransaction();
+			StudentDetailedGrade sDetailedGrade = (StudentDetailedGrade) session.get(StudentDetailedGrade.class, sdg.getSDGID());
+		    session.merge(sDetailedGrade);
+			session.delete(sDetailedGrade);
+			tx.commit();
+		} catch (HibernateException e) {
+			if (tx != null)
+				tx.rollback();
+			e.printStackTrace();
+		} finally {
+			session.close();
+		}
+		
 	}
 }

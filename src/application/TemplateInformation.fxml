@@ -8,45 +8,45 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane prefHeight="590.0" prefWidth="460.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.Login">
+<AnchorPane prefHeight="800.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.TemplateInfoController">
    <children>
-      <Label alignment="CENTER" layoutX="158.0" layoutY="14.0" prefHeight="27.0" prefWidth="155.0" text="Template Information" textAlignment="CENTER" AnchorPane.topAnchor="14.0">
+      <Label alignment="CENTER" layoutX="174.0" layoutY="27.0" prefHeight="27.0" prefWidth="155.0" text="Template Information" textAlignment="CENTER" AnchorPane.topAnchor="27.0">
          <font>
             <Font size="14.0" />
          </font>
       </Label>
-      <Label contentDisplay="RIGHT" layoutX="44.0" layoutY="59.0" prefHeight="17.0" prefWidth="57.0" text="Semester" textAlignment="CENTER" />
-      <Label layoutX="44.0" layoutY="90.0" prefHeight="17.0" prefWidth="57.0" text="College" textAlignment="CENTER" />
-      <Label layoutX="244.0" layoutY="59.0" prefHeight="17.0" prefWidth="57.0" text="Course" textAlignment="CENTER" />
-      <Label contentDisplay="RIGHT" layoutX="244.0" layoutY="90.0" prefHeight="17.0" prefWidth="57.0" text="Credit" textAlignment="CENTER" />
-      <TextField editable="false" layoutX="295.0" layoutY="54.0" prefHeight="13.0" prefWidth="122.0" />
-      <TextField editable="false" layoutX="295.0" layoutY="85.0" prefHeight="13.0" prefWidth="122.0" />
-      <Label alignment="CENTER" layoutX="142.0" layoutY="128.0" prefHeight="27.0" prefWidth="155.0" text="Grading Criteria" textAlignment="CENTER">
+      <Label contentDisplay="RIGHT" layoutX="36.0" layoutY="88.0" prefHeight="17.0" prefWidth="57.0" text="Semester" textAlignment="CENTER" />
+      <Label layoutX="36.0" layoutY="119.0" prefHeight="17.0" prefWidth="57.0" text="College" textAlignment="CENTER" />
+      <Label layoutX="251.0" layoutY="88.0" prefHeight="17.0" prefWidth="57.0" text="Course" textAlignment="CENTER" />
+      <Label contentDisplay="RIGHT" layoutX="251.0" layoutY="119.0" prefHeight="17.0" prefWidth="57.0" text="Credit" textAlignment="CENTER" />
+      <TextField fx:id="semester" editable="false" layoutX="333.0" layoutY="84.0" prefHeight="13.0" prefWidth="122.0" />
+      <TextField fx:id="college" editable="false" layoutX="333.0" layoutY="115.0" prefHeight="13.0" prefWidth="122.0" />
+      <Label alignment="CENTER" layoutX="171.0" layoutY="168.0" prefHeight="27.0" prefWidth="155.0" text="Grading Criteria" textAlignment="CENTER">
          <font>
             <Font size="14.0" />
          </font>
       </Label>
-      <TableView layoutX="44.0" layoutY="155.0" prefHeight="200.0" prefWidth="372.0">
+      <TableView fx:id="generalTableView" onMouseClicked="#userClickedOnGeneralTable"  layoutX="45.0" layoutY="220.0" prefHeight="200.0" prefWidth="407.0">
         <columns>
-          <TableColumn prefWidth="232.0" text="Type" />
-          <TableColumn prefWidth="139.0" text="Percentage" />
+          <TableColumn  fx:id="generalTypeColumn"  prefWidth="240.0" resizable="false" text="Type" />
+          <TableColumn  fx:id="generalPercentageColumn"  prefWidth="166.0" resizable="false" text="Percentage" />
         </columns>
       </TableView>
-      <TableView layoutX="44.0" layoutY="396.0" prefHeight="142.0" prefWidth="372.0">
+      <TableView  fx:id="detailedTableView"  layoutX="48.0" layoutY="499.0" prefHeight="182.0" prefWidth="407.0">
          <columns>
-            <TableColumn prefWidth="180.0" text="Items" />
-            <TableColumn prefWidth="96.0" text="Percentage" />
-            <TableColumn prefWidth="95.0" text="Total Score" />
+            <TableColumn  fx:id="detailedTypeColumn"  prefWidth="154.0" resizable="false" text="Type" />
+            <TableColumn fx:id="detailedPercentageColumn" prefWidth="122.0" resizable="false" text="Percentage" />
+            <TableColumn fx:id="detailedTotalScoreColumn" prefWidth="130.0" resizable="false" text="Total Score" />
          </columns>
       </TableView>
-      <Label alignment="CENTER" layoutX="158.0" layoutY="363.0" prefHeight="27.0" prefWidth="155.0" text="Detailed Criteria" textAlignment="CENTER">
+      <Label alignment="CENTER" layoutX="174.0" layoutY="446.0" prefHeight="27.0" prefWidth="155.0" text="Detailed Criteria" textAlignment="CENTER">
          <font>
             <Font size="14.0" />
          </font>
       </Label>
-      <TextField editable="false" layoutX="112.0" layoutY="54.0" prefHeight="13.0" prefWidth="122.0" />
-      <TextField editable="false" layoutX="112.0" layoutY="85.0" prefHeight="13.0" prefWidth="122.0" />
-      <Button layoutX="125.0" layoutY="545.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="57.0" text="Cancel" />
-      <Button layoutX="278.0" layoutY="545.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="57.0" text="Import" />
+      <TextField fx:id="courseName" editable="false" layoutX="112.0" layoutY="82.0" prefHeight="13.0" prefWidth="122.0" />
+      <TextField fx:id="credit" editable="false" layoutX="112.0" layoutY="113.0" prefHeight="13.0" prefWidth="122.0" />
+      <Button fx:id="cancelTemplate" onAction="#cancelTemplateButton" layoutX="102.0" layoutY="719.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="72.0" text="Cancel" />
+      <Button fx:id="importTemplate" onAction="#importTemplateButton" layoutX="308.0" layoutY="719.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="72.0" text="Import" />
    </children>
 </AnchorPane>

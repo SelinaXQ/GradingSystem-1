@@ -18,6 +18,14 @@ public class StudentDetailedGrade {
 		this.score = score;
 		this.comment = comment;
 	}
+	
+	public StudentDetailedGrade(String sDGID, String cSID, String dCriID, double score, String comment) {
+		this.sDGID = sDGID;
+		this.cSID = cSID;
+		this.dCriID = dCriID;
+		this.score = score;
+		this.comment = comment;
+	}
 
 	public String getSDGID() {
 		return sDGID;

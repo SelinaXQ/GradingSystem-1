@@ -28,10 +28,11 @@ import uitable.StudentInfo;
 
 public class StudentManagementController implements Initializable{
 
+	CourseHomeController courseHome = new CourseHomeController();
 	GradingController gradingController = new GradingController();
 	ObservableList<StudentInfo> studentData = FXCollections.observableArrayList();
 	Operations operations = new Operations();
-	Course course = new Course();
+	Course course = courseHome.getCourse();
 	
 	//table
 	@FXML private TableView<StudentInfo> tableView;
@@ -85,9 +86,9 @@ public class StudentManagementController implements Initializable{
 		for(int i = 0; i<studentData.size(); i++) {
 			studentInfo.add(studentData.get(i));
 		}
-		course = operations.getCourseInfo("1");
+//		course = operations.getCourseInfo("1");
 		
-		operations.saveOpUpdateStudentsInfo(studentInfo, course);
+		operations.updateStudentInfo(studentInfo, course);
 		
 		
 	}
@@ -109,16 +110,16 @@ public class StudentManagementController implements Initializable{
 		for(int i = 0; i<studentData.size(); i++) {
 			studentInfo.add(studentData.get(i));
 		}
-		course = operations.getCourseInfo("1");
+//		course = operations.getCourseInfo("1");
 		
-		operations.saveOpUpdateStudentsInfo(studentInfo, course);
+		operations.saveStudentsInfo(studentInfo, course);
 		
 	}
 	
 	@FXML
 	public void deleteButton() {
 
-		course = operations.getCourseInfo("1");
+//		course = operations.getCourseInfo("1");
 		
 		ObservableList<StudentInfo> selectedRows, allStudent;
         allStudent = tableView.getItems();

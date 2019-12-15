@@ -8,60 +8,66 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane prefHeight="620.0" prefWidth="460.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.Login">
+<AnchorPane prefHeight="808.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.CourseInfoController">
    <children>
-      <Button layoutX="380.0" layoutY="293.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="57.0" text="Add" />
-      <Label alignment="CENTER" layoutX="169.0" layoutY="14.0" prefHeight="27.0" prefWidth="155.0" text="Course Information" textAlignment="CENTER" AnchorPane.topAnchor="14.0">
+      <Label alignment="CENTER" layoutX="282.0" layoutY="14.0" prefHeight="27.0" prefWidth="165.0" text="Course Information" textAlignment="CENTER" AnchorPane.topAnchor="14.0">
          <font>
             <Font size="14.0" />
          </font>
       </Label>
-      <Label contentDisplay="RIGHT" layoutX="55.0" layoutY="59.0" prefHeight="17.0" prefWidth="57.0" text="Semester" textAlignment="CENTER" />
-      <Label layoutX="55.0" layoutY="90.0" prefHeight="17.0" prefWidth="57.0" text="College" textAlignment="CENTER" />
-      <Label layoutX="255.0" layoutY="59.0" prefHeight="17.0" prefWidth="57.0" text="Course" textAlignment="CENTER" />
-      <Label contentDisplay="RIGHT" layoutX="255.0" layoutY="90.0" prefHeight="17.0" prefWidth="57.0" text="Credit" textAlignment="CENTER" />
-      <TextField layoutX="306.0" layoutY="54.0" prefHeight="13.0" prefWidth="122.0" />
-      <TextField layoutX="306.0" layoutY="85.0" prefHeight="13.0" prefWidth="122.0" />
-      <ChoiceBox layoutX="112.0" layoutY="54.0" prefHeight="13.0" prefWidth="122.0" />
-      <ChoiceBox layoutX="112.0" layoutY="85.0" prefHeight="13.0" prefWidth="122.0" />
-      <Separator layoutY="130.0" prefHeight="1.0" prefWidth="475.0" />
-      <Label alignment="CENTER" layoutX="123.0" layoutY="174.0" prefHeight="27.0" prefWidth="155.0" text="Grading Criteria" textAlignment="CENTER">
+      <Label contentDisplay="RIGHT" layoutX="66.0" layoutY="61.0" prefHeight="17.0" prefWidth="57.0" text="Semester" textAlignment="CENTER" />
+      <Label layoutX="66.0" layoutY="101.0" prefHeight="17.0" prefWidth="57.0" text="College" textAlignment="CENTER" />
+      <Label layoutX="293.0" layoutY="61.0" prefHeight="17.0" prefWidth="57.0" text="Course" textAlignment="CENTER" />
+      <Label contentDisplay="RIGHT" layoutX="293.0" layoutY="101.0" prefHeight="17.0" prefWidth="57.0" text="Credit" textAlignment="CENTER" />
+      <TextField fx:id="courseName" promptText="CS 591" layoutX="365.0" layoutY="55.0" prefHeight="13.0" prefWidth="122.0" />
+      <TextField fx:id="credit"  promptText="4.0" layoutX="365.0" layoutY="95.0" prefHeight="13.0" prefWidth="122.0" />
+      <TextField fx:id="semester" layoutX="143.0" layoutY="55.0" prefHeight="13.0" prefWidth="122.0" />
+      <ChoiceBox fx:id="college" layoutX="143.0" layoutY="95.0" prefHeight="13.0" prefWidth="122.0" />
+      <Button fx:id="saveCourseInfo" layoutX="543.0" layoutY="73.0" mnemonicParsing="false" onAction="#saveCourseInfoButton" prefHeight="27.0" prefWidth="57.0" text="Save" />
+  
+      <Separator layoutY="159.0" prefHeight="0.0" prefWidth="700.0" />
+      <Label alignment="CENTER" layoutX="265.0" layoutY="228.0" prefHeight="27.0" prefWidth="200.0" text="Grading Criteria" textAlignment="CENTER">
          <font>
             <Font size="14.0" />
          </font>
       </Label>
-      <Button layoutX="44.0" layoutY="140.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="190.0" text="Import from Template">
+      <Button fx:id="importFromTemplate" layoutX="61.0" layoutY="190.0" mnemonicParsing="false" onAction="#importFromTemplateButton" prefHeight="27.0" prefWidth="190.0" text="Import from Template">
          <font>
             <Font size="12.0" />
          </font>
       </Button>
-      <Button layoutX="256.0" layoutY="140.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="190.0" text="Save as Template">
+      <Button fx:id="saveAsTemplate" layoutX="441.0" layoutY="190.0" mnemonicParsing="false" onAction="#saveAsTemplateButton" prefHeight="27.0" prefWidth="190.0" text="Save as Template">
          <font>
             <Font size="12.0" />
          </font>
       </Button>
-      <TableView layoutX="44.0" layoutY="209.0" prefHeight="200.0" prefWidth="313.0">
+      <TableView fx:id="generalTableView" onMouseClicked="#userClickedOnGeneralTable" layoutX="66.0" layoutY="271.0" prefHeight="215.0" prefWidth="375.0">
         <columns>
-          <TableColumn prefWidth="170.0" text="Type" />
-          <TableColumn prefWidth="142.0" text="Percentage" />
+          <TableColumn fx:id="generalTypeColumn" onEditCommit="#changeGeneralTypeCellEvent" prefWidth="255.0" resizable="false" text="Type" />
+          <TableColumn fx:id="generalPercentageColumn" onEditCommit="#changeGeneralPercentageCellEvent" prefWidth="119.0" resizable="false" text="Percentage" />
         </columns>
       </TableView>
-      <Button layoutX="380.0" layoutY="338.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="57.0" text="Delete" />
-      <Button layoutX="380.0" layoutY="382.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="57.0" text="Save" />
-      <TableView layoutX="44.0" layoutY="457.0" prefHeight="142.0" prefWidth="313.0">
+      <Button fx:id="addGeneralCriteria" layoutX="536.0" layoutY="360.0" mnemonicParsing="false" onAction="#addGeneralCriteriaButton" prefHeight="27.0" prefWidth="57.0" text="Add" />
+      <Button fx:id="saveGeneralCriteria" layoutX="536.0" layoutY="405.0" mnemonicParsing="false" onAction="#saveGeneralCriteriaButton" prefHeight="27.0" prefWidth="57.0" text="Save" />
+      <Button fx:id="deleteGeneralCriteria" layoutX="536.0" layoutY="449.0" mnemonicParsing="false" onAction="#deleteGeneralCriteriaButton" prefHeight="27.0" prefWidth="57.0" text="Delete" />
+      <TableView fx:id="detailedTableView"  layoutX="66.0" layoutY="549.0" prefHeight="215.0" prefWidth="375.0">
          <columns>
-            <TableColumn prefWidth="140.0" text="Items" />
-            <TableColumn prefWidth="97.0" text="Percentage" />
-            <TableColumn prefWidth="75.0" text="Total Score" />
+            <TableColumn fx:id="detailedTypeColumn" onEditCommit="#changeDetailedTypeCellEvent" prefWidth="127.0" resizable="false" text="Type" />
+            <TableColumn  fx:id="detailedPercentageColumn" onEditCommit="#changeDetailedPercentageCellEvent" prefWidth="128.0" resizable="false" text="Percentage" />
+            <TableColumn fx:id="detailedTotalScoreColumn" onEditCommit="#changeDetailedScoreCellEvent" prefWidth="119.0" resizable="false" text="Total Score" />
          </columns>
       </TableView>
-      <Label alignment="CENTER" layoutX="123.0" layoutY="423.0" prefHeight="27.0" prefWidth="155.0" text="Detailed Criteria" textAlignment="CENTER">
+      <Label alignment="CENTER" layoutX="265.0" layoutY="502.0" prefHeight="27.0" prefWidth="200.0" text="Detailed Criteria" textAlignment="CENTER">
          <font>
             <Font size="14.0" />
          </font>
       </Label>
-      <Button layoutX="380.0" layoutY="572.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="57.0" text="Save" />
-      <Button layoutX="380.0" layoutY="528.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="57.0" text="Delete" />
-      <Button layoutX="380.0" layoutY="483.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="57.0" text="Add" />
-   </children>
+      <Button fx:id="saveDetailedCriteria" layoutX="536.0" layoutY="682.0" mnemonicParsing="false" onAction="#saveDetailedCriteriaButton" prefHeight="27.0" prefWidth="57.0" text="Save" />
+      <Button fx:id="deleteDetailedCriteria" layoutX="536.0"  layoutY="726.0" mnemonicParsing="false" onAction="#deleteDetailedCriteriaButton" prefHeight="27.0" prefWidth="57.0" text="Delete" />
+      <Button fx:id="addDetailedCriteria" layoutX="536.0" layoutY="637.0" mnemonicParsing="false" onAction="#addDetailedCriteriaButton" prefHeight="27.0" prefWidth="57.0" text="Add" />
+      <TextField fx:id="generalCriteriaType" promptText="Type" layoutX="503.0" layoutY="271.0" prefHeight="13.0" prefWidth="122.0" />
+      <TextField fx:id="generalCriteriaPer" promptText="Percentage" layoutX="503.0" layoutY="315.0" prefHeight="13.0" prefWidth="122.0" />
+      <TextField fx:id="detailedCriteriaPer" promptText="Percentage" layoutX="504.0" layoutY="593.0" prefHeight="13.0" prefWidth="122.0" />
+      <TextField fx:id="detailedCriteriaType" promptText="Type" layoutX="504.0" layoutY="549.0" prefHeight="13.0" prefWidth="122.0" />
+      </children>
 </AnchorPane>

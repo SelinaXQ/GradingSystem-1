@@ -17,6 +17,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TableColumn.CellEditEvent;
@@ -24,6 +26,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import javafx.util.Callback;
 import javafx.util.converter.DoubleStringConverter;
 import javafx.util.converter.IntegerStringConverter;
 import pojo.Course;
@@ -35,10 +38,12 @@ import uitable.StudentInfo;
 
 public class GradingController implements Initializable{
 
+	CourseHomeController courseHome = new CourseHomeController();
 	
 	Operations operations = new Operations();
-	Course course = operations.getCourseInfo("1");
-	String courseid = course.getcID();
+//	Course course = operations.getCourseInfo("1");
+	Course course = courseHome.getCourse();
+	String courseid = course.getCID();
 	//student info
 	ObservableList<StudentInfo> studentData = FXCollections.observableArrayList();
 	ArrayList<StudentInfo> studentList = new ArrayList<>();
@@ -46,12 +51,13 @@ public class GradingController implements Initializable{
 	// general criteria
 	ObservableList<GeneralCriteria> generalCriteria = FXCollections.observableArrayList();
 	ArrayList<GeneralCriteria> generalArr = operations.getGeneralCriteriasByCourseID(courseid, false);
-	GeneralCriteria generalCur = new GeneralCriteria();
+	private static GeneralCriteria generalCur = new GeneralCriteria();
 	//detailed criteria
 	ObservableList<DetailedCriteria> detailedCriteria = FXCollections.observableArrayList();
-	DetailedCriteria detailedCur = new DetailedCriteria();
+	private static DetailedCriteria detailedCur = new DetailedCriteria();
 	//give grade
 	ObservableList<GiveDetailedGrades> grade = FXCollections.observableArrayList();
+	private static GiveDetailedGrades gradeCur = new GiveDetailedGrades();
 	
 	//table general
 	@FXML private TableView<GeneralCriteria> generalTableView;
@@ -71,6 +77,8 @@ public class GradingController implements Initializable{
 	@FXML private TableColumn<GiveDetailedGrades, String> gradeMiddleNameColumn;
 	@FXML private TableColumn<GiveDetailedGrades, String> gradeLastNameColumn;
 	@FXML private TableColumn<GiveDetailedGrades, Double> gradeScoreColumn;
+	
+	@FXML private Button commentButton;
 	
 	/*
 	 * initialize table
@@ -106,8 +114,41 @@ public class GradingController implements Initializable{
 		gradeLastNameColumn.setCellValueFactory(new PropertyValueFactory<GiveDetailedGrades, String>("lName"));
 		gradeScoreColumn.setCellValueFactory(new PropertyValueFactory<GiveDetailedGrades, Double>("score"));
 		gradeTableView.setEditable(true);
+		
+		//set background color
+		
+//		gradeScoreColumn.setCellFactory(new Callback<TableColumn<GiveDetailedGrades, Double>, TableCell<GiveDetailedGrades, Double>>(){
+//
+//			@Override
+//			public TableCell<GiveDetailedGrades, Double> call(TableColumn<GiveDetailedGrades, Double> para) {
+//				// TODO Auto-generated method stub
+//				
+//				return new TableCell<GiveDetailedGrades, Double>() {
+//					
+//					protected void updateItem(Double item, boolean empty) {
+//						if(!empty) {
+//							int curIndex = indexProperty().getValue() < 0 ? 0 : indexProperty().getValue();
+//							String comment = para.getTableView().getItems().get(curIndex).getComment();
+//							Double score = para.getTableView().getItems().get(curIndex).getScore();
+//							
+//							setText(score.toString());
+//							
+//							if(comment != null) {
+//								
+//								setStyle("-fx-background-color: yellow");
+//							}
+//							
+//						}
+//					}
+//				};
+//			}
+//			
+//		});
+		
 		gradeScoreColumn.setCellFactory(TextFieldTableCell.forTableColumn(new DoubleStringConverter()));
 		
+		
+		this.commentButton.setDisable(true);
 	}
 	
 	public void userClickedOnGeneralTable() {
@@ -131,6 +172,8 @@ public class GradingController implements Initializable{
 		
 		System.out.println(detailedCur.toString());
 		
+		System.out.println(course.getCID());
+		
 		ArrayList<GiveDetailedGrades> gradeArr = operations.getStudentsDetailedGrades(course, detailedCur);
 		System.out.println("grade size:" + gradeArr.size());
 //		System.out.println(gradeArr.get(0).getfName());
@@ -139,6 +182,29 @@ public class GradingController implements Initializable{
 			System.out.println(grade.toString());
 		}
 		gradeTableView.setItems(grade);
+		
+	}
+	
+	public void userClickOnGradeTable() {
+		//show comment button
+		this.commentButton.setDisable(false);
+		gradeCur = gradeTableView.getSelectionModel().getSelectedItem();
+		System.out.println(gradeCur);
+		
+	}
+	
+	@FXML
+	public void commentButtonClicked(ActionEvent event) throws IOException {
+		
+		//initialize window
+	    Parent commentParent = FXMLLoader.load(getClass().getResource("Comment.fxml"));
+	    
+		Scene commentScene = new Scene(commentParent);
+				
+		Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
+				
+	    window.setScene(commentScene);
+		window.show();
 		
 	}
 	
@@ -276,6 +342,8 @@ public class GradingController implements Initializable{
 //		detailedCriteria
 		ArrayList<GiveDetailedGrades> temp = new ArrayList<>();
 		for(int i = 0; i < grade.size(); i++) {
+			
+//			if(grade)
 			temp.add(grade.get(i));
 			System.out.println(temp.get(i));
 		}
@@ -331,7 +399,7 @@ public class GradingController implements Initializable{
 			
 			//add to sql
 //			course = operations.getCourseInfo("1");
-			operations.saveOpUpdateStudentsInfo(studentList, course);
+			operations.saveStudentsInfo(studentList, course);
 			
 			studentList = operations.getStudentsByCourseID(course);
 			for(int i = 0; i<studentList.size(); i++) {
@@ -359,7 +427,6 @@ public class GradingController implements Initializable{
 		return studentData;
 	}
 
-
 	
 	/*
 	 * Get general criteria
@@ -386,6 +453,16 @@ public class GradingController implements Initializable{
 			}
 		}		
 		return detailedCriteria;
+	}
+	
+	public GiveDetailedGrades getCurGrade() {
+		System.out.println("cur: " + gradeCur);
+		return this.gradeCur;
+	}
+	
+	public DetailedCriteria getCurCriteria() {
+		System.out.println("cur detail: " + detailedCur);
+		return detailedCur;
 	}
 	
 }

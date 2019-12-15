@@ -12,7 +12,11 @@ public class GiveDetailedGrades {
     private SimpleStringProperty mName;
     private SimpleStringProperty lName;
     private SimpleDoubleProperty score;
-    private SimpleStringProperty comment;
+    private String comment;
+    
+    public GiveDetailedGrades() {
+		
+	}
 
     public GiveDetailedGrades(String bUID, String fName, String mName, String lName, double score) {
         this.BUID = new SimpleStringProperty(bUID);
@@ -28,15 +32,17 @@ public class GiveDetailedGrades {
         this.mName = new SimpleStringProperty(mName);
         this.lName = new SimpleStringProperty(lName);
         this.score = new SimpleDoubleProperty(score);
-        this.comment = new SimpleStringProperty(comment);
+        this.comment = comment;
     }
 
-    public String getComment() {
-        return comment.get();
+    
+
+	public String getComment() {
+        return comment;
     }
 
     public void setComment(String comment) {
-        this.comment = new SimpleStringProperty(comment);
+        this.comment = comment;
     }
 
     public String getBUID() {

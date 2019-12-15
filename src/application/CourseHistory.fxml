@@ -6,20 +6,20 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="500.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane prefHeight="600.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.CourseHistoryController">
    <children>
-      <Label layoutX="156.0" layoutY="36.0" text="History Courses">
+      <Label alignment="CENTER" layoutX="122.0" layoutY="36.0" prefHeight="18.0" prefWidth="156.0" text="History Courses">
          <font>
             <Font size="14.0" />
          </font></Label>
-      <Button layoutX="165.0" layoutY="379.0" mnemonicParsing="false" text="Overview" />
-      <Button layoutX="165.0" layoutY="427.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="70.0" text="Back" />
-      <ChoiceBox layoutX="125.0" layoutY="78.0" prefWidth="150.0" />
-      <TableView layoutX="76.0" layoutY="137.0" prefHeight="200.0" prefWidth="248.0">
+      <Button fx:id="overview" onAction="#overviewButton"  layoutX="141.0" layoutY="456.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="119.0" text="Overview" />
+      <Button fx:id="cancel" onAction="#canccelButton"  layoutX="141.0" layoutY="520.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="119.0" text="Back" />
+      <ChoiceBox fx:id="semestersList" layoutX="125.0" layoutY="78.0" prefHeight="27.0" prefWidth="150.0" />
+      <TableView fx:id="coursesTextView" onMouseClicked="#clickCourse"  layoutX="61.0" layoutY="150.0" prefHeight="257.0" prefWidth="278.0">
         <columns>
-          <TableColumn prefWidth="69.0" text="College" />
-          <TableColumn prefWidth="99.0" text="Course ID" />
-            <TableColumn prefWidth="79.0" text="Status" />
+          <TableColumn fx:id="courseIDColumn" prefWidth="88.0" resizable="false" text="College" />
+          <TableColumn fx:id="collegeColumn" prefWidth="102.0" resizable="false" text="Course ID" />
+            <TableColumn fx:id="stateColumn" prefWidth="87.0" resizable="false" text="Status" />
         </columns>
       </TableView>
    </children>

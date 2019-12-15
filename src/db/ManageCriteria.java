@@ -2,6 +2,7 @@ package db;
 
 import java.util.*;
 
+import javax.persistence.EntityManager;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
@@ -14,6 +15,7 @@ import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
 import org.hibernate.query.Query;
 
+
 import pojo.DetailedCriteria;
 import pojo.GeneralCriteria;
 import pojo.Student;
@@ -24,7 +26,7 @@ public class ManageCriteria {
 		Session session = null;
 		Transaction tx = null;
 		List<GeneralCriteria> gCris = null;
-		try  {
+		try {
 			session = HibernateUtil.getSessionFactory().openSession();
 			tx = session.beginTransaction();
 			CriteriaBuilder builder = session.getCriteriaBuilder();
@@ -32,14 +34,14 @@ public class ManageCriteria {
 			Root<GeneralCriteria> root = query.from(GeneralCriteria.class);
 			query.select(root).where(builder.equal(root.get("cID"), cID));
 			Query<GeneralCriteria> q = session.createQuery(query);
-			gCris  = q.getResultList();
+			gCris = q.getResultList();
 			tx.commit();
 		} catch (Exception e) {
 			e.printStackTrace();
 			if (tx != null) {
 				tx.rollback();
 			}
-		}finally {
+		} finally {
 			session.close();
 		}
 		return (ArrayList<GeneralCriteria>) gCris;
@@ -49,7 +51,7 @@ public class ManageCriteria {
 		Session session = null;
 		Transaction tx = null;
 		List<DetailedCriteria> dCris = null;
-		try  {
+		try {
 			session = HibernateUtil.getSessionFactory().openSession();
 			tx = session.beginTransaction();
 			CriteriaBuilder builder = session.getCriteriaBuilder();
@@ -57,14 +59,14 @@ public class ManageCriteria {
 			Root<DetailedCriteria> root = query.from(DetailedCriteria.class);
 			query.select(root).where(builder.equal(root.get("gCriID"), gCriID));
 			Query<DetailedCriteria> q = session.createQuery(query);
-			dCris  = q.getResultList();
+			dCris = q.getResultList();
 			tx.commit();
 		} catch (Exception e) {
 			e.printStackTrace();
 			if (tx != null) {
 				tx.rollback();
 			}
-		}finally {
+		} finally {
 			session.close();
 		}
 		return (ArrayList<DetailedCriteria>) dCris;
@@ -105,15 +107,18 @@ public class ManageCriteria {
 
 	}
 
-	public void updateOrSaveGeneralCriteria(GeneralCriteria gCriteria) {
+	public String updateOrSaveGeneralCriteria(GeneralCriteria gCriteria) {
+		String gCriId = null;
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		Transaction tx = null;
 		try {
 			tx = session.beginTransaction();
-		//	GeneralCriteria gCri = (GeneralCriteria) session.get(GeneralCriteria.class, gCriteria.getgCriID());
-		//	System.out.println("Database:" + gCri.getgCriID());
-		//	session.merge(gCri);
+			// GeneralCriteria gCri = (GeneralCriteria) session.get(GeneralCriteria.class,
+			// gCriteria.getgCriID());
+			// System.out.println("Database:" + gCri.getgCriID());
+			// session.merge(gCri);
 			session.saveOrUpdate(gCriteria);
+			gCriId = gCriteria.getgCriID();
 			tx.commit();
 		} catch (HibernateException e) {
 			if (tx != null)
@@ -122,15 +127,32 @@ public class ManageCriteria {
 		} finally {
 			session.close();
 		}
-
+		return gCriId;
 	}
 
-	public void updateOrSaveDetailedCriteria(DetailedCriteria  dCriteria) {
+	public void updateOrSaveDetailedCriteria(DetailedCriteria dCriteria) {
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		Transaction tx = null;
 		try {
 			tx = session.beginTransaction();
 			session.saveOrUpdate(dCriteria);
+			tx.commit();
+		} catch (HibernateException e) {
+			if (tx != null)
+				tx.rollback();
+			e.printStackTrace();
+		} finally {
+			session.close();
+		}
+	}
+
+	public void deleteGeneralCriteriasByCID(String cid) {
+		Session session = HibernateUtil.getSessionFactory().openSession();
+		Transaction tx = null;
+		try {
+			tx = session.beginTransaction();
+			Query<?> query = session.createQuery("delete from GeneralCriteria where cid='" + cid + "'");
+			query.executeUpdate();
 			tx.commit();
 		} catch (HibernateException e) {
 			if (tx != null)
