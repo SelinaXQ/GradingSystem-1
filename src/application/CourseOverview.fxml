@@ -5,20 +5,18 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="530.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane prefHeight="530.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.CourseOverviewController">
    <children>
       <Label layoutX="42.0" layoutY="33.0" prefHeight="17.0" prefWidth="107.0" text="CS 591 Overview" />
-      <TableView layoutX="42.0" layoutY="74.0" prefHeight="364.0" prefWidth="717.0">
+      <TableView layoutX="42.0" layoutY="74.0" prefHeight="364.0" prefWidth="717.0" fx:id="tableView">
         <columns>
-          <TableColumn prefWidth="75.0" text="BU ID" />
-          <TableColumn text="First Name" />
-            <TableColumn text="Middle Name" />
-            <TableColumn text="Last Name" />
-            <TableColumn text="Quiz" />
-            <TableColumn text="Assignment" />
-            <TableColumn text="Bonus" />
-            <TableColumn text="Composite" />
-            <TableColumn text="Grade" />
+          <TableColumn fx:id="BUIDColumn" prefWidth="75.0" text="BU ID" />
+          <TableColumn fx:id="firstNameColumn" text="First Name"  />
+            <TableColumn fx:id="middleNameColumn" text="Middle Name" />
+            <TableColumn fx:id="lastNameColumn" text="Last Name" />
+            <TableColumn fx:id="generalCriteriaColumns" text="Last Name" />
+            <TableColumn fx:id="compositeColumn" text="Composite" />
+            <TableColumn fx:id="gradeColumn" text="Grade" />
         </columns>
       </TableView>
       <Button layoutX="56.0" layoutY="466.0" mnemonicParsing="false" text="close the course" />
