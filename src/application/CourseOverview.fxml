@@ -16,7 +16,7 @@
             <TableColumn fx:id="lastNameColumn" text="Last Name" />
             <TableColumn fx:id="generalCriteriaColumns" text="Last Name" />
             <TableColumn fx:id="compositeColumn" text="Composite" />
-            <TableColumn fx:id="gradeColumn" text="Grade" />
+            <TableColumn fx:id="gradingColumn" onEditCommit="#changeGradingColumnEvent" text="Grade" />
         </columns>
       </TableView>
       <Button layoutX="56.0" layoutY="466.0" mnemonicParsing="false" text="close the course" />
