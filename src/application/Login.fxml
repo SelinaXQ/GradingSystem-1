@@ -17,7 +17,7 @@
       </Label>
       <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" layoutX="34.0" layoutY="75.0" prefHeight="27.0" prefWidth="114.0" text="Username:" textAlignment="RIGHT" />
       <Label alignment="CENTER_RIGHT" layoutX="34.0" layoutY="118.0" prefHeight="27.0" prefWidth="114.0" text="Password:" textAlignment="CENTER" />
-      <Button alignment="CENTER" layoutX="113.0" layoutY="175.0" mnemonicParsing="false" onAction="#cancelButton" prefHeight="27.0" prefWidth="57.0" text="Cancel" />
+      <Button alignment="CENTER" layoutX="100.0" layoutY="175.0" mnemonicParsing="false" onAction="#cancelButton" prefHeight="27.0" prefWidth="71.0" text="Cancel" />
       <Button fx:id="login" alignment="CENTER" layoutX="230.0" layoutY="175.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#loginButton" prefHeight="27.0" prefWidth="57.0" text="OK" />
       <TextField fx:id="userName" layoutX="182.0" layoutY="75.0" prefHeight="27.0" prefWidth="136.0" />
       <PasswordField fx:id="password" layoutX="182.0" layoutY="118.0" prefHeight="27.0" prefWidth="136.0" />

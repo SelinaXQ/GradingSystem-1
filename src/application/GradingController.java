@@ -413,6 +413,17 @@ public class GradingController implements Initializable{
 	}
 	
 
+	
+	@FXML
+	public void backButton(ActionEvent event) throws IOException {
+		Parent gradingParent = FXMLLoader.load(getClass().getResource("CourseHome.fxml"));
+		Scene gradingScene = new Scene(gradingParent);
+		
+		Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
+		window.setScene(gradingScene);
+		window.show();
+	}
+	
 	/*
 	 * Get student data by course
 	 */
@@ -460,7 +471,7 @@ public class GradingController implements Initializable{
 	
 	public GiveDetailedGrades getCurGrade() {
 		System.out.println("cur: " + gradeCur);
-		return this.gradeCur;
+		return gradeCur;
 	}
 	
 	public DetailedCriteria getCurCriteria() {

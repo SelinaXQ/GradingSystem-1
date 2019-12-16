@@ -14,6 +14,8 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -98,19 +100,29 @@ public class CourseHomeController implements Initializable {
 	}
 
 	@FXML
-	public void goToGradingButton(ActionEvent event) {
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("Grading.fxml"));
-
-		Stage stage = new Stage();
-		Scene scene;
-		try {
-			scene = new Scene(loader.load());
-			stage.setScene(scene);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-
-		stage.show();
+	public void goToGradingButton(ActionEvent event) throws IOException {
+		
+		Parent parent = FXMLLoader.load(getClass().getResource("Grading.fxml"));
+		Scene scene = new Scene(parent);
+		
+		Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
+		window.setScene(scene);
+		window.show();
+		
+		
+		
+//		FXMLLoader loader = new FXMLLoader(getClass().getResource("Grading.fxml"));
+//
+//		Stage stage = new Stage();
+//		Scene scene;
+//		try {
+//			scene = new Scene(loader.load());
+//			stage.setScene(scene);
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//		}
+//
+//		stage.show();
 
 		/*
 		 * Stage main = (Stage) grading.getScene().getWindow(); main.close();
@@ -118,21 +130,30 @@ public class CourseHomeController implements Initializable {
 	}
 
 	@FXML
-	public void editCourseButton(ActionEvent event) {
+	public void editCourseButton(ActionEvent event) throws IOException {
 		addOrEdit = false;
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("CourseInformation.fxml"));
-
-		Stage stage = new Stage();
-		Scene scene;
-		try {
-			scene = new Scene(loader.load());
-			stage.setScene(scene);
-			stage.setTitle("Edit Course Information & Criteria");
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-
-		stage.show();
+		
+		Parent parent = FXMLLoader.load(getClass().getResource("CourseInformation.fxml"));
+		Scene scene = new Scene(parent);
+		
+		Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
+		window.setScene(scene);
+		window.setTitle("Edit Course Information & Criteria");
+		window.show();
+		
+//		FXMLLoader loader = new FXMLLoader(getClass().getResource("CourseInformation.fxml"));
+//
+//		Stage stage = new Stage();
+//		Scene scene;
+//		try {
+//			scene = new Scene(loader.load());
+//			stage.setScene(scene);
+//			stage.setTitle("Edit Course Information & Criteria");
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//		}
+//
+//		stage.show();
 
 		/*
 		 * Stage main = (Stage) edit.getScene().getWindow(); main.close();
@@ -140,20 +161,29 @@ public class CourseHomeController implements Initializable {
 	}
 
 	@FXML
-	public void viewCourseHistoryButton(ActionEvent event) {
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("CourseHistory.fxml"));
-
-		Stage stage = new Stage();
-		Scene scene;
-		try {
-			scene = new Scene(loader.load());
-			stage.setScene(scene);
-			stage.setTitle("History Courses");
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-
-		stage.show();
+	public void viewCourseHistoryButton(ActionEvent event) throws IOException {
+		
+		Parent parent = FXMLLoader.load(getClass().getResource("CourseHistory.fxml"));
+		Scene scene = new Scene(parent);
+		
+		Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
+		window.setScene(scene);
+		window.setTitle("History Courses");
+		window.show();
+		
+//		FXMLLoader loader = new FXMLLoader(getClass().getResource("CourseHistory.fxml"));
+//
+//		Stage stage = new Stage();
+//		Scene scene;
+//		try {
+//			scene = new Scene(loader.load());
+//			stage.setScene(scene);
+//			stage.setTitle("History Courses");
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//		}
+//
+//		stage.show();
 
 		/*
 		 * Stage main = (Stage) viewHistory.getScene().getWindow(); main.close();
