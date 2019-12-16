@@ -111,6 +111,7 @@ public class GradingController implements Initializable{
 		gradeBUIDColumn.setCellValueFactory(new PropertyValueFactory<GiveDetailedGrades, String>("BUID"));
 		gradeFirstNameColumn.setCellValueFactory(new PropertyValueFactory<GiveDetailedGrades, String>("fName"));
 		gradeMiddleNameColumn.setCellValueFactory(new PropertyValueFactory<GiveDetailedGrades, String>("mName"));
+//		gradeMiddleNameColumn.setVisible(false);
 		gradeLastNameColumn.setCellValueFactory(new PropertyValueFactory<GiveDetailedGrades, String>("lName"));
 		gradeScoreColumn.setCellValueFactory(new PropertyValueFactory<GiveDetailedGrades, Double>("score"));
 		gradeTableView.setEditable(true);
