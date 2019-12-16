@@ -7,27 +7,28 @@
 <?import javafx.scene.layout.AnchorPane?>
 
 <AnchorPane prefHeight="530.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.OverviewController">
-   <children>
-      <Label layoutX="42.0" layoutY="33.0" prefHeight="17.0" prefWidth="124.0" text="CS 591 Overview" />
-      <TableView layoutX="42.0" layoutY="74.0" prefHeight="364.0" prefWidth="717.0">
-        <columns>
-          <TableColumn prefWidth="75.0" resizable="false" text="BU ID" />
-          <TableColumn resizable="false" text="First Name" />
-            <TableColumn resizable="false" text="Middle Name" />
-            <TableColumn resizable="false" text="Last Name" />
-            <TableColumn resizable="false" text="Quiz" />
-            <TableColumn resizable="false" text="Assignment" />
-            <TableColumn resizable="false" text="Bonus" />
-            <TableColumn resizable="false" text="Composite" />
-            <TableColumn prefWidth="79.0" resizable="false" text="Grade" />
-        </columns>
-         <padding>
-            <Insets left="1.0" right="1.0" top="1.0" />
-         </padding>
-      </TableView>
-      <Button fx:id="closeCourse" layoutX="42.0" layoutY="466.0" mnemonicParsing="false" onAction="#closeCourseButton" prefHeight="27.0" prefWidth="107.0" text="close the course" />
-      <TextField fx:id="curveValue" layoutX="366.0" layoutY="466.0" prefHeight="27.0" prefWidth="99.0" />
-      <Button fx:id="curve" layoutX="504.0" layoutY="466.0" mnemonicParsing="false" onAction="#curveButton" prefHeight="27.0" prefWidth="51.0" text="Curve" />
-      <Button fx:id="statistic" layoutX="641.0" layoutY="466.0" mnemonicParsing="false" onAction="#statisticButton" prefHeight="27.0" prefWidth="116.0" text="Get Statistic" />
-   </children>
+    <children>
+        <Label layoutX="42.0" layoutY="33.0" prefHeight="17.0" prefWidth="124.0" text="CS 591 Overview" />
+        <TableView fx:id="tableView" layoutX="42.0" layoutY="74.0" prefHeight="364.0" prefWidth="717.0">
+            <columns>
+                <TableColumn fx:id="BUIDColumn" prefWidth="75" resizable="true" text="BU ID" />
+                <TableColumn fx:id="firstNameColumn" resizable="true" text="First Name" />
+                <TableColumn fx:id="middleNameColumn" resizable="true" text="Middle Name" />
+                <TableColumn fx:id="lastNameColumn" resizable="true" text="Last Name" />
+                <TableColumn fx:id="compositeColumn" resizable="true" text="Composite" />
+                <TableColumn fx:id="gradeColumn" onEditCommit="#changeGradingColumnEvent" resizable="true" text="Grade" />
+            </columns>
+            <padding>
+                <Insets left="1.0" right="1.0" top="1.0" />
+            </padding>
+         <columnResizePolicy>
+            <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+         </columnResizePolicy>
+        </TableView>
+        <Button fx:id="closeCourse" layoutX="56.0" layoutY="466.0" mnemonicParsing="false" onAction="#closeCourseButton" prefHeight="27.0" prefWidth="200.0" text="close the course" />
+        <TextField fx:id="curveValue" layoutX="446.0" layoutY="466.0" prefHeight="27.0" prefWidth="99.0" />
+        <Button fx:id="curve" layoutX="348.0" layoutY="466.0" mnemonicParsing="false" onAction="#curveButton" prefHeight="30.0" prefWidth="86.0" text="Curve" />
+        <Button fx:id="statistic" layoutX="630.0" layoutY="466.0" mnemonicParsing="false" onAction="#statisticButton" prefHeight="27.0" prefWidth="129.0" text="Get Statistic" />
+      <Button fx:id="changeDisplayMode" onAction="#changeModeButtonClicked" layoutX="541.0" layoutY="28.0" mnemonicParsing="false" text="Change Display Mode" />
+    </children>
 </AnchorPane>

@@ -309,7 +309,7 @@ public class CourseInfoController implements Initializable {
 			System.out.println("If new detailed Criteria has id: " + detailedCriteria.get(i).getdCriID());
 			DetailedCriteria tempDetailed = detailedCriteria.get(i);
 			temp.add(tempDetailed);
-			System.out.println(temp.get(i).toString());
+			System.out.println("EN;;;"+ temp.get(i).toString());
 		}
 
 		if (operations.saveDetailedCriterias(course, temp, false)) {
@@ -346,6 +346,7 @@ public class CourseInfoController implements Initializable {
 		DetailedCriteria dCriteria = new DetailedCriteria(null, generalCur.getgCriID(), detailedCriteriaType.getText(),
 				Double.parseDouble(detailedCriteriaPer.getText()), Double.parseDouble(detailedCScore.getText()));
 		detailedTableView.getItems().add(dCriteria);
+		detailedCriteria.add(dCriteria);
 	}
 
 	@FXML

@@ -88,8 +88,8 @@ public class StudentManagementController implements Initializable{
 		}
 //		course = operations.getCourseInfo("1");
 		
-		operations.updateStudentInfo(studentInfo, course);
-		
+//		operations.updateStudentInfo(studentInfo, course);
+		operations.saveStudentsInfo(studentInfo, course);
 		
 	}
 	
