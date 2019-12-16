@@ -35,7 +35,7 @@ import java.util.*;
 
 public class OverviewController implements Initializable {
 	Operations operations = new Operations();
-	CourseHistoryController courseHistory = new CourseHistoryController(); 
+	CourseHistoryController courseHistory = new CourseHistoryController();
 	Course course = courseHistory.getCourse();
 	//System.out.println(course.toString());
 	String courseid = course.getCID();
@@ -106,6 +106,7 @@ public class OverviewController implements Initializable {
 				}
 			});
 			ArrayList<DetailedCriteria> dc =  operations.getDetailedCriteriasByGenerCriID(i.getgCriID(),false);
+			if (dc!=null)
 			for(DetailedCriteria j:dc){
 				TableColumn<Overview,String> dColumn = new TableColumn<Overview,String>();
 				dColumn.setText(j.getDeCriType());
@@ -115,7 +116,7 @@ public class OverviewController implements Initializable {
 						ArrayList<HashMap<String, DetailedGrade>> dcS = param.getValue().getDcs();
 						double dc=0.0;
 						for( HashMap<String, DetailedGrade> d:dcS){
-							if (d.get(i.getGenCriType()).getdCriID().equals(j.getdCriID())) dc=d.get(i.getgCriID()).getScore();
+							if (d.get(i.getgCriID()).getdCriID().equals(j.getdCriID())) dc=d.get(i.getgCriID()).getScore();
 							break;
 						}
 						return new SimpleStringProperty(new DoubleStringConverter().toString(dc));
