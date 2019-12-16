@@ -114,38 +114,42 @@ public class GradingController implements Initializable{
 		gradeLastNameColumn.setCellValueFactory(new PropertyValueFactory<GiveDetailedGrades, String>("lName"));
 		gradeScoreColumn.setCellValueFactory(new PropertyValueFactory<GiveDetailedGrades, Double>("score"));
 		gradeTableView.setEditable(true);
-		
+		gradeScoreColumn.setCellFactory(TextFieldTableCell.forTableColumn(new DoubleStringConverter()));
 		//set background color
 		
-//		gradeScoreColumn.setCellFactory(new Callback<TableColumn<GiveDetailedGrades, Double>, TableCell<GiveDetailedGrades, Double>>(){
-//
-//			@Override
-//			public TableCell<GiveDetailedGrades, Double> call(TableColumn<GiveDetailedGrades, Double> para) {
-//				// TODO Auto-generated method stub
-//				
-//				return new TableCell<GiveDetailedGrades, Double>() {
-//					
-//					protected void updateItem(Double item, boolean empty) {
-//						if(!empty) {
-//							int curIndex = indexProperty().getValue() < 0 ? 0 : indexProperty().getValue();
-//							String comment = para.getTableView().getItems().get(curIndex).getComment();
-//							Double score = para.getTableView().getItems().get(curIndex).getScore();
-//							
-//							setText(score.toString());
-//							
-//							if(comment != null) {
-//								
-//								setStyle("-fx-background-color: yellow");
-//							}
-//							
-//						}
-//					}
-//				};
-//			}
-//			
-//		});
+		gradeBUIDColumn.setCellFactory(new Callback<TableColumn<GiveDetailedGrades, String>, TableCell<GiveDetailedGrades, String>>(){
+
+			
+			
+			@Override
+			public TableCell<GiveDetailedGrades, String> call(TableColumn<GiveDetailedGrades, String> para) {
+				// TODO Auto-generated method stub
+				
+				return new TableCell<GiveDetailedGrades, String>() {
+					
+					protected void updateItem(String item, boolean empty) {
+						
+						if(!empty) {
+							int curIndex = indexProperty().getValue() < 0 ? 0 : indexProperty().getValue();
+							String comment = para.getTableView().getItems().get(curIndex).getComment();
+							String BUID = para.getTableView().getItems().get(curIndex).getBUID();
+							
+							setText(BUID);
+
+							if(comment != null) {
+								
+								setStyle("-fx-background-color: yellow");
+							}
+							
+							
+						}
+					}
+				};
+			}
+			
+		});
 		
-		gradeScoreColumn.setCellFactory(TextFieldTableCell.forTableColumn(new DoubleStringConverter()));
+		
 		
 		
 		this.commentButton.setDisable(true);
