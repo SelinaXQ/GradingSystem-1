@@ -79,20 +79,29 @@ public class CourseHomeController implements Initializable {
 	}
 	
 	@FXML
-	public void addCourseButton(ActionEvent event) {
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("CourseInformation.fxml"));
+	public void addCourseButton(ActionEvent event) throws IOException {
 		addOrEdit = true;
-		Stage stage = new Stage();
-		Scene scene;
-		try {
-			scene = new Scene(loader.load());
-			stage.setScene(scene);
-			stage.setTitle("Add Course Information & Criteria");
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-
-		stage.show();
+		Parent parent = FXMLLoader.load(getClass().getResource("CourseInformation.fxml"));
+		Scene scene = new Scene(parent);
+		
+		Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
+		window.setScene(scene);
+		window.setTitle("Add Course Information & Criteria");
+		window.show();
+//		
+//		FXMLLoader loader = new FXMLLoader(getClass().getResource("CourseInformation.fxml"));
+//		
+//		Stage stage = new Stage();
+//		Scene scene;
+//		try {
+//			scene = new Scene(loader.load());
+//			stage.setScene(scene);
+//			stage.setTitle("Add Course Information & Criteria");
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//		}
+//
+//		stage.show();
 
 		/*
 		 * Stage main = (Stage) add.getScene().getWindow(); main.close();
