@@ -10,8 +10,8 @@
 
 <AnchorPane prefHeight="437.0" prefWidth="318.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.ImportTemplateController">
    <children>
-      <Button fx:id="cancel" layoutX="83.0" layoutY="357.0" mnemonicParsing="false" onAction="#cancelButton" prefHeight="27.0" prefWidth="57.0" text="Cancel" />
-      <Button fx:id="view" layoutX="176.0" layoutY="357.0" mnemonicParsing="false" onAction="#viewButton" prefHeight="27.0" prefWidth="57.0" text="View" />
+      <Button fx:id="cancel" layoutX="76.0" layoutY="357.0" mnemonicParsing="false" onAction="#cancelButton" prefHeight="27.0" prefWidth="70.0" text="Cancel" />
+      <Button fx:id="view" layoutX="171.0" layoutY="357.0" mnemonicParsing="false" onAction="#viewButton" prefHeight="27.0" prefWidth="70.0" text="View" />
       <Label alignment="CENTER" layoutX="64.0" layoutY="23.0" prefHeight="34.0" prefWidth="191.0" text="Import the Template" textAlignment="CENTER" AnchorPane.topAnchor="23.0">
          <font>
             <Font size="15.0" />

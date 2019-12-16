@@ -15,6 +15,8 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
@@ -63,6 +65,10 @@ public class CourseInfoController implements Initializable {
 	private TextField detailedCriteriaPer;
 	@FXML
 	private TextField detailedCriteriaType;
+	
+	@FXML
+	private TextField detailedCScore;
+	
 	@FXML
 	private TextField semester;
 	@FXML
@@ -337,7 +343,7 @@ public class CourseInfoController implements Initializable {
 	@FXML
 	public void addDetailedCriteriaButton(ActionEvent event) {
 		DetailedCriteria dCriteria = new DetailedCriteria(null, generalCur.getgCriID(), detailedCriteriaType.getText(),
-				Double.parseDouble(detailedCriteriaPer.getText()), 0.00);
+				Double.parseDouble(detailedCriteriaPer.getText()), Double.parseDouble(detailedCScore.getText()));
 		detailedTableView.getItems().add(dCriteria);
 	}
 
@@ -361,6 +367,16 @@ public class CourseInfoController implements Initializable {
 		course.setState(1);
 		course.setSemID(semester.getText());
 		operations.saveCourseInfo(course);
+	}
+	
+	@FXML
+	public void backButton(ActionEvent event) throws IOException {
+		Parent parent = FXMLLoader.load(getClass().getResource("CourseHome.fxml"));
+		Scene scene = new Scene(parent);
+		
+		Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
+		window.setScene(scene);
+		window.show();
 	}
 
 	@FXML
