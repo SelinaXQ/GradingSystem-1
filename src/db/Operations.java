@@ -274,18 +274,18 @@ public class Operations {
 		ArrayList<CourseStudents> students = mStudents.getStudentsByCId(course);
 		ArrayList<GiveDetailedGrades> giveDetailedGrades = new ArrayList<GiveDetailedGrades>();
 		for (CourseStudents cs : students) {
-			System.out.println("CSID:"+cs.getCSID());
-			System.out.println("Dcriid"+ dCriteria.getdCriID());
-			StudentDetailedGrade sDetailedGrade = mOthers.getStudentDetailedGrade(cs.getCSID(), dCriteria.getdCriID())
-					.get(0);
-			Student s = mStudents.getStudentByBUID(cs.getBUID()).get(0);
+			if (cs.getCondition().equalsIgnoreCase("w") == false) {
+				StudentDetailedGrade sDetailedGrade = mOthers
+						.getStudentDetailedGrade(cs.getCSID(), dCriteria.getdCriID()).get(0);
+				Student s = mStudents.getStudentByBUID(cs.getBUID()).get(0);
 
-			// GiveDetailedGrades giveDetailedGrade = new GiveDetailedGrades(s.getBUID(),
-			// s.getFirstName(),
-			// s.getMiddleName(), s.getLastName(), sDetailedGrade.getScore());
-			GiveDetailedGrades giveDetailedGrade = new GiveDetailedGrades(s.getBUID(), s.getFirstName(),
-					s.getMiddleName(), s.getLastName(), sDetailedGrade.getScore(), sDetailedGrade.getComment());
-			giveDetailedGrades.add(giveDetailedGrade);
+				// GiveDetailedGrades giveDetailedGrade = new GiveDetailedGrades(s.getBUID(),
+				// s.getFirstName(),
+				// s.getMiddleName(), s.getLastName(), sDetailedGrade.getScore());
+				GiveDetailedGrades giveDetailedGrade = new GiveDetailedGrades(s.getBUID(), s.getFirstName(),
+						s.getMiddleName(), s.getLastName(), sDetailedGrade.getScore(), sDetailedGrade.getComment());
+				giveDetailedGrades.add(giveDetailedGrade);
+			}
 		}
 		return giveDetailedGrades;
 
@@ -322,7 +322,11 @@ public class Operations {
 			cs.setCondition(sInfo.getCondition());
 			if (css.size() == 0) {
 				mStudents.updateOrSaveCourseStudent(cs);
-				initDetailedGrades(cs, c);
+				if (cs.getCondition().equals("w") == false) {
+					initDetailedGrades(cs, c);
+				} else {
+					deleteDetailedGrades(cs, c);
+				}
 			} else {
 				cs.setCSID(css.get(0).getCSID());
 				mStudents.updateOrSaveCourseStudent(cs);
