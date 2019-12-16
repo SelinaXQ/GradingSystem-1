@@ -64,7 +64,7 @@ public class Login extends Application implements Initializable {
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("CourseHome.fxml"));
 			// SemesterController controller = new SemesterController();
 			// loader.setController(this);
-			Stage courseHome = new Stage();
+			Stage courseHome = new Stage(); 
 			courseHome.setTitle("Current Courses");
 			Scene scene;
 			try {
