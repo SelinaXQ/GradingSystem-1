@@ -20,8 +20,11 @@
       <ChoiceBox fx:id="semestersList" layoutX="58.0" layoutY="75.0" prefHeight="36.0" prefWidth="200.0" />
       <TableView fx:id="coursesTextView" layoutX="59.0" layoutY="134.0" onMouseClicked="#clickCourse" prefHeight="200.0" prefWidth="200.0">
         <columns>
-          <TableColumn fx:id="courseIDColumn" editable="false" prefWidth="199.0" resizable="false" text="Choose Course" />
+          <TableColumn fx:id="courseIDColumn" editable="false" prefWidth="198.0" resizable="false" text="Choose Course" />
         </columns>
+         <padding>
+            <Insets left="1.0" right="1.0" top="1.0" />
+         </padding>
       </TableView>
    </children>
 </AnchorPane>

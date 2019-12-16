@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.*?>
 <?import javafx.scene.shape.*?>
 <?import javafx.scene.control.*?>
 <?import java.lang.*?>
@@ -16,31 +17,40 @@
           <TableColumn fx:id="gradeFirstNameColumn" prefWidth="124.0" resizable="false" text="First Name" />
             <TableColumn fx:id="gradeMiddleNameColumn" prefWidth="117.0" resizable="false" text="Middle Name" />
             <TableColumn fx:id="gradeLastNameColumn" prefWidth="126.0" resizable="false" text="Last Name" />
-            <TableColumn fx:id="gradeScoreColumn" onEditCommit="#changeGradeScoreCellEvent" prefWidth="109.0" resizable="false" text="Score" />
+            <TableColumn fx:id="gradeScoreColumn" onEditCommit="#changeGradeScoreCellEvent" prefWidth="107.0" resizable="false" text="Score" />
         </columns>
          <columnResizePolicy>
             <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
          </columnResizePolicy>
+         <padding>
+            <Insets left="1.0" right="1.0" top="1.0" />
+         </padding>
       </TableView>
       <Label alignment="CENTER" layoutX="303.0" layoutY="27.0" prefHeight="17.0" prefWidth="140.0" text="Student Management" />
       <TableView fx:id="generalTableView" layoutX="100.0" layoutY="135.0" onMouseClicked="#userClickedOnGeneralTable" prefHeight="192.0" prefWidth="241.0">
         <columns>
           <TableColumn fx:id="generalTypeColumn" onEditCommit="#changeGeneralTypeCellEvent" prefWidth="122.0" resizable="false" text="Type" />
-          <TableColumn fx:id="generalPercentageColumn" onEditCommit="#changeGeneralPercentageCellEvent" prefWidth="118.0" resizable="false" text="Percentage" />
+          <TableColumn fx:id="generalPercentageColumn" onEditCommit="#changeGeneralPercentageCellEvent" prefWidth="117.0" resizable="false" text="Percentage" />
         </columns>
          <columnResizePolicy>
             <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
          </columnResizePolicy>
+         <padding>
+            <Insets left="1.0" right="1.0" top="1.0" />
+         </padding>
       </TableView>
       <TableView fx:id="detailedTableView" layoutX="373.0" layoutY="135.0" onMouseClicked="#userClickOnDetailedTable" prefHeight="192.0" prefWidth="327.0">
         <columns>
           <TableColumn fx:id="detailedTypeColumn" onEditCommit="#changeDetailedTypeCellEvent" prefWidth="115.0" resizable="false" text="Type" />
           <TableColumn fx:id="detailedPercentageColumn" onEditCommit="#changeDetailedPercentageCellEvent" prefWidth="114.0" resizable="false" text="Percentage" />
-            <TableColumn fx:id="detailedTotalScoreColumn" onEditCommit="#changeDetailedScoreCellEvent" prefWidth="97.0" resizable="false" text="Total Score" />
+            <TableColumn fx:id="detailedTotalScoreColumn" onEditCommit="#changeDetailedScoreCellEvent" prefWidth="96.0" resizable="false" text="Total Score" />
         </columns>
          <columnResizePolicy>
             <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
          </columnResizePolicy>
+         <padding>
+            <Insets left="1.0" right="1.0" top="1.0" />
+         </padding>
       </TableView>
       <Label layoutX="100.0" layoutY="102.0" prefHeight="17.0" prefWidth="100.0" text="General Criteria:" />
       <Label layoutX="373.0" layoutY="102.0" prefHeight="17.0" prefWidth="108.0" text="Detailed Criteria:" />

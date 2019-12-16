@@ -50,7 +50,7 @@
             <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
          </columnResizePolicy>
          <padding>
-            <Insets left="2.0" right="2.0" top="1.0" />
+            <Insets left="1.0" right="1.0" top="1.0" />
          </padding>
       </TableView>
       <Button fx:id="addGeneralCriteria" layoutX="302.0" layoutY="449.0" mnemonicParsing="false" onAction="#addGeneralCriteriaButton" prefHeight="27.0" prefWidth="57.0" text="Add" />
@@ -60,11 +60,14 @@
          <columns>
             <TableColumn fx:id="detailedTypeColumn" onEditCommit="#changeDetailedTypeCellEvent" prefWidth="142.0" resizable="false" text="Type" />
             <TableColumn fx:id="detailedPercentageColumn" onEditCommit="#changeDetailedPercentageCellEvent" prefWidth="147.0" resizable="false" text="Percentage" />
-            <TableColumn fx:id="detailedTotalScoreColumn" onEditCommit="#changeDetailedScoreCellEvent" prefWidth="151.0" resizable="false" text="Total Score" />
+            <TableColumn fx:id="detailedTotalScoreColumn" onEditCommit="#changeDetailedScoreCellEvent" prefWidth="150.0" resizable="false" text="Total Score" />
          </columns>
          <columnResizePolicy>
             <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
          </columnResizePolicy>
+         <padding>
+            <Insets left="1.0" right="1.0" top="1.0" />
+         </padding>
       </TableView>
       <Label alignment="CENTER" layoutX="202.0" layoutY="485.0" prefHeight="27.0" prefWidth="200.0" text="Detailed Criteria" textAlignment="CENTER">
          <font>

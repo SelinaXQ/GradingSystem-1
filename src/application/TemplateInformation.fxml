@@ -29,18 +29,24 @@
       <TableView fx:id="generalTableView" layoutX="45.0" layoutY="220.0" onMouseClicked="#userClickedOnGeneralTable" prefHeight="200.0" prefWidth="407.0">
         <columns>
           <TableColumn fx:id="generalTypeColumn" prefWidth="204.0" resizable="false" text="Type" />
-          <TableColumn fx:id="generalPercentageColumn" prefWidth="202.0" resizable="false" text="Percentage" />
+          <TableColumn fx:id="generalPercentageColumn" prefWidth="203.0" resizable="false" text="Percentage" />
         </columns>
          <columnResizePolicy>
             <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
          </columnResizePolicy>
+         <padding>
+            <Insets left="1.0" right="1.0" top="1.0" />
+         </padding>
       </TableView>
       <TableView fx:id="detailedTableView" layoutX="48.0" layoutY="499.0" prefHeight="182.0" prefWidth="407.0">
          <columns>
             <TableColumn fx:id="detailedTypeColumn" prefWidth="154.0" resizable="false" text="Type" />
             <TableColumn fx:id="detailedPercentageColumn" prefWidth="122.0" resizable="false" text="Percentage" />
-            <TableColumn fx:id="detailedTotalScoreColumn" prefWidth="130.0" resizable="false" text="Total Score" />
+            <TableColumn fx:id="detailedTotalScoreColumn" prefWidth="128.0" resizable="false" text="Total Score" />
          </columns>
+         <padding>
+            <Insets left="1.0" right="1.0" top="1.0" />
+         </padding>
       </TableView>
       <Label alignment="CENTER" layoutX="174.0" layoutY="446.0" prefHeight="27.0" prefWidth="155.0" text="Detailed Criteria" textAlignment="CENTER">
          <font>

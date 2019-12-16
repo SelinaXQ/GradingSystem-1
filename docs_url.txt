@@ -4,3 +4,6 @@ README:
 https://docs.google.com/document/d/1DSqF4bNY6wv2WJIa5vbjdFjst8a86p8LPZ16jj3w-So/edit?usp=sharing
 Presentation:
 https://docs.google.com/presentation/d/1-BVukjvZi8Z-63pKjdH-ImuAIzN0W8VgPySjAHLrrfg/edit?usp=sharing
+
+.DS_Store
+src/hibernate.cfg.xml

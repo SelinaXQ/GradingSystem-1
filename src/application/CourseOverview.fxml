@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
@@ -18,12 +19,15 @@
             <TableColumn resizable="false" text="Assignment" />
             <TableColumn resizable="false" text="Bonus" />
             <TableColumn resizable="false" text="Composite" />
-            <TableColumn resizable="false" text="Grade" />
+            <TableColumn prefWidth="79.0" resizable="false" text="Grade" />
         </columns>
+         <padding>
+            <Insets left="1.0" right="1.0" top="1.0" />
+         </padding>
       </TableView>
-      <Button fx:id="closeCourse" onAction="#closeCourseButton" layoutX="56.0" layoutY="466.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="107.0" text="close the course" />
+      <Button fx:id="closeCourse" layoutX="56.0" layoutY="466.0" mnemonicParsing="false" onAction="#closeCourseButton" prefHeight="27.0" prefWidth="107.0" text="close the course" />
       <TextField fx:id="curveValue" layoutX="366.0" layoutY="466.0" prefHeight="27.0" prefWidth="99.0" />
-      <Button fx:id="curve"  onAction="#curveButton" layoutX="504.0" layoutY="466.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="51.0" text="Curve" />
-      <Button fx:id="statistic"  onAction="#statisticButton" layoutX="641.0" layoutY="466.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="69.0" text="Get Statistic" />
+      <Button fx:id="curve" layoutX="504.0" layoutY="466.0" mnemonicParsing="false" onAction="#curveButton" prefHeight="27.0" prefWidth="51.0" text="Curve" />
+      <Button fx:id="statistic" layoutX="641.0" layoutY="466.0" mnemonicParsing="false" onAction="#statisticButton" prefHeight="27.0" prefWidth="69.0" text="Get Statistic" />
    </children>
 </AnchorPane>

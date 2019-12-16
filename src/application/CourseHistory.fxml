@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.*?>
 <?import javafx.scene.text.*?>
 <?import javafx.scene.control.*?>
 <?import java.lang.*?>
@@ -12,15 +13,18 @@
          <font>
             <Font size="14.0" />
          </font></Label>
-      <Button fx:id="overview" onAction="#overviewButton"  layoutX="141.0" layoutY="456.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="119.0" text="Overview" />
-      <Button fx:id="cancel" onAction="#canccelButton"  layoutX="141.0" layoutY="520.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="119.0" text="Back" />
+      <Button fx:id="overview" layoutX="141.0" layoutY="456.0" mnemonicParsing="false" onAction="#overviewButton" prefHeight="36.0" prefWidth="119.0" text="Overview" />
+      <Button fx:id="cancel" layoutX="141.0" layoutY="520.0" mnemonicParsing="false" onAction="#canccelButton" prefHeight="36.0" prefWidth="119.0" text="Back" />
       <ChoiceBox fx:id="semestersList" layoutX="125.0" layoutY="78.0" prefHeight="27.0" prefWidth="150.0" />
-      <TableView fx:id="coursesTextView" onMouseClicked="#clickCourse"  layoutX="61.0" layoutY="150.0" prefHeight="257.0" prefWidth="278.0">
+      <TableView fx:id="coursesTextView" layoutX="61.0" layoutY="150.0" onMouseClicked="#clickCourse" prefHeight="257.0" prefWidth="278.0">
         <columns>
           <TableColumn fx:id="courseIDColumn" prefWidth="88.0" resizable="false" text="College" />
           <TableColumn fx:id="collegeColumn" prefWidth="102.0" resizable="false" text="Course ID" />
-            <TableColumn fx:id="stateColumn" prefWidth="87.0" resizable="false" text="Status" />
+            <TableColumn fx:id="stateColumn" prefWidth="86.0" resizable="false" text="Status" />
         </columns>
+         <padding>
+            <Insets left="1.0" right="1.0" top="1.0" />
+         </padding>
       </TableView>
    </children>
 </AnchorPane>
