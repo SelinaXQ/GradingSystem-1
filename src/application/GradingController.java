@@ -425,6 +425,16 @@ public class GradingController implements Initializable{
 		window.show();
 	}
 	
+	@FXML
+	public void overviewButton(ActionEvent event) throws IOException{
+		Parent gradingParent = FXMLLoader.load(getClass().getResource("CourseOverview.fxml"));
+		Scene gradingScene = new Scene(gradingParent);
+		
+		Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
+		window.setScene(gradingScene);
+		window.show();
+	}
+	
 	/*
 	 * Get student data by course
 	 */
