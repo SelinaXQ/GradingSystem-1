@@ -58,7 +58,6 @@ public class Login extends Application implements Initializable {
 
 		String user = userName.getText().trim();
 		String pwd = password.getText().trim();
-
 		boolean flag = operations.login(user, pwd);
 
 		if (flag == true) {
