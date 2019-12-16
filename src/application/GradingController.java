@@ -151,7 +151,6 @@ public class GradingController implements Initializable{
 		
 		
 		
-		
 		this.commentButton.setDisable(true);
 	}
 	
