@@ -21,13 +21,13 @@
       </Label>
       <TableView fx:id="coursesTextView" layoutX="62.0" layoutY="68.0" onMouseClicked="#clickCourse" prefHeight="197.0" prefWidth="205.0">
         <columns>
-          <TableColumn fx:id="courseIDColumn" editable="false" prefWidth="203.0" resizable="false" sortable="false" text="Choose Course" />
+          <TableColumn fx:id="courseIDColumn" editable="false" prefWidth="195.0" resizable="false" sortable="false" text="Choose Course" />
         </columns>
          <columnResizePolicy>
             <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
          </columnResizePolicy>
          <padding>
-            <Insets left="1.0" right="1.0" top="1.0" />
+            <Insets left="5.0" right="5.0" top="1.0" />
          </padding>
       </TableView>
    </children>
