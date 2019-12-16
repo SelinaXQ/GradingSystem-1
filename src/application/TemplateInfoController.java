@@ -193,5 +193,9 @@ public class TemplateInfoController implements Initializable {
 	public ArrayList<GeneralCriteria> getGeneralCriteriaFromTemplate() {
 		return generalArr;
 	}
+	
+	public void setIfTemplate(boolean flag) {
+		ifTemplate = flag;
+	}
 
 }

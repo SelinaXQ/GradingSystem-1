@@ -49,7 +49,7 @@ public class ManageStudents {
 		Transaction tx = null;
 		try {
 			tx = session.beginTransaction();
-			CourseStudents cS = (CourseStudents) session.get(CourseStudents.class, cStudents.getcSID());
+			CourseStudents cS = (CourseStudents) session.get(CourseStudents.class, cStudents.getCSID());
 		    session.merge(cS);
 			session.delete(cS);
 			tx.commit();

@@ -28,27 +28,27 @@ public class CourseStudents {
 		this.comment = comment;
 	}
 
-	public String getcSID() {
+	public String getCSID() {
 		return cSID;
 	}
 
-	public void setcSID(String cSID) {
+	public void setCSID(String cSID) {
 		this.cSID = cSID;
 	}
 
-	public String getcID() {
+	public String getCID() {
 		return cID;
 	}
 
-	public void setcID(String cID) {
+	public void setCID(String cID) {
 		this.cID = cID;
 	}
 
-	public String getbUID() {
+	public String getBUID() {
 		return bUID;
 	}
 
-	public void setbUID(String bUID) {
+	public void setBUID(String bUID) {
 		this.bUID = bUID;
 	}
 

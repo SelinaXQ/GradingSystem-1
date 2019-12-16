@@ -152,7 +152,19 @@ public class Operations {
 				}
 			} else {
 				for (DetailedCriteria dCri : dCris) {
+					boolean ifNull = dCri.getdCriID() == null ? true : false;
+					ArrayList<StudentInfo> sInfos = getStudentsByCourseID(c);
 					mCriteria.updateOrSaveDetailedCriteria(dCri);
+					System.out.println("DCriID return??? " + dCri.getdCriID());
+					if (ifNull && sInfos.size() != 0) {
+						ArrayList<GiveDetailedGrades> grades = new ArrayList<GiveDetailedGrades>();
+						for (StudentInfo sInfo : sInfos) {
+							GiveDetailedGrades grade = new GiveDetailedGrades(sInfo.getBUID(), sInfo.getFirstName(),
+									sInfo.getMiddleName(), sInfo.getLastName(), 0.00, null);
+							grades.add(grade);
+						}
+						updateStudentsDetailedGrade(dCri, grades);
+					}
 				}
 			}
 			return flag;
@@ -176,7 +188,7 @@ public class Operations {
 		ArrayList<Overview> overviews = new ArrayList<Overview>();
 		ArrayList<CourseStudents> students = mStudents.getStudentsByCId(course);
 		for (CourseStudents s : students) {
-			Student student = mStudents.getStudentByBUID(s.getbUID()).get(0);
+			Student student = mStudents.getStudentByBUID(s.getBUID()).get(0);
 			ArrayList<GeneralCriteria> gcs = mCriteria.getGeneralCriteriaByCourseID(course.getCID());
 			ArrayList<HashMap<String, DetailedGrade>> dgs = new ArrayList<HashMap<String, DetailedGrade>>();
 			ArrayList<GeneralGrade> genGrades = new ArrayList<GeneralGrade>();
@@ -184,9 +196,7 @@ public class Operations {
 				HashMap<String, DetailedGrade> dList = new HashMap<String, DetailedGrade>();
 				ArrayList<DetailedCriteria> dCs = mCriteria.getDetailedCriterias(gc.getgCriID());
 				for (DetailedCriteria dc : dCs) {
-					System.out.println(s.getcSID());
-					System.out.println(dc.getdCriID());
-					StudentDetailedGrade sdGrade = mOthers.getStudentDetailedGrade(s.getcSID(), dc.getdCriID()).get(0);
+					StudentDetailedGrade sdGrade = mOthers.getStudentDetailedGrade(s.getCSID(), dc.getdCriID()).get(0);
 					double grade = sdGrade.getScore();
 					double totalScore = dc.getTotalScore();
 					double per = dc.getDeCriPer();
@@ -235,9 +245,18 @@ public class Operations {
 		for (GiveDetailedGrades gdg : gdgs) {
 			Student s = mStudents.getStudentByBUID(gdg.getBUID()).get(0);
 			CourseStudents cs = mStudents.getStudentCSID(s.getBUID()).get(0);
-			StudentDetailedGrade sdg = mOthers.getStudentDetailedGrade(cs.getcSID(), dCriteria.getdCriID()).get(0);
-			StudentDetailedGrade studentDetailedGrade = new StudentDetailedGrade(sdg.getSDGID(), cs.getcSID(),
-					dCriteria.getdCriID(), gdg.getScore(), gdg.getComment());
+			ArrayList<StudentDetailedGrade> sdgs = mOthers.getStudentDetailedGrade(cs.getCSID(), dCriteria.getdCriID());
+			StudentDetailedGrade sdg;
+			StudentDetailedGrade studentDetailedGrade;
+			if (sdgs.size() == 0) {
+				System.out.println("??????" + dCriteria.getdCriID());
+				studentDetailedGrade = new StudentDetailedGrade(cs.getCSID(), dCriteria.getdCriID(), gdg.getScore(),
+						gdg.getComment());
+			} else {
+				sdg = sdgs.get(0);
+				studentDetailedGrade = new StudentDetailedGrade(sdg.getSDGID(), cs.getCSID(), dCriteria.getdCriID(),
+						gdg.getScore(), gdg.getComment());
+			}
 			mOthers.updateOrSaveStudentDetailedGrade(studentDetailedGrade);
 		}
 	}
@@ -255,9 +274,11 @@ public class Operations {
 		ArrayList<CourseStudents> students = mStudents.getStudentsByCId(course);
 		ArrayList<GiveDetailedGrades> giveDetailedGrades = new ArrayList<GiveDetailedGrades>();
 		for (CourseStudents cs : students) {
-			StudentDetailedGrade sDetailedGrade = mOthers.getStudentDetailedGrade(cs.getcSID(), dCriteria.getdCriID())
+			System.out.println("CSID:"+cs.getCSID());
+			System.out.println("Dcriid"+ dCriteria.getdCriID());
+			StudentDetailedGrade sDetailedGrade = mOthers.getStudentDetailedGrade(cs.getCSID(), dCriteria.getdCriID())
 					.get(0);
-			Student s = mStudents.getStudentByBUID(cs.getbUID()).get(0);
+			Student s = mStudents.getStudentByBUID(cs.getBUID()).get(0);
 
 			// GiveDetailedGrades giveDetailedGrade = new GiveDetailedGrades(s.getBUID(),
 			// s.getFirstName(),
@@ -275,11 +296,13 @@ public class Operations {
 	public ArrayList<StudentInfo> getStudentsByCourseID(Course course) {
 		ArrayList<StudentInfo> sInfos = new ArrayList<StudentInfo>();
 		ArrayList<CourseStudents> css = mStudents.getStudentsByCId(course);
-		for (CourseStudents cs : css) {
-			Student student = mStudents.getStudentByBUID(cs.getbUID()).get(0);
-			StudentInfo sInfo = new StudentInfo(student.getBUID(), student.getFirstName(), student.getMiddleName(),
-					student.getLastName(), cs.getCondition());
-			sInfos.add(sInfo);
+		if (css.size() != 0) {
+			for (CourseStudents cs : css) {
+				Student student = mStudents.getStudentByBUID(cs.getBUID()).get(0);
+				StudentInfo sInfo = new StudentInfo(student.getBUID(), student.getFirstName(), student.getMiddleName(),
+						student.getLastName(), cs.getCondition());
+				sInfos.add(sInfo);
+			}
 		}
 		return sInfos;
 	}
@@ -294,26 +317,26 @@ public class Operations {
 
 			ArrayList<CourseStudents> css = mStudents.getCourseStudent(sInfo.getBUID(), c.getCID());
 			CourseStudents cs = new CourseStudents();
-			cs.setbUID(sInfo.getBUID());
-			cs.setcID(c.getCID());
+			cs.setBUID(sInfo.getBUID());
+			cs.setCID(c.getCID());
 			cs.setCondition(sInfo.getCondition());
 			if (css.size() == 0) {
 				mStudents.updateOrSaveCourseStudent(cs);
 				initDetailedGrades(cs, c);
 			} else {
-				cs.setcSID(css.get(0).getcSID());
+				cs.setCSID(css.get(0).getCSID());
 				mStudents.updateOrSaveCourseStudent(cs);
 			}
 		}
 	}
 
 	private void initDetailedGrades(CourseStudents cs, Course c) {
-		CourseStudents cStudent = mStudents.getCourseStudent(cs.getbUID(), c.getCID()).get(0);
+		CourseStudents cStudent = mStudents.getCourseStudent(cs.getBUID(), c.getCID()).get(0);
 		ArrayList<GeneralCriteria> gCriterias = getGeneralCriteriasByCourseID(c.getCID(), false);
 		for (GeneralCriteria gc : gCriterias) {
 			ArrayList<DetailedCriteria> dcs = getDetailedCriteriasByGenerCriID(gc.getgCriID(), false);
 			for (DetailedCriteria dc : dcs) {
-				StudentDetailedGrade sdg = new StudentDetailedGrade(cStudent.getcSID(), dc.getdCriID(), 0.00, null);
+				StudentDetailedGrade sdg = new StudentDetailedGrade(cStudent.getCSID(), dc.getdCriID(), 0.00, null);
 				mOthers.updateOrSaveStudentDetailedGrade(sdg);
 			}
 		}
@@ -323,9 +346,9 @@ public class Operations {
 		for (StudentInfo sInfo : sInfos) {
 			CourseStudents cs = mStudents.getCourseStudent(sInfo.getBUID(), c.getCID()).get(0);
 			CourseStudents cStudents = new CourseStudents();
-			cStudents.setcSID(cs.getcSID());
-			cStudents.setbUID(sInfo.getBUID());
-			cStudents.setcID(c.getCID());
+			cStudents.setCSID(cs.getCSID());
+			cStudents.setBUID(sInfo.getBUID());
+			cStudents.setCID(c.getCID());
 			cStudents.setCondition(sInfo.getCondition());
 			mStudents.updateOrSaveCourseStudent(cStudents);
 
@@ -336,12 +359,12 @@ public class Operations {
 	}
 
 	private void deleteDetailedGrades(CourseStudents cs, Course c) {
-		CourseStudents cStudent = mStudents.getCourseStudent(cs.getbUID(), c.getCID()).get(0);
+		CourseStudents cStudent = mStudents.getCourseStudent(cs.getBUID(), c.getCID()).get(0);
 		ArrayList<GeneralCriteria> gCriterias = getGeneralCriteriasByCourseID(c.getCID(), false);
 		for (GeneralCriteria gc : gCriterias) {
 			ArrayList<DetailedCriteria> dcs = getDetailedCriteriasByGenerCriID(gc.getgCriID(), false);
 			for (DetailedCriteria dc : dcs) {
-				StudentDetailedGrade sdg = mOthers.getStudentDetailedGrade(cStudent.getcSID(), dc.getdCriID()).get(0);
+				StudentDetailedGrade sdg = mOthers.getStudentDetailedGrade(cStudent.getCSID(), dc.getdCriID()).get(0);
 				mOthers.deleteDetailedGrade(sdg);
 			}
 		}
@@ -366,8 +389,8 @@ public class Operations {
 	public boolean saveComment(DetailedCriteria dCriteria, GiveDetailedGrades gdg) {
 		Student s = mStudents.getStudentByBUID(gdg.getBUID()).get(0);
 		CourseStudents cs = mStudents.getStudentCSID(s.getBUID()).get(0);
-		StudentDetailedGrade sdg = mOthers.getStudentDetailedGrade(cs.getcSID(), dCriteria.getdCriID()).get(0);
-		StudentDetailedGrade studentDetailedGrade = new StudentDetailedGrade(sdg.getSDGID(), cs.getcSID(),
+		StudentDetailedGrade sdg = mOthers.getStudentDetailedGrade(cs.getCSID(), dCriteria.getdCriID()).get(0);
+		StudentDetailedGrade studentDetailedGrade = new StudentDetailedGrade(sdg.getSDGID(), cs.getCSID(),
 				dCriteria.getdCriID(), gdg.getScore(), gdg.getComment());
 		mOthers.updateOrSaveStudentDetailedGrade(studentDetailedGrade);
 		return true;

@@ -65,10 +65,10 @@ public class CourseInfoController implements Initializable {
 	private TextField detailedCriteriaPer;
 	@FXML
 	private TextField detailedCriteriaType;
-	
+
 	@FXML
 	private TextField detailedCScore;
-	
+
 	@FXML
 	private TextField semester;
 	@FXML
@@ -136,7 +136,6 @@ public class CourseInfoController implements Initializable {
 
 		CourseHomeController courseHomeController = new CourseHomeController();
 		boolean addOrEdit = courseHomeController.getAddOrEdit();
-		// TODO
 		if (addOrEdit == true) { // ADD
 			generalArr = new ArrayList<GeneralCriteria>();
 			// new Criterias
@@ -144,16 +143,14 @@ public class CourseInfoController implements Initializable {
 			course = courseHomeController.getCourse();
 			generalArr = operations.getGeneralCriteriasByCourseID(course.getCID(), false);
 			credit.setText("4.0");
-			if(course.getCollege().equals("CAS")) {
+			if (course.getCollege().equals("CAS")) {
 				college.getSelectionModel().select(0);
-			}else {
+			} else {
 				college.getSelectionModel().select(1);
 			}
 			courseName.setText(course.getCName());
 		}
-
 		if (ifTemplate == true) {
-
 			generalArr = tController.getGeneralCriteriaFromTemplate();
 			operations.deleteGeneralCriteriaByCourseID(course.getCID());
 			for (GeneralCriteria gc : generalArr) {
@@ -166,10 +163,13 @@ public class CourseInfoController implements Initializable {
 				for (DetailedCriteria dc : detailedArr) {
 					dc.setgCriID(uuid);
 					dc.setdCriID(null);
+
 				}
+
 				operations.saveDetailedCriterias(course, detailedArr, false);
 			}
 			ifTemplate = false;
+			tController.setIfTemplate(false);
 		}
 
 		generalTypeColumn.setCellValueFactory(new PropertyValueFactory<GeneralCriteria, String>("genCriType"));
@@ -228,19 +228,19 @@ public class CourseInfoController implements Initializable {
 
 		if (operations.saveGeneralCriterias(temp, false)) {
 			Alert info = new Alert(Alert.AlertType.INFORMATION);
-		    Pane pane = new Pane();
-		    info.setContentText("Save successfully!!");
-		    info.getDialogPane().setExpandableContent(pane);
-		    info.show();
+			Pane pane = new Pane();
+			info.setContentText("Save successfully!!");
+			info.getDialogPane().setExpandableContent(pane);
+			info.show();
 			generalTableView.refresh();
 
 		} else {
 			Alert info = new Alert(Alert.AlertType.ERROR);
-		    Pane pane = new Pane();
-		    info.setContentText("General criterias added up should be 100%!!");
-		    info.getDialogPane().setExpandableContent(pane);
-		    info.show();
-		   
+			Pane pane = new Pane();
+			info.setContentText("General criterias added up should be 100%!!");
+			info.getDialogPane().setExpandableContent(pane);
+			info.show();
+
 			// refresh
 			generalCriteria = FXCollections.observableArrayList();
 			generalTableView.setItems(getGeneralCriteria());
@@ -306,26 +306,27 @@ public class CourseInfoController implements Initializable {
 	public void saveDetailedCriteriaButton(ActionEvent event) {
 		ArrayList<DetailedCriteria> temp = new ArrayList<>();
 		for (int i = 0; i < detailedCriteria.size(); i++) {
+			System.out.println("If new detailed Criteria has id: " + detailedCriteria.get(i).getdCriID());
 			DetailedCriteria tempDetailed = detailedCriteria.get(i);
 			temp.add(tempDetailed);
 			System.out.println(temp.get(i).toString());
 		}
 
-		if (operations.saveDetailedCriterias(null, temp, false)) {
+		if (operations.saveDetailedCriterias(course, temp, false)) {
 			Alert info = new Alert(Alert.AlertType.INFORMATION);
-		    Pane pane = new Pane();
-		    info.setContentText("Save successfully!!");
-		    info.getDialogPane().setExpandableContent(pane);
-		    info.show();
+			Pane pane = new Pane();
+			info.setContentText("Save successfully!!");
+			info.getDialogPane().setExpandableContent(pane);
+			info.show();
 			detailedTableView.refresh();
 
 		} else {
 			System.out.println("Added up should be 100%!!");
 			Alert info = new Alert(Alert.AlertType.ERROR);
-		    Pane pane = new Pane();
-		    info.setContentText("Detailed criterias added up should be 100%!!!!");
-		    info.getDialogPane().setExpandableContent(pane);
-		    info.show();
+			Pane pane = new Pane();
+			info.setContentText("Detailed criterias added up should be 100%!!!!");
+			info.getDialogPane().setExpandableContent(pane);
+			info.show();
 			// refresh
 			detailedCriteria = FXCollections.observableArrayList();
 
@@ -368,13 +369,13 @@ public class CourseInfoController implements Initializable {
 		course.setSemID(semester.getText());
 		operations.saveCourseInfo(course);
 	}
-	
+
 	@FXML
 	public void backButton(ActionEvent event) throws IOException {
 		Parent parent = FXMLLoader.load(getClass().getResource("CourseHome.fxml"));
 		Scene scene = new Scene(parent);
-		
-		Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
+
+		Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
 		window.setScene(scene);
 		window.show();
 	}
