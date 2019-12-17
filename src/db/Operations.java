@@ -210,7 +210,7 @@ public class Operations {
 				GeneralGrade gg = new GeneralGrade(gc.getgCriID(), gc.getGenCriPer(), getGeneralGrades(dList, gc));
 				genGrades.add(gg);
 			}
-			Overview overview = new Overview(student, dgs, genGrades, getOverviewPercentage(genGrades), "");
+			Overview overview = new Overview(student, dgs, genGrades, getOverviewPercentage(genGrades), s.getGrade());
 			overviews.add(overview);
 		}
 		return overviews;
@@ -333,6 +333,17 @@ public class Operations {
 			}
 		}
 	}
+	
+	
+	public void saveOrUpdateOverview(ArrayList<Overview> overviews, Course course) {
+		for (Overview overview : overviews) {
+			CourseStudents cs = mStudents.getCourseStudent(overview.getBUID(), course.getCID()).get(0);
+			cs.setGrade(overview.getGrade());
+			System.out.println(cs.getGrade());
+			mStudents.updateOrSaveCourseStudent(cs);
+		}
+	}
+	
 
 	private void initDetailedGrades(CourseStudents cs, Course c) {
 		CourseStudents cStudent = mStudents.getCourseStudent(cs.getBUID(), c.getCID()).get(0);

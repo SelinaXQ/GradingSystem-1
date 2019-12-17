@@ -25,10 +25,11 @@
             <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
          </columnResizePolicy>
         </TableView>
-        <Button fx:id="closeCourse" layoutX="56.0" layoutY="466.0" mnemonicParsing="false" onAction="#closeCourseButton" prefHeight="27.0" prefWidth="200.0" text="close the course" />
-        <TextField fx:id="curveValue" layoutX="446.0" layoutY="466.0" prefHeight="27.0" prefWidth="99.0" />
-        <Button fx:id="curve" layoutX="348.0" layoutY="466.0" mnemonicParsing="false" onAction="#curveButton" prefHeight="30.0" prefWidth="86.0" text="Curve" />
-        <Button fx:id="statistic" layoutX="630.0" layoutY="466.0" mnemonicParsing="false" onAction="#statisticButton" prefHeight="27.0" prefWidth="129.0" text="Get Statistic" />
-      <Button fx:id="changeDisplayMode" onAction="#changeModeButtonClicked" layoutX="541.0" layoutY="28.0" mnemonicParsing="false" text="Change Display Mode" />
+        <Button fx:id="closeCourse" layoutX="56.0" layoutY="466.0" mnemonicParsing="false" onAction="#closeCourseButton" prefHeight="30.0" prefWidth="179.0" text="close the course" />
+        <TextField fx:id="curveValue" layoutX="359.0" layoutY="466.0" prefHeight="27.0" prefWidth="99.0" />
+        <Button fx:id="curve" layoutX="266.0" layoutY="466.0" mnemonicParsing="false" onAction="#curveButton" prefHeight="30.0" prefWidth="86.0" text="Curve" />
+        <Button fx:id="statistic" layoutX="494.0" layoutY="466.0" mnemonicParsing="false" onAction="#statisticButton" prefHeight="27.0" prefWidth="129.0" text="Get Statistic" />
+      <Button fx:id="changeDisplayMode" layoutX="541.0" layoutY="28.0" mnemonicParsing="false" onAction="#changeModeButtonClicked" text="Change Display Mode" />
+      <Button fx:id="saveButton" layoutX="668.0" layoutY="466.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="72.0" onAction="#saveButtonClicked" text="Save" />
     </children>
 </AnchorPane>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="application.StatisticsController"
+            prefHeight="250.0" prefWidth="200.0">
+    <children>
+        <Label alignment="CENTER" contentDisplay="CENTER" layoutX="34.0" layoutY="16.0" prefHeight="17.0" prefWidth="132.0" text="Overall Stats" />
+        <ListView fx:id="list" layoutX="42.0" layoutY="54.0" prefHeight="150" prefWidth="116.0">
+        </ListView>
+    </children>
+
+
+</AnchorPane>

@@ -36,13 +36,16 @@ import java.net.URL;
 import java.util.*;
 
 public class OverviewController implements Initializable {
+	static boolean changable;
+	static Course course;
 	Operations operations = new Operations();
 	CourseHistoryController courseHistory = new CourseHistoryController();
-	Course course = courseHistory.getCourse();
+	//Course course = courseHistory.getCourse();
 	//System.out.println(course.toString());
 	String courseid = course.getCID();
+	double curveVal =0.0;
 	//GradingController gradingController = new GradingController();
-	ObservableList<Overview> overviewData = FXCollections.observableArrayList();
+	static ObservableList<Overview> overviewData = FXCollections.observableArrayList();
 	ArrayList<ColumnCoexist> columnCoexists = new ArrayList<>();
 
 	ArrayList<TableColumn<Overview,String>> columnList = new ArrayList<TableColumn<Overview, String>>() ;
@@ -54,6 +57,7 @@ public class OverviewController implements Initializable {
 	@FXML private TableColumn<Overview, String> lastNameColumn;
 	@FXML private TableColumn<Overview, String> compositeColumn;
 	@FXML private  TableColumn<Overview,String> gradeColumn;
+	@FXML private TextField curveValue;
 	// general criteria
 	ArrayList<GeneralCriteria> generalArr = operations.getGeneralCriteriasByCourseID(courseid, false);
 
@@ -62,22 +66,22 @@ public class OverviewController implements Initializable {
 	ObservableList<DetailedCriteria> detailedCriteria = FXCollections.observableArrayList();
 	DetailedCriteria detailedCur = new DetailedCriteria();
 
+//	@FXML
+//	private TextField curveValue;
 	@FXML
-	 private TextField curveValue;
-	 @FXML
-	 private Button closeCourse;
-	 @FXML
-	 private Button curve;
-	 @FXML
-	 private Button statistic;
-	
+	private Button closeCourse;
+	@FXML
+	private Button curve;
+	@FXML
+	private Button statistic;
+
 	/*
 	 * initialize table
 	 */
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		
+
 		boolean ifFromHistory = courseHistory.getIfFromHistory();
 		  if(ifFromHistory == true) {
 		   course = courseHistory.getCourse();
@@ -87,13 +91,20 @@ public class OverviewController implements Initializable {
 		   curveValue.setVisible(false);
 		   statistic.setVisible(false);
 		  }
+
 		
 		BUIDColumn.setCellValueFactory(new PropertyValueFactory<Overview, String>("BUID"));
 
 		firstNameColumn.setCellValueFactory(new PropertyValueFactory<Overview, String>("firstName"));
 		middleNameColumn.setCellValueFactory(new PropertyValueFactory<Overview, String>("middleName"));
 		lastNameColumn.setCellValueFactory(new PropertyValueFactory<Overview, String>("lastName"));
-		compositeColumn .setCellValueFactory(new PropertyValueFactory<Overview, String>("total"));
+		compositeColumn .setCellValueFactory(new Callback<TableColumn.CellDataFeatures<Overview, String>, ObservableValue<String>>() {
+			@Override
+			public ObservableValue<String> call(TableColumn.CellDataFeatures<Overview, String> param) {
+				return new SimpleStringProperty(new DoubleStringConverter().toString(param.getValue().getTotal()*(curveVal+1)));
+			}
+		});
+		gradeColumn .setCellValueFactory(new PropertyValueFactory<Overview, String>("grade"));
 		gradeColumn.setCellFactory(TextFieldTableCell.forTableColumn());
 
 		ArrayList <GeneralCriteria> generalCriteria =operations.getGeneralCriteriasByCourseID(courseid,false);
@@ -106,10 +117,8 @@ public class OverviewController implements Initializable {
 					ArrayList<GeneralGrade> gcS = param.getValue().getGcScores();
 					double gc=0.0;
 					for(GeneralGrade g:gcS){
-						if (g.getgCriID().equals(i.getgCriID())) {
-							gc=g.getScore();
-							break;
-						}
+						if (g.getgCriID().equals(i.getgCriID())) {gc=g.getScore();
+						break;}
 					}
 					return new SimpleStringProperty(new DoubleStringConverter().toString(gc));
 				}
@@ -122,16 +131,15 @@ public class OverviewController implements Initializable {
 				public ObservableValue<String> call(TableColumn.CellDataFeatures<Overview, String> param) {
 					ArrayList<GeneralGrade> gcS = param.getValue().getGcScores();
 					double gc=0.0;
-					for(GeneralGrade g:gcS){
-						if (g.getgCriID().equals(i.getgCriID())){
-							gc=g.getScore();
-							break;
-						}
+					for(GeneralGrade g:gcS) {
+						if (g.getgCriID().equals(i.getgCriID())) {
+							gc = g.getScore();
+						break;
+					}
 					}
 					return new SimpleStringProperty(new DoubleStringConverter().toString(gc));
 				}
 			});
-			
 			ArrayList<DetailedCriteria> dc =  operations.getDetailedCriteriasByGenerCriID(i.getgCriID(),false);
 			if (dc!=null)
 			for(DetailedCriteria j:dc){
@@ -143,8 +151,8 @@ public class OverviewController implements Initializable {
 						ArrayList<HashMap<String, DetailedGrade>> dcS = param.getValue().getDcs();
 						double dc=0.0;
 						for( HashMap<String, DetailedGrade> d:dcS){
-							if ((d.get(i.getgCriID())!=null) && (d.get(i.getgCriID()).getdCriID().equals(j.getdCriID()))) {
-								dc=d.get(i.getgCriID()).getScore();
+							if ((d.get(i.getgCriID())!=null)&&(d.get(i.getgCriID()).getdCriID().equals(j.getdCriID()))) {
+								dc = d.get(i.getgCriID()).getScore();
 								break;
 							}
 						}
@@ -207,7 +215,24 @@ public class OverviewController implements Initializable {
 			i.switchVisible();
 	}
 	@FXML
+	public void saveButtonClicked(ActionEvent event) throws IOException{
+		ArrayList<Overview> temp = new ArrayList<>();
+		for(int i = 0; i < overviewData.size(); i++) {
+			Overview tempOverview = overviewData.get(i);
+			temp.add(tempOverview);
+		}
+
+		operations.saveOrUpdateOverview(temp, course);
+		//overviewData = FXCollections.observableArrayList();
+		//tableView.setItems(getOverview());
+		tableView.refresh();
+	}
+	@FXML
 	public void curveButton(ActionEvent event) throws IOException{
+		String val = curveValue.getText();
+		if (val!="")
+		curveVal =  Double.parseDouble(val);
+		tableView.refresh();
 
 	}
 	@FXML
