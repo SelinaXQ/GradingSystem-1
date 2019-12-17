@@ -141,6 +141,7 @@ public class CourseInfoController implements Initializable {
 		System.out.println("Current" + addOrEdit);
 		if (addOrEdit == true) { // ADD
 			generalArr = new ArrayList<GeneralCriteria>();
+			course = new Course();
 		} else { // EDIT
 			course = courseHomeController.getCourse();
 
@@ -300,10 +301,18 @@ public class CourseInfoController implements Initializable {
 		ArrayList<GeneralCriteria> generalCriterias = operations.getGeneralCriteriasByCourseID(course.getCID(), false);
 		for (GeneralCriteria gc : generalCriterias) {
 			ArrayList<DetailedCriteria> dCris = operations.getDetailedCriteriasByGenerCriID(gc.getgCriID(), false);
+			for(DetailedCriteria dCriteria:dCris) {
+				dCriteria.setdCriID(null);
+			}
+			gc.setgCriID(null);
 			operations.saveDetailedCriterias(course, dCris, true);
 		}
 		operations.saveGeneralCriterias(generalCriterias, true);
-
+		Alert info = new Alert(Alert.AlertType.INFORMATION);
+		Pane pane = new Pane();
+		info.setContentText("Save successfully!!");
+		info.getDialogPane().setExpandableContent(pane);
+		info.show();
 	}
 
 	@FXML

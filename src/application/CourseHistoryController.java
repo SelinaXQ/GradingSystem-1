@@ -19,12 +19,15 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
+import javafx.util.Callback;
 import pojo.Course;
 import pojo.Semester;
+import uitable.GiveDetailedGrades;
 
 public class CourseHistoryController implements Initializable {
 	@FXML
@@ -53,7 +56,7 @@ public class CourseHistoryController implements Initializable {
 	private Operations operations;
 
 	private Semester curSemester;
-	
+
 	private static boolean ifFromHistory = false;
 
 	@Override
@@ -74,10 +77,36 @@ public class CourseHistoryController implements Initializable {
 				courses = operations.getCoursesBySemester(curSemester.toString());
 				if (courses.size() != 0) {
 					courseIDColumn.setCellValueFactory(new PropertyValueFactory<Course, String>("cName"));
+					collegeColumn.setCellValueFactory(new PropertyValueFactory<Course, String>("college"));
+					stateColumn.setCellFactory(new Callback<TableColumn<Course, String>, TableCell<Course, String>>(){
+
+						@Override
+						public TableCell<Course, String> call(TableColumn<Course, String> para) {
+							// TODO Auto-generated method stub
+							return new TableCell<Course, String>() {
+								
+								protected void updateItem(String item, boolean empty) {
+									if(!empty) {
+										int curIndex = indexProperty().getValue() < 0 ? 0 : indexProperty().getValue();
+										int curState = para.getTableView().getItems().get(curIndex).getState();
+										if(curState == 0) {
+											setText("Closed");
+										}else {
+											setText("");
+										}
+									}
+									
+								}
+							
+							};
+						}
+						
+					});
 					coursesTextView.setItems(getCourseName());
 				}
 			}
 		});
+		
 		semestersList.getSelectionModel().selectFirst();
 	}
 
@@ -93,12 +122,12 @@ public class CourseHistoryController implements Initializable {
 	public void clickCourse() {
 		course = coursesTextView.getSelectionModel().getSelectedItem();
 	}
-	
+
 	@FXML
 	public void overviewButton(ActionEvent event) {
 		ifFromHistory = true;
-		OverviewController.changable=false;
-		OverviewController.course=course;
+		OverviewController.changable = false;
+		OverviewController.course = course;
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("CourseOverview.fxml"));
 		Stage overview = new Stage();
 		overview.setTitle("Ovewview Course");
@@ -111,11 +140,11 @@ public class CourseHistoryController implements Initializable {
 		}
 
 		overview.show();
-		
+
 		Stage main = (Stage) cancel.getScene().getWindow();
 		main.close();
 	}
-	
+
 	@FXML
 	public void cancelButton(ActionEvent event) throws IOException {
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("CourseHome.fxml"));
@@ -129,7 +158,7 @@ public class CourseHistoryController implements Initializable {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		
+
 		Stage main = (Stage) cancel.getScene().getWindow();
 		main.close();
 	}
@@ -137,9 +166,9 @@ public class CourseHistoryController implements Initializable {
 	public Course getCourse() {
 		return course;
 	}
-	
+
 	public boolean getIfFromHistory() {
 		return ifFromHistory;
 	}
-	
+
 }

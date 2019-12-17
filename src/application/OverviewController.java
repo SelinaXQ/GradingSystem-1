@@ -243,9 +243,6 @@ public class OverviewController implements Initializable {
 	@FXML
 	public void closeCourseButton(ActionEvent event) throws IOException {
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("CloseCourse.fxml"));
-		operations.closeCourse(course);
-		
-
 		Stage stage = new Stage();
 		Scene scene;
 		try {

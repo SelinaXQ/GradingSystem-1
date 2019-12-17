@@ -157,7 +157,6 @@ public class Operations {
 					boolean ifNull = dCri.getdCriID() == null ? true : false;
 					ArrayList<StudentInfo> sInfos = getStudentsByCourseID(c);
 					mCriteria.updateOrSaveDetailedCriteria(dCri);
-					System.out.println("DCriID return??? " + dCri.getdCriID());
 					if (ifNull && sInfos.size() != 0) {
 						ArrayList<GiveDetailedGrades> grades = new ArrayList<GiveDetailedGrades>();
 						for (StudentInfo sInfo : sInfos) {
@@ -190,6 +189,9 @@ public class Operations {
 		ArrayList<Overview> overviews = new ArrayList<Overview>();
 		ArrayList<CourseStudents> students = mStudents.getStudentsByCId(course);// all students
 		for (CourseStudents s : students) { // each student
+			if(s.getCondition().equalsIgnoreCase("w")) {
+				continue;
+			}
 			Student student = mStudents.getStudentByBUID(s.getBUID()).get(0);
 			ArrayList<GeneralCriteria> gcs = mCriteria.getGeneralCriteriaByCourseID(course.getCID());
 			ArrayList<HashMap<String, List<DetailedGrade>>> dgs = new ArrayList<HashMap<String, List<DetailedGrade>>>();
