@@ -78,7 +78,7 @@ public class ManageCourse {
 
 	
 
-	public void updateOrSaveCourse(Course c) {
+	public String updateOrSaveCourse(Course c) {
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		Transaction tx = null;
 		try {
@@ -93,5 +93,6 @@ public class ManageCourse {
 		} finally {
 			session.close();
 		}
+		return c.getCID();
 	}
 }

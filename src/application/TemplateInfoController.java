@@ -27,7 +27,7 @@ import pojo.DetailedCriteria;
 import pojo.GeneralCriteria;
 
 public class TemplateInfoController implements Initializable {
-	
+
 	@FXML
 	private TextField semester;
 	@FXML
@@ -73,20 +73,19 @@ public class TemplateInfoController implements Initializable {
 	private TableColumn<DetailedCriteria, Double> detailedPercentageColumn;
 	@FXML
 	private TableColumn<DetailedCriteria, Double> detailedTotalScoreColumn;
-	private CourseHomeController cHomeController;
+	private CourseHomeController cHomeController = new CourseHomeController();
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		cHomeController = new CourseHomeController();
 		addOrEdit = cHomeController.getAddOrEdit();
-		
+
 		ImportTemplateController iController = new ImportTemplateController();
 		course = iController.getCourse();
 		courseName.setText(course.getCName());
 		college.setText(course.getCollege());
 		credit.setText("4.0");
 		semester.setText(course.getSemID());
-		
+
 		operations = new Operations();
 		generalArr = operations.getGeneralCriteriasByCourseID(course.getCID(), true);
 
@@ -149,6 +148,13 @@ public class TemplateInfoController implements Initializable {
 	public void importTemplateButton(ActionEvent event) {
 		ifTemplate = true;
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("CourseInformation.fxml"));
+		String title = null;
+		if (addOrEdit == true) {
+			title = "Add Course Information & Criteria";
+		} else {
+			title = "Edit Course Information & Criteria";
+		}
+		cHomeController.setAddOrEdit(false);
 		// SemesterController controller = new SemesterController();
 		// loader.setController(this);
 		Stage courseInfo = new Stage();
@@ -157,12 +163,7 @@ public class TemplateInfoController implements Initializable {
 		try {
 			scene = new Scene(loader.load());
 			courseInfo.setScene(scene);
-			if (addOrEdit == true) {
-				courseInfo.setTitle("Add Course Information & Criteria");
-			} else {
-				courseInfo.setTitle("Edit Course Information & Criteria");
-			}
-			cHomeController.setAddOrEdit(false);
+			courseInfo.setTitle(title);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -187,7 +188,6 @@ public class TemplateInfoController implements Initializable {
 		detailedTableView.setItems(detailedCriteria);
 	}
 
-
 	public boolean getIfTemplate() {
 		return ifTemplate;
 	}
@@ -195,7 +195,7 @@ public class TemplateInfoController implements Initializable {
 	public ArrayList<GeneralCriteria> getGeneralCriteriaFromTemplate() {
 		return generalArr;
 	}
-	
+
 	public void setIfTemplate(boolean flag) {
 		ifTemplate = flag;
 	}

@@ -86,7 +86,7 @@ public class GradingController implements Initializable{
 	
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		// TODO Auto-generated method stub
+		System.out.println("CUFRENT COURSE:" + course.getCID());
 		//general table
 		generalTypeColumn.setCellValueFactory(new PropertyValueFactory<GeneralCriteria, String>("genCriType"));
 		generalPercentageColumn.setCellValueFactory(new PropertyValueFactory<GeneralCriteria, Double>("genCriPer"));
@@ -176,7 +176,7 @@ public class GradingController implements Initializable{
 		
 		System.out.println(detailedCur.toString());
 		
-		System.out.println(course.getCID());
+		System.out.println("Current course 2:"+course.getCID());
 		
 		ArrayList<GiveDetailedGrades> gradeArr = operations.getStudentsDetailedGrades(course, detailedCur);
 		System.out.println("grade size:" + gradeArr.size());
@@ -219,6 +219,8 @@ public class GradingController implements Initializable{
 		
 		detailedGradeSelected.setScore(Double.valueOf(edittedCell.getNewValue().toString()));
 		grade.get(index).setScore(Double.valueOf(edittedCell.getNewValue().toString()));
+		System.out.println("CAUREER3"+course.getCID());
+		
 	}
 	
 	@FXML
@@ -319,7 +321,7 @@ public class GradingController implements Initializable{
 			System.out.println(temp.get(i).toString());
 		}
 		
-		if(operations.saveDetailedCriterias(null, temp, false)) {
+		if(operations.saveDetailedCriterias(courseHome.getCourse(), temp, false)) {
 			
 			System.out.println("Save successfully");
 			detailedTableView.refresh();
@@ -351,7 +353,9 @@ public class GradingController implements Initializable{
 			temp.add(grade.get(i));
 			System.out.println(temp.get(i));
 		}
-		operations.updateStudentsDetailedGrade(detailedCur, temp);
+		operations.updateStudentsDetailedGrade(course, detailedCur, temp);
+		System.out.println("Course4"+course.getCID());
+		
 	}
 	
 	
@@ -433,6 +437,7 @@ public class GradingController implements Initializable{
 		
 		Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
 		window.setScene(gradingScene);
+		window.setTitle("Overview");
 		window.show();
 	}
 	

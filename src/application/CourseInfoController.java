@@ -109,8 +109,8 @@ public class CourseInfoController implements Initializable {
 	private TableColumn<DetailedCriteria, Double> detailedPercentageColumn;
 	@FXML
 	private TableColumn<DetailedCriteria, Double> detailedTotalScoreColumn;
-	
-	private CourseHomeController courseHomeController;
+
+	private CourseHomeController courseHomeController = new CourseHomeController();
 	private TemplateInfoController tController;
 
 	@Override
@@ -137,13 +137,14 @@ public class CourseInfoController implements Initializable {
 		tController = new TemplateInfoController();
 		ifTemplate = tController.getIfTemplate();
 
-		courseHomeController = new CourseHomeController();
 		boolean addOrEdit = courseHomeController.getAddOrEdit();
+		System.out.println("Current" + addOrEdit);
 		if (addOrEdit == true) { // ADD
-			course = new Course();
 			generalArr = new ArrayList<GeneralCriteria>();
 		} else { // EDIT
 			course = courseHomeController.getCourse();
+
+			System.out.println("Current Course: " + course.getCID());
 			generalArr = operations.getGeneralCriteriasByCourseID(course.getCID(), false);
 			credit.setText("4.0");
 			if (course.getCollege().equals("CAS")) {
@@ -349,7 +350,7 @@ public class CourseInfoController implements Initializable {
 		DetailedCriteria dCriteria = new DetailedCriteria(null, generalCur.getgCriID(), detailedCriteriaType.getText(),
 				Double.parseDouble(detailedCriteriaPer.getText()), Double.parseDouble(detailedCScore.getText()));
 //		detailedTableView.getItems().add(dCriteria);
-		
+
 		detailedCriteria.add(dCriteria);
 		detailedTableView.refresh();
 	}
@@ -374,7 +375,7 @@ public class CourseInfoController implements Initializable {
 		course.setState(1);
 		course.setSemID(semester.getText());
 		courseHomeController.setCourse(course);
-		operations.saveCourseInfo(course);
+		course.setCID(operations.saveCourseInfo(course));
 	}
 
 	@FXML

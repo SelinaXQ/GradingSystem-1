@@ -14,6 +14,8 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
@@ -109,10 +111,25 @@ public class CourseHistoryController implements Initializable {
 		}
 
 		overview.show();
+		
+		Stage main = (Stage) cancel.getScene().getWindow();
+		main.close();
 	}
 	
 	@FXML
-	public void canccelButton(ActionEvent event) {
+	public void cancelButton(ActionEvent event) throws IOException {
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("CourseHome.fxml"));
+		Stage overview = new Stage();
+		overview.setTitle("Current Courses");
+		Scene scene;
+		try {
+			scene = new Scene(loader.load());
+			overview.setScene(scene);
+			overview.show();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
 		Stage main = (Stage) cancel.getScene().getWindow();
 		main.close();
 	}

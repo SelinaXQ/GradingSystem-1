@@ -14,7 +14,7 @@
             <Font size="14.0" />
          </font></Label>
       <Button fx:id="overview" layoutX="141.0" layoutY="456.0" mnemonicParsing="false" onAction="#overviewButton" prefHeight="36.0" prefWidth="119.0" text="Overview" />
-      <Button fx:id="cancel" layoutX="141.0" layoutY="520.0" mnemonicParsing="false" onAction="#canccelButton" prefHeight="36.0" prefWidth="119.0" text="Back" />
+      <Button fx:id="cancel" layoutX="141.0" layoutY="520.0" mnemonicParsing="false" onAction="#cancelButton" prefHeight="36.0" prefWidth="119.0" text="Back" />
       <ChoiceBox fx:id="semestersList" layoutX="125.0" layoutY="78.0" prefHeight="27.0" prefWidth="150.0" />
       <TableView fx:id="coursesTextView" layoutX="61.0" layoutY="150.0" onMouseClicked="#clickCourse" prefHeight="257.0" prefWidth="278.0">
         <columns>

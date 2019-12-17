@@ -45,9 +45,10 @@ public class OverviewController implements Initializable {
 	// System.out.println(course.toString());
 	String courseid = course.getCID();
 	static double curveVal = 0.0;
-	
-	@FXML Label courseLabel;
-	
+
+	@FXML
+	Label courseLabel;
+
 	// GradingController gradingController = new GradingController();
 	static ObservableList<Overview> overviewData = FXCollections.observableArrayList();
 	ArrayList<ColumnCoexist> columnCoexists = new ArrayList<>();
@@ -95,7 +96,7 @@ public class OverviewController implements Initializable {
 	public void initialize(URL arg0, ResourceBundle arg1) {
 
 		courseLabel.setText(course.getCName());
-		
+
 		// boolean ifFromHistory = courseHistory.getIfFromHistory();
 		if (changable == false) {
 			closeCourse.setVisible(false);
@@ -122,8 +123,7 @@ public class OverviewController implements Initializable {
 
 		ArrayList<GeneralCriteria> generalCriteria = operations.getGeneralCriteriasByCourseID(courseid, false);
 		System.out.println("General Size: " + generalCriteria.size() + " !!!!!!");
-		
-		
+
 		for (GeneralCriteria generalCri : generalCriteria) {
 			TableColumn<Overview, String> gColumn = new TableColumn<Overview, String>();
 			gColumn.setText(generalCri.getGenCriType());
@@ -143,8 +143,8 @@ public class OverviewController implements Initializable {
 						}
 					});
 			tableView.getColumns().add(gColumn);
-			
-			//expand 
+
+			// expand
 			TableColumn<Overview, String> g1Column = new TableColumn<Overview, String>();
 			g1Column.setText(generalCri.getGenCriType());
 			g1Column.setCellValueFactory(
@@ -162,42 +162,40 @@ public class OverviewController implements Initializable {
 							return new SimpleStringProperty(new DoubleStringConverter().toString(gc));
 						}
 					});
-			ArrayList<DetailedCriteria> detailedList = operations.getDetailedCriteriasByGenerCriID(generalCri.getgCriID(), false);
+			ArrayList<DetailedCriteria> detailedList = operations
+					.getDetailedCriteriasByGenerCriID(generalCri.getgCriID(), false);
 			System.out.println("Detailed Size: " + detailedList.size() + " !!!!!!");
-			
+
 			if (detailedList != null) {
 				for (DetailedCriteria detailedCri : detailedList) {
 					System.out.println("cur detailed type: " + detailedCri.getDeCriType());
 					TableColumn<Overview, String> dColumn = new TableColumn<Overview, String>();
 					dColumn.setText(detailedCri.getDeCriType());
-					
+
 					dColumn.setCellValueFactory(
 							new Callback<TableColumn.CellDataFeatures<Overview, String>, ObservableValue<String>>() {
 								@Override
 								public ObservableValue<String> call(
 										TableColumn.CellDataFeatures<Overview, String> param) {
-									ArrayList<HashMap<String, DetailedGrade>> dcS = param.getValue().getDcs();
+									ArrayList<HashMap<String, List<DetailedGrade>>> dcS = param.getValue().getDcs();
 									System.out.println("list size: " + dcS.size());
 									double dc = 0.0;
-									for (HashMap<String, DetailedGrade> d : dcS) {
+									for (HashMap<String, List<DetailedGrade>> d : dcS) {
 //										if ((d.get(generalCri.getgCriID()) != null) && (d.get(generalCri.getgCriID())
 //												.getdCriID().equals(detailedCri.getdCriID()))) {
 										System.out.println("GID: " + generalCri.getgCriID());
 										System.out.println("DID: " + detailedCri.getdCriID());
-										for(String key : d.keySet()) {
-											System.out.println("current key: " + key);
-											System.out.println("current detail: " + d.get(key).getdCriID());
-										}
-//										System.out.println("DGID: " + d.get(generalCri.getgCriID()).getdCriID());
-										if ((d.get(generalCri.getgCriID()) != null) && (d.get(generalCri.getgCriID())
-												.getdCriID().equals(detailedCri.getdCriID()))) {
-											dc = d.get(generalCri.getgCriID()).getScore();
-											System.out.println("Type: " + detailedCri.getDeCriType() + " DC: " + dc + " !!!!!!!");
-//											System.out.println("Current score: " + dc + " !!!!!!!!");
-											break;
+										for (String key : d.keySet()) {
+											System.out.println("Key size:" + d.get(key).size());
+											System.out.println("HashMap size:" + d.size());
+											for (DetailedGrade dGrade : d.get(key)) {
+												if (dGrade.getdCriID().equals(detailedCri.getdCriID())) {
+													dc = dGrade.getScore();
+													break;
+												}
+											}
 										}
 									}
-//									System.out.println("Current score: " + dc + " !!!!!!!!");
 									return new SimpleStringProperty(new DoubleStringConverter().toString(dc));
 								}
 							});
@@ -206,8 +204,7 @@ public class OverviewController implements Initializable {
 					System.out.println("Add once!!!!!!!!!!!!!");
 				}
 			}
-				
-			
+
 			tableView.getColumns().add(g1Column);
 			g1Column.setVisible(false);
 			columnCoexists.add(new ColumnCoexist(gColumn, g1Column));
@@ -265,8 +262,7 @@ public class OverviewController implements Initializable {
 			System.out.println("Column...");
 			i.switchVisible();
 		}
-			
-		
+
 	}
 
 	@FXML
@@ -314,16 +310,18 @@ public class OverviewController implements Initializable {
 	public void backButton(ActionEvent event) throws IOException {
 
 		if (changable == true) {
-			Parent gradingParent = FXMLLoader.load(getClass().getResource("CourseHome.fxml"));
+			Parent gradingParent = FXMLLoader.load(getClass().getResource("Grading.fxml"));
 			Scene gradingScene = new Scene(gradingParent);
 			Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
 			window.setScene(gradingScene);
+			window.setTitle("Grading");
 			window.show();
 		} else {
 			Parent gradingParent = FXMLLoader.load(getClass().getResource("CourseHistory.fxml"));
 			Scene gradingScene = new Scene(gradingParent);
 			Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
 			window.setScene(gradingScene);
+			window.setTitle("History Courses");
 			window.show();
 		}
 

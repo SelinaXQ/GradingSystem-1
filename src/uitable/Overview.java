@@ -1,6 +1,6 @@
 package uitable;
 
-import java.util.ArrayList;
+import java.util.*;
 import java.util.HashMap;
 
 import pojo.Student;
@@ -9,12 +9,12 @@ import pojo.Student;
 // each attribute is corresponding to a column in that table
 public class Overview {
     private Student student;
-    private ArrayList<HashMap<String, DetailedGrade>> dcs;  // the String is the general Score 's id (primary key)
+    private ArrayList<HashMap<String, List<DetailedGrade>>> dcs;  // the String is the general Score 's id (primary key)
     private ArrayList<GeneralGrade> gcScores;
     private double total; // composite
     private String grade;  // A+, A, ...
 
-    public Overview(Student student, ArrayList<HashMap<String, DetailedGrade>> dcs, ArrayList<GeneralGrade> gcScores, double total,
+    public Overview(Student student, ArrayList<HashMap<String, List<DetailedGrade>>> dcs, ArrayList<GeneralGrade> gcScores, double total,
                     String grade) {
         super();
         this.student = student;
@@ -33,11 +33,11 @@ public class Overview {
         this.student = student;
     }
 
-    public ArrayList<HashMap<String, DetailedGrade>> getDcs() {
+    public ArrayList<HashMap<String, List<DetailedGrade>>> getDcs() {
         return dcs;
     }
 
-    public void setDcs(ArrayList<HashMap<String, DetailedGrade>> dcs) {
+    public void setDcs(ArrayList<HashMap<String, List<DetailedGrade>>> dcs) {
         this.dcs = dcs;
     }
 
