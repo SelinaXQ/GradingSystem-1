@@ -25,7 +25,7 @@ import javafx.scene.layout.Pane;
 public class Login extends Application implements Initializable {
 
 	Operations operations = new Operations();
-	Semester semester = new Semester("Fall 2018");
+	Semester semester = new Semester("Fall 2019");
 	@FXML
 	private TextField userName;
 	@FXML

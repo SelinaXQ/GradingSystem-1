@@ -87,6 +87,8 @@ public class OverviewController implements Initializable {
 	private Button curve;
 	@FXML
 	private Button statistic;
+	@FXML
+	private Button save;
 
 	/*
 	 * initialize table
@@ -103,6 +105,7 @@ public class OverviewController implements Initializable {
 			curve.setVisible(false);
 			curveValue.setVisible(false);
 			statistic.setVisible(false);
+			save.setVisible(false);
 		}
 
 		BUIDColumn.setCellValueFactory(new PropertyValueFactory<Overview, String>("BUID"));

@@ -30,7 +30,7 @@
         <Button fx:id="curve" layoutX="498.0" layoutY="457.0" mnemonicParsing="false" onAction="#curveButton" prefHeight="30.0" prefWidth="108.0" text="Add Curve" />
         <Button fx:id="statistic" layoutX="629.0" layoutY="457.0" mnemonicParsing="false" onAction="#statisticButton" prefHeight="30.0" prefWidth="108.0" text="Get Statistic" />
       <Button fx:id="changeDisplayMode" layoutX="800.0" layoutY="28.0" mnemonicParsing="false" onAction="#changeModeButtonClicked" text="Change Display Mode" />
-      <Button fx:id="saveButton" layoutX="880.0" layoutY="455.0" mnemonicParsing="false" onAction="#saveButtonClicked" prefHeight="30.0" prefWidth="72.0" text="Save" />
+      <Button fx:id="save" layoutX="880.0" layoutY="455.0" mnemonicParsing="false" onAction="#saveButtonClicked" prefHeight="30.0" prefWidth="72.0" text="Save" />
       <Button layoutX="42.0" layoutY="459.0" mnemonicParsing="false" onAction="#backButton" prefHeight="27.0" prefWidth="79.0" text="Back" />
     </children>
 </AnchorPane>

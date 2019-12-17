@@ -33,16 +33,18 @@ public class CloseCourseController  implements Initializable {
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		course = controller.getCourse();
 	}
-
+	
 	@FXML
-	public void closeButton(ActionEvent event) throws IOException {
+	public void closeButton() throws IOException {
 		operations.closeCourse(course);
 		Stage main = (Stage) close.getScene().getWindow();
 		main.close();
 	}
 
+	
+
 	@FXML
-	public void cancelButton(ActionEvent event) throws IOException {
+	public void cancelButton() throws IOException {
 		Stage main = (Stage) cancel.getScene().getWindow();
 		main.close();
 	}
