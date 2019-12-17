@@ -107,6 +107,7 @@ public class OverviewController implements Initializable {
 					return new SimpleStringProperty(new DoubleStringConverter().toString(gc));
 				}
 			});
+			
 			ArrayList<DetailedCriteria> dc =  operations.getDetailedCriteriasByGenerCriID(i.getgCriID(),false);
 			if (dc!=null)
 			for(DetailedCriteria j:dc){
