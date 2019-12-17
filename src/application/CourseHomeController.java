@@ -14,6 +14,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Rectangle2D;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -22,6 +23,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
 import pojo.Course;
 import pojo.GeneralCriteria;
@@ -86,6 +88,11 @@ public class CourseHomeController implements Initializable {
 		
 		Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
 		window.setScene(scene);
+		Rectangle2D bounds = Screen.getPrimary().getVisualBounds();
+		double x = bounds.getMinX() + (bounds.getWidth() - scene.getWidth()) * 0.5;
+		double y = bounds.getMinY() + (bounds.getHeight() - scene.getHeight()) * 1;
+		window.setX(x);
+		window.setY(y);
 		window.setTitle("Add Course Information & Criteria");
 		window.show();
 //		
@@ -148,6 +155,11 @@ public class CourseHomeController implements Initializable {
 		
 		Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
 		window.setScene(scene);
+		Rectangle2D bounds = Screen.getPrimary().getVisualBounds();
+		double x = bounds.getMinX() + (bounds.getWidth() - scene.getWidth()) * 0.5;
+		double y = bounds.getMinY() + (bounds.getHeight() - scene.getHeight()) * 1;
+		window.setX(x);
+		window.setY(y);
 		window.setTitle("Edit Course Information & Criteria");
 		window.show();
 		
