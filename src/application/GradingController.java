@@ -371,6 +371,7 @@ public class GradingController implements Initializable{
 		Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
 		
 		window.setScene(studentManagementScene);
+		window.setTitle("Student Managment");
 		window.show();
 		
 	}
