@@ -32,10 +32,11 @@ public class StatisticsController implements Initializable {
         mean=mean/overviewList.size();
         Arrays.sort(temp);
         medium = temp[overviewList.size()/2];
-        list.getItems().add("Min "+min);
-        list.getItems().add("Max "+max);
-        list.getItems().add("Mean "+mean);
-        list.getItems().add("Medium "+medium);
+        double val = 1+OverviewController.curveVal;
+        list.getItems().add("Min "+String.format("%.2f", min*val));
+        list.getItems().add("Max "+String.format("%.2f", max*val));
+        list.getItems().add("Mean "+String.format("%.2f", mean*val));
+        list.getItems().add("Medium "+String.format("%.2f", medium*val));
     }
 
 }

@@ -344,10 +344,14 @@ public class CourseInfoController implements Initializable {
 
 	@FXML
 	public void addDetailedCriteriaButton(ActionEvent event) {
+		System.out.println("Add detailed clicked");
+		System.out.println("general cur: " + generalCur.getgCriID());
 		DetailedCriteria dCriteria = new DetailedCriteria(null, generalCur.getgCriID(), detailedCriteriaType.getText(),
 				Double.parseDouble(detailedCriteriaPer.getText()), Double.parseDouble(detailedCScore.getText()));
 //		detailedTableView.getItems().add(dCriteria);
+		
 		detailedCriteria.add(dCriteria);
+		detailedTableView.refresh();
 	}
 
 	@FXML

@@ -426,6 +426,8 @@ public class GradingController implements Initializable{
 	
 	@FXML
 	public void overviewButton(ActionEvent event) throws IOException{
+		OverviewController.course=course;
+		OverviewController.changable=true;
 		Parent gradingParent = FXMLLoader.load(getClass().getResource("CourseOverview.fxml"));
 		Scene gradingScene = new Scene(gradingParent);
 		

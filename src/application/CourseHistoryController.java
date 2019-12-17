@@ -95,6 +95,8 @@ public class CourseHistoryController implements Initializable {
 	@FXML
 	public void overviewButton(ActionEvent event) {
 		ifFromHistory = true;
+		OverviewController.changable=false;
+		OverviewController.course=course;
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("CourseOverview.fxml"));
 		Stage overview = new Stage();
 		overview.setTitle("Ovewview Course");
