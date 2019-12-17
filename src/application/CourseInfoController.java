@@ -87,7 +87,7 @@ public class CourseInfoController implements Initializable {
 	// general criteria
 	ObservableList<GeneralCriteria> generalCriteria;
 	ArrayList<GeneralCriteria> generalArr;
-	GeneralCriteria generalCur;
+	static GeneralCriteria generalCur;
 	// detailed criteria
 	ObservableList<DetailedCriteria> detailedCriteria;
 	DetailedCriteria detailedCur;
@@ -358,9 +358,9 @@ public class CourseInfoController implements Initializable {
 		System.out.println("general cur: " + generalCur.getgCriID());
 		DetailedCriteria dCriteria = new DetailedCriteria(null, generalCur.getgCriID(), detailedCriteriaType.getText(),
 				Double.parseDouble(detailedCriteriaPer.getText()), Double.parseDouble(detailedCScore.getText()));
-//		detailedTableView.getItems().add(dCriteria);
+		detailedTableView.getItems().add(dCriteria);
 
-		detailedCriteria.add(dCriteria);
+//		detailedCriteria.add(dCriteria);
 		detailedTableView.refresh();
 	}
 
