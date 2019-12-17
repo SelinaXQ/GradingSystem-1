@@ -15,6 +15,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -44,6 +45,9 @@ public class OverviewController implements Initializable {
 	// System.out.println(course.toString());
 	String courseid = course.getCID();
 	static double curveVal = 0.0;
+	
+	@FXML Label courseLabel;
+	
 	// GradingController gradingController = new GradingController();
 	static ObservableList<Overview> overviewData = FXCollections.observableArrayList();
 	ArrayList<ColumnCoexist> columnCoexists = new ArrayList<>();
@@ -90,6 +94,8 @@ public class OverviewController implements Initializable {
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 
+		courseLabel.setText(course.getCName());
+		
 		// boolean ifFromHistory = courseHistory.getIfFromHistory();
 		if (changable == false) {
 			closeCourse.setVisible(false);
