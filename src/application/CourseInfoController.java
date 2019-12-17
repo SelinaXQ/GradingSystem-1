@@ -109,6 +109,9 @@ public class CourseInfoController implements Initializable {
 	private TableColumn<DetailedCriteria, Double> detailedPercentageColumn;
 	@FXML
 	private TableColumn<DetailedCriteria, Double> detailedTotalScoreColumn;
+	
+	private CourseHomeController courseHomeController;
+	private TemplateInfoController tController;
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
@@ -131,14 +134,14 @@ public class CourseInfoController implements Initializable {
 		generalCur = new GeneralCriteria();
 		detailedCur = new DetailedCriteria();
 
-		TemplateInfoController tController = new TemplateInfoController();
+		tController = new TemplateInfoController();
 		ifTemplate = tController.getIfTemplate();
 
-		CourseHomeController courseHomeController = new CourseHomeController();
+		courseHomeController = new CourseHomeController();
 		boolean addOrEdit = courseHomeController.getAddOrEdit();
 		if (addOrEdit == true) { // ADD
+			course = new Course();
 			generalArr = new ArrayList<GeneralCriteria>();
-			// new Criterias
 		} else { // EDIT
 			course = courseHomeController.getCourse();
 			generalArr = operations.getGeneralCriteriasByCourseID(course.getCID(), false);
@@ -306,10 +309,8 @@ public class CourseInfoController implements Initializable {
 	public void saveDetailedCriteriaButton(ActionEvent event) {
 		ArrayList<DetailedCriteria> temp = new ArrayList<>();
 		for (int i = 0; i < detailedCriteria.size(); i++) {
-			System.out.println("If new detailed Criteria has id: " + detailedCriteria.get(i).getdCriID());
 			DetailedCriteria tempDetailed = detailedCriteria.get(i);
 			temp.add(tempDetailed);
-			System.out.println("EN;;;"+ temp.get(i).toString());
 		}
 
 		if (operations.saveDetailedCriterias(course, temp, false)) {
@@ -345,7 +346,7 @@ public class CourseInfoController implements Initializable {
 	public void addDetailedCriteriaButton(ActionEvent event) {
 		DetailedCriteria dCriteria = new DetailedCriteria(null, generalCur.getgCriID(), detailedCriteriaType.getText(),
 				Double.parseDouble(detailedCriteriaPer.getText()), Double.parseDouble(detailedCScore.getText()));
-		detailedTableView.getItems().add(dCriteria);
+//		detailedTableView.getItems().add(dCriteria);
 		detailedCriteria.add(dCriteria);
 	}
 
@@ -368,6 +369,7 @@ public class CourseInfoController implements Initializable {
 		course.setCollege(college.getSelectionModel().getSelectedItem());
 		course.setState(1);
 		course.setSemID(semester.getText());
+		courseHomeController.setCourse(course);
 		operations.saveCourseInfo(course);
 	}
 
@@ -378,6 +380,7 @@ public class CourseInfoController implements Initializable {
 
 		Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
 		window.setScene(scene);
+		window.setTitle("Current Courses");
 		window.show();
 	}
 

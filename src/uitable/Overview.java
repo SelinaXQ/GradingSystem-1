@@ -64,4 +64,19 @@ public class Overview {
     public void setGrade(String grade) {
         this.grade = grade;
     }
+
+    public String getFirstName(){
+        return student.getFirstName();
+    }
+
+    public String getMiddleName(){
+        return student.getMiddleName();
+    }
+
+    public String getLastName(){
+        return student.getLastName();
+    }
+    public String getBUID(){
+        return  student.getBUID();
+    }
 }

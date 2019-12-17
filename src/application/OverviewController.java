@@ -14,9 +14,11 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.stage.FileChooser;
@@ -35,7 +37,7 @@ import java.util.*;
 
 public class OverviewController implements Initializable {
 	Operations operations = new Operations();
-	CourseHistoryController courseHistory = new CourseHistoryController(); 
+	CourseHistoryController courseHistory = new CourseHistoryController();
 	Course course = courseHistory.getCourse();
 	//System.out.println(course.toString());
 	String courseid = course.getCID();
@@ -60,12 +62,32 @@ public class OverviewController implements Initializable {
 	ObservableList<DetailedCriteria> detailedCriteria = FXCollections.observableArrayList();
 	DetailedCriteria detailedCur = new DetailedCriteria();
 
+	@FXML
+	 private TextField curveValue;
+	 @FXML
+	 private Button closeCourse;
+	 @FXML
+	 private Button curve;
+	 @FXML
+	 private Button statistic;
+	
 	/*
 	 * initialize table
 	 */
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
+		
+		boolean ifFromHistory = courseHistory.getIfFromHistory();
+		  if(ifFromHistory == true) {
+		   course = courseHistory.getCourse();
+		   ifFromHistory = false;
+		   closeCourse.setVisible(false);
+		   curve.setVisible(false);
+		   curveValue.setVisible(false);
+		   statistic.setVisible(false);
+		  }
+		
 		BUIDColumn.setCellValueFactory(new PropertyValueFactory<Overview, String>("BUID"));
 
 		firstNameColumn.setCellValueFactory(new PropertyValueFactory<Overview, String>("firstName"));
@@ -84,8 +106,10 @@ public class OverviewController implements Initializable {
 					ArrayList<GeneralGrade> gcS = param.getValue().getGcScores();
 					double gc=0.0;
 					for(GeneralGrade g:gcS){
-						if (g.getgCriID().equals(i.getgCriID())) gc=g.getScore();
-						break;
+						if (g.getgCriID().equals(i.getgCriID())) {
+							gc=g.getScore();
+							break;
+						}
 					}
 					return new SimpleStringProperty(new DoubleStringConverter().toString(gc));
 				}
@@ -99,13 +123,17 @@ public class OverviewController implements Initializable {
 					ArrayList<GeneralGrade> gcS = param.getValue().getGcScores();
 					double gc=0.0;
 					for(GeneralGrade g:gcS){
-						if (g.getgCriID().equals(i.getgCriID())) gc=g.getScore();
-						break;
+						if (g.getgCriID().equals(i.getgCriID())){
+							gc=g.getScore();
+							break;
+						}
 					}
 					return new SimpleStringProperty(new DoubleStringConverter().toString(gc));
 				}
 			});
+			
 			ArrayList<DetailedCriteria> dc =  operations.getDetailedCriteriasByGenerCriID(i.getgCriID(),false);
+			if (dc!=null)
 			for(DetailedCriteria j:dc){
 				TableColumn<Overview,String> dColumn = new TableColumn<Overview,String>();
 				dColumn.setText(j.getDeCriType());
@@ -115,8 +143,10 @@ public class OverviewController implements Initializable {
 						ArrayList<HashMap<String, DetailedGrade>> dcS = param.getValue().getDcs();
 						double dc=0.0;
 						for( HashMap<String, DetailedGrade> d:dcS){
-							if (d.get(i.getGenCriType()).getdCriID().equals(j.getdCriID())) dc=d.get(i.getgCriID()).getScore();
-							break;
+							if ((d.get(i.getgCriID())!=null) && (d.get(i.getgCriID()).getdCriID().equals(j.getdCriID()))) {
+								dc=d.get(i.getgCriID()).getScore();
+								break;
+							}
 						}
 						return new SimpleStringProperty(new DoubleStringConverter().toString(dc));
 					}

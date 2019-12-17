@@ -73,10 +73,11 @@ public class TemplateInfoController implements Initializable {
 	private TableColumn<DetailedCriteria, Double> detailedPercentageColumn;
 	@FXML
 	private TableColumn<DetailedCriteria, Double> detailedTotalScoreColumn;
+	private CourseHomeController cHomeController;
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		CourseHomeController cHomeController = new CourseHomeController();
+		cHomeController = new CourseHomeController();
 		addOrEdit = cHomeController.getAddOrEdit();
 		
 		ImportTemplateController iController = new ImportTemplateController();
@@ -161,6 +162,7 @@ public class TemplateInfoController implements Initializable {
 			} else {
 				courseInfo.setTitle("Edit Course Information & Criteria");
 			}
+			cHomeController.setAddOrEdit(false);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
