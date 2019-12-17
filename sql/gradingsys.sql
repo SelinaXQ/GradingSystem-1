@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 80018
 File Encoding         : 65001
 
-Date: 2019-12-14 22:40:13
+Date: 2019-12-17 18:37:43
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -47,10 +47,8 @@ CREATE TABLE `courses` (
 -- ----------------------------
 -- Records of courses
 -- ----------------------------
-INSERT INTO `courses` VALUES ('1', 'CS 500', 'Fall 2019', 'CAS', '1');
-INSERT INTO `courses` VALUES ('123455', 'CS 400', 'Fall 2018', 'GRS', '0');
-INSERT INTO `courses` VALUES ('1ba98beb6f0682d0016f0683098d0000', 'CS 611', 'Fall 2019', 'GRS', '1');
-INSERT INTO `courses` VALUES ('2', 'CS 600', 'Fall 2019', 'GRS', '1');
+INSERT INTO `courses` VALUES ('1', 'CS 591', 'Fall 2018', 'CAS', '0');
+INSERT INTO `courses` VALUES ('ff8080816f16128d016f1613a3f70000', 'CS 611', 'Fall 2019', 'CAS', '0');
 
 -- ----------------------------
 -- Table structure for `coursesstudents`
@@ -66,17 +64,24 @@ CREATE TABLE `coursesstudents` (
   PRIMARY KEY (`csid`),
   KEY `cid` (`cid`),
   KEY `buid` (`buid`),
-  CONSTRAINT `coursesstudents_ibfk_2` FOREIGN KEY (`buid`) REFERENCES `students` (`buid`) ON DELETE RESTRICT ON UPDATE RESTRICT
+  CONSTRAINT `coursesstudents_ibfk_2` FOREIGN KEY (`buid`) REFERENCES `students` (`buid`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='Information of students enrolled in all the courses, including their status, grade and comment';
 
 -- ----------------------------
 -- Records of coursesstudents
 -- ----------------------------
-INSERT INTO `coursesstudents` VALUES ('1ba9d93c6eebc54f016eebc597410000', '1', 'U96796201', '', null, null);
-INSERT INTO `coursesstudents` VALUES ('1ba9d93c6eebc54f016eebc5979f0003', '1', 'U96796202', '', null, null);
-INSERT INTO `coursesstudents` VALUES ('1ba9d93c6eebc54f016eebc597d70006', '1', 'U96796203', '', null, null);
-INSERT INTO `coursesstudents` VALUES ('1ba9d93c6eebc54f016eebc598030009', '1', 'U96796204', '', null, null);
-INSERT INTO `coursesstudents` VALUES ('1ba9d93c6eebc54f016eebc5982a000c', '1', 'U96796205', '', null, null);
+INSERT INTO `coursesstudents` VALUES ('1ba9faa66f15b775016f15b819270006', '1', 'U96796201', '', 'A', null);
+INSERT INTO `coursesstudents` VALUES ('1ba9faa66f15b775016f15b8194a000b', '1', 'U96796202', '', 'A-', null);
+INSERT INTO `coursesstudents` VALUES ('1ba9faa66f15b775016f15b819680010', '1', 'U96796203', '', 'A-', null);
+INSERT INTO `coursesstudents` VALUES ('1ba9faa66f15b775016f15b819870015', '1', 'U96796204', '', 'B+', null);
+INSERT INTO `coursesstudents` VALUES ('1ba9faa66f15e19e016f15e6fa620014', '1ba9faa66f15d9ce016f15de442b0000', 'U96796201', '', 'A', null);
+INSERT INTO `coursesstudents` VALUES ('1ba9faa66f15e19e016f15e6fa88001b', '1ba9faa66f15d9ce016f15de442b0000', 'U96796202', '', 'A-', null);
+INSERT INTO `coursesstudents` VALUES ('1ba9faa66f15e19e016f15e6faaa0022', '1ba9faa66f15d9ce016f15de442b0000', 'U96796203', '', 'B+', null);
+INSERT INTO `coursesstudents` VALUES ('1ba9faa66f15e19e016f15e6facb0029', '1ba9faa66f15d9ce016f15de442b0000', 'U96796204', 'w', null, null);
+INSERT INTO `coursesstudents` VALUES ('ff8080816f16128d016f1615e5900013', 'ff8080816f16128d016f1613a3f70000', 'U96796201', '', null, null);
+INSERT INTO `coursesstudents` VALUES ('ff8080816f16128d016f1615e5fb001a', 'ff8080816f16128d016f1613a3f70000', 'U96796202', '', null, null);
+INSERT INTO `coursesstudents` VALUES ('ff8080816f16128d016f1615e6300021', 'ff8080816f16128d016f1613a3f70000', 'U96796203', '', null, null);
+INSERT INTO `coursesstudents` VALUES ('ff8080816f16128d016f1615e6670028', 'ff8080816f16128d016f1613a3f70000', 'U96796204', 'w', null, null);
 
 -- ----------------------------
 -- Table structure for `detailedcriteria`
@@ -96,15 +101,16 @@ CREATE TABLE `detailedcriteria` (
 -- ----------------------------
 -- Records of detailedcriteria
 -- ----------------------------
-INSERT INTO `detailedcriteria` VALUES ('1ba98beb6f0682d0016f068622ce0002', '1ba98beb6f0682d0016f068622ca0001', 'a1', '0.50', '100.00');
-INSERT INTO `detailedcriteria` VALUES ('1ba98beb6f0682d0016f068622d20003', '1ba98beb6f0682d0016f068622ca0001', 'a2', '0.50', '900.00');
-INSERT INTO `detailedcriteria` VALUES ('1ba98beb6f0682d0016f068622dc0005', '1ba98beb6f0682d0016f068622d80004', 'dh1', '0.50', '0.00');
-INSERT INTO `detailedcriteria` VALUES ('1ba98beb6f0682d0016f068622df0006', '1ba98beb6f0682d0016f068622d80004', 'dh2', '0.50', '0.00');
-INSERT INTO `detailedcriteria` VALUES ('1ba98beb6f06a4e3016f06a514e70001', '1ba98beb6f06a4e3016f06a514dc0000', 'a1', '0.50', '100.00');
-INSERT INTO `detailedcriteria` VALUES ('1ba98beb6f06a4e3016f06a514eb0002', '1ba98beb6f06a4e3016f06a514dc0000', 'a2', '0.50', '900.00');
-INSERT INTO `detailedcriteria` VALUES ('1ba98beb6f06a4e3016f06a514f60004', '1ba98beb6f06a4e3016f06a514f30003', 'dh1', '0.50', '0.00');
-INSERT INTO `detailedcriteria` VALUES ('1ba98beb6f06a4e3016f06a514f90005', '1ba98beb6f06a4e3016f06a514f30003', 'dh2', '0.50', '0.00');
-INSERT INTO `detailedcriteria` VALUES ('1ba98beb6f06a791016f06a99bf70001', '1ba98beb6f06a4e3016f06a56d3e0006', 'quiz2', '1.00', '50.00');
+INSERT INTO `detailedcriteria` VALUES ('1ba9faa66f15f836016f15f8bc590001', '1ba9faa66f15f836016f15f8bc3f0000', 'e1', '0.50', '100.00');
+INSERT INTO `detailedcriteria` VALUES ('1ba9faa66f15f836016f15f8bc8e0006', '1ba9faa66f15f836016f15f8bc3f0000', 'e2', '0.50', '100.00');
+INSERT INTO `detailedcriteria` VALUES ('1ba9faa66f15f836016f15f8bcbe000c', '1ba9faa66f15f836016f15f8bcb2000b', 'assi1', '0.50', '100.00');
+INSERT INTO `detailedcriteria` VALUES ('1ba9faa66f15f836016f15f8bce60011', '1ba9faa66f15f836016f15f8bcb2000b', 'assi2', '0.50', '100.00');
+INSERT INTO `detailedcriteria` VALUES ('ff8080816f16128d016f16140a960002', 'ff8080816f16128d016f16140a5e0001', 'a1', '0.50', '100.00');
+INSERT INTO `detailedcriteria` VALUES ('ff8080816f16128d016f16140a9c0003', 'ff8080816f16128d016f16140a5e0001', 'a2', '0.50', '100.00');
+INSERT INTO `detailedcriteria` VALUES ('ff8080816f16128d016f16140aae0005', 'ff8080816f16128d016f16140aa50004', 'dh1', '0.50', '100.00');
+INSERT INTO `detailedcriteria` VALUES ('ff8080816f16128d016f16140ab70006', 'ff8080816f16128d016f16140aa50004', 'dh2', '0.50', '100.00');
+INSERT INTO `detailedcriteria` VALUES ('ff8080816f16128d016f16156ed90008', 'ff8080816f16128d016f161484380007', 'final project', '0.50', '100.00');
+INSERT INTO `detailedcriteria` VALUES ('ff8080816f16128d016f16156f130009', 'ff8080816f16128d016f161484380007', 'gorup project', '0.50', '100.00');
 
 -- ----------------------------
 -- Table structure for `generalcriteria`
@@ -123,12 +129,11 @@ CREATE TABLE `generalcriteria` (
 -- ----------------------------
 -- Records of generalcriteria
 -- ----------------------------
-INSERT INTO `generalcriteria` VALUES ('1ba98beb6f0682d0016f068622ca0001', '1', 'final', '0.50');
-INSERT INTO `generalcriteria` VALUES ('1ba98beb6f0682d0016f068622d80004', '1', 'assignment', '0.50');
-INSERT INTO `generalcriteria` VALUES ('1ba98beb6f06a4e3016f06a514dc0000', '1ba98beb6f0682d0016f0683098d0000', 'final', '0.50');
-INSERT INTO `generalcriteria` VALUES ('1ba98beb6f06a4e3016f06a514f30003', '1ba98beb6f0682d0016f0683098d0000', 'assignment', '0.30');
-INSERT INTO `generalcriteria` VALUES ('1ba98beb6f06a4e3016f06a56d3e0006', '1ba98beb6f0682d0016f0683098d0000', 'quiz', '0.20');
-INSERT INTO `generalcriteria` VALUES ('1ba98beb6f06a791016f06a7f3430000', '1ba98beb6f0682d0016f0683098d0000', 'bonus', '0.00');
+INSERT INTO `generalcriteria` VALUES ('1ba9faa66f15f836016f15f8bc3f0000', '1', 'exam', '0.50');
+INSERT INTO `generalcriteria` VALUES ('1ba9faa66f15f836016f15f8bcb2000b', '1', 'assignment', '0.50');
+INSERT INTO `generalcriteria` VALUES ('ff8080816f16128d016f16140a5e0001', 'ff8080816f16128d016f1613a3f70000', 'exam', '0.50');
+INSERT INTO `generalcriteria` VALUES ('ff8080816f16128d016f16140aa50004', 'ff8080816f16128d016f1613a3f70000', 'assignment', '0.20');
+INSERT INTO `generalcriteria` VALUES ('ff8080816f16128d016f161484380007', 'ff8080816f16128d016f1613a3f70000', 'project', '0.30');
 
 -- ----------------------------
 -- Table structure for `semesters`
@@ -144,9 +149,6 @@ CREATE TABLE `semesters` (
 -- ----------------------------
 INSERT INTO `semesters` VALUES ('Fall 2018');
 INSERT INTO `semesters` VALUES ('Fall 2019');
-INSERT INTO `semesters` VALUES ('Spring 2018');
-INSERT INTO `semesters` VALUES ('Spring 2019');
-INSERT INTO `semesters` VALUES ('Spring 2020');
 
 -- ----------------------------
 -- Table structure for `studentdetailedgrade`
@@ -168,6 +170,46 @@ CREATE TABLE `studentdetailedgrade` (
 -- ----------------------------
 -- Records of studentdetailedgrade
 -- ----------------------------
+INSERT INTO `studentdetailedgrade` VALUES ('1ba9faa66f15f836016f15f8bc6a0002', '1ba9faa66f15b775016f15b819270006', '1ba9faa66f15f836016f15f8bc590001', '0.90', null);
+INSERT INTO `studentdetailedgrade` VALUES ('1ba9faa66f15f836016f15f8bc720003', '1ba9faa66f15b775016f15b8194a000b', '1ba9faa66f15f836016f15f8bc590001', '0.80', null);
+INSERT INTO `studentdetailedgrade` VALUES ('1ba9faa66f15f836016f15f8bc790004', '1ba9faa66f15b775016f15b819680010', '1ba9faa66f15f836016f15f8bc590001', '0.70', null);
+INSERT INTO `studentdetailedgrade` VALUES ('1ba9faa66f15f836016f15f8bc810005', '1ba9faa66f15b775016f15b819870015', '1ba9faa66f15f836016f15f8bc590001', '0.60', null);
+INSERT INTO `studentdetailedgrade` VALUES ('1ba9faa66f15f836016f15f8bc960007', '1ba9faa66f15b775016f15b819270006', '1ba9faa66f15f836016f15f8bc8e0006', '0.90', null);
+INSERT INTO `studentdetailedgrade` VALUES ('1ba9faa66f15f836016f15f8bc9d0008', '1ba9faa66f15b775016f15b8194a000b', '1ba9faa66f15f836016f15f8bc8e0006', '0.80', null);
+INSERT INTO `studentdetailedgrade` VALUES ('1ba9faa66f15f836016f15f8bca40009', '1ba9faa66f15b775016f15b819680010', '1ba9faa66f15f836016f15f8bc8e0006', '0.70', null);
+INSERT INTO `studentdetailedgrade` VALUES ('1ba9faa66f15f836016f15f8bcab000a', '1ba9faa66f15b775016f15b819870015', '1ba9faa66f15f836016f15f8bc8e0006', '0.60', null);
+INSERT INTO `studentdetailedgrade` VALUES ('1ba9faa66f15f836016f15f8bcc5000d', '1ba9faa66f15b775016f15b819270006', '1ba9faa66f15f836016f15f8bcbe000c', '0.90', null);
+INSERT INTO `studentdetailedgrade` VALUES ('1ba9faa66f15f836016f15f8bccb000e', '1ba9faa66f15b775016f15b8194a000b', '1ba9faa66f15f836016f15f8bcbe000c', '0.80', null);
+INSERT INTO `studentdetailedgrade` VALUES ('1ba9faa66f15f836016f15f8bcd3000f', '1ba9faa66f15b775016f15b819680010', '1ba9faa66f15f836016f15f8bcbe000c', '0.70', null);
+INSERT INTO `studentdetailedgrade` VALUES ('1ba9faa66f15f836016f15f8bcda0010', '1ba9faa66f15b775016f15b819870015', '1ba9faa66f15f836016f15f8bcbe000c', '0.60', null);
+INSERT INTO `studentdetailedgrade` VALUES ('1ba9faa66f15f836016f15f8bcec0012', '1ba9faa66f15b775016f15b819270006', '1ba9faa66f15f836016f15f8bce60011', '0.90', null);
+INSERT INTO `studentdetailedgrade` VALUES ('1ba9faa66f15f836016f15f8bcf30013', '1ba9faa66f15b775016f15b8194a000b', '1ba9faa66f15f836016f15f8bce60011', '0.80', null);
+INSERT INTO `studentdetailedgrade` VALUES ('1ba9faa66f15f836016f15f8bcf90014', '1ba9faa66f15b775016f15b819680010', '1ba9faa66f15f836016f15f8bce60011', '0.70', null);
+INSERT INTO `studentdetailedgrade` VALUES ('1ba9faa66f15f836016f15f8bd000015', '1ba9faa66f15b775016f15b819870015', '1ba9faa66f15f836016f15f8bce60011', '0.60', null);
+INSERT INTO `studentdetailedgrade` VALUES ('ff8080816f16128d016f1615e5d00014', 'ff8080816f16128d016f1615e5900013', 'ff8080816f16128d016f16140a960002', '0.00', null);
+INSERT INTO `studentdetailedgrade` VALUES ('ff8080816f16128d016f1615e5d50015', 'ff8080816f16128d016f1615e5900013', 'ff8080816f16128d016f16140a9c0003', '0.00', null);
+INSERT INTO `studentdetailedgrade` VALUES ('ff8080816f16128d016f1615e5de0016', 'ff8080816f16128d016f1615e5900013', 'ff8080816f16128d016f16140aae0005', '0.00', null);
+INSERT INTO `studentdetailedgrade` VALUES ('ff8080816f16128d016f1615e5e30017', 'ff8080816f16128d016f1615e5900013', 'ff8080816f16128d016f16140ab70006', '0.50', null);
+INSERT INTO `studentdetailedgrade` VALUES ('ff8080816f16128d016f1615e5ed0018', 'ff8080816f16128d016f1615e5900013', 'ff8080816f16128d016f16156ed90008', '0.00', null);
+INSERT INTO `studentdetailedgrade` VALUES ('ff8080816f16128d016f1615e5f10019', 'ff8080816f16128d016f1615e5900013', 'ff8080816f16128d016f16156f130009', '0.00', null);
+INSERT INTO `studentdetailedgrade` VALUES ('ff8080816f16128d016f1615e60a001b', 'ff8080816f16128d016f1615e5fb001a', 'ff8080816f16128d016f16140a960002', '0.00', null);
+INSERT INTO `studentdetailedgrade` VALUES ('ff8080816f16128d016f1615e60e001c', 'ff8080816f16128d016f1615e5fb001a', 'ff8080816f16128d016f16140a9c0003', '0.00', null);
+INSERT INTO `studentdetailedgrade` VALUES ('ff8080816f16128d016f1615e616001d', 'ff8080816f16128d016f1615e5fb001a', 'ff8080816f16128d016f16140aae0005', '0.00', null);
+INSERT INTO `studentdetailedgrade` VALUES ('ff8080816f16128d016f1615e61a001e', 'ff8080816f16128d016f1615e5fb001a', 'ff8080816f16128d016f16140ab70006', '-10.00', null);
+INSERT INTO `studentdetailedgrade` VALUES ('ff8080816f16128d016f1615e622001f', 'ff8080816f16128d016f1615e5fb001a', 'ff8080816f16128d016f16156ed90008', '0.00', null);
+INSERT INTO `studentdetailedgrade` VALUES ('ff8080816f16128d016f1615e6260020', 'ff8080816f16128d016f1615e5fb001a', 'ff8080816f16128d016f16156f130009', '0.00', null);
+INSERT INTO `studentdetailedgrade` VALUES ('ff8080816f16128d016f1615e63f0022', 'ff8080816f16128d016f1615e6300021', 'ff8080816f16128d016f16140a960002', '0.00', null);
+INSERT INTO `studentdetailedgrade` VALUES ('ff8080816f16128d016f1615e6440023', 'ff8080816f16128d016f1615e6300021', 'ff8080816f16128d016f16140a9c0003', '0.00', null);
+INSERT INTO `studentdetailedgrade` VALUES ('ff8080816f16128d016f1615e64d0024', 'ff8080816f16128d016f1615e6300021', 'ff8080816f16128d016f16140aae0005', '0.00', null);
+INSERT INTO `studentdetailedgrade` VALUES ('ff8080816f16128d016f1615e6510025', 'ff8080816f16128d016f1615e6300021', 'ff8080816f16128d016f16140ab70006', '-20.00', 'nice!');
+INSERT INTO `studentdetailedgrade` VALUES ('ff8080816f16128d016f1615e6580026', 'ff8080816f16128d016f1615e6300021', 'ff8080816f16128d016f16156ed90008', '0.00', null);
+INSERT INTO `studentdetailedgrade` VALUES ('ff8080816f16128d016f1615e65c0027', 'ff8080816f16128d016f1615e6300021', 'ff8080816f16128d016f16156f130009', '0.00', null);
+INSERT INTO `studentdetailedgrade` VALUES ('ff8080816f16128d016f1615e6750029', 'ff8080816f16128d016f1615e6670028', 'ff8080816f16128d016f16140a960002', '0.00', null);
+INSERT INTO `studentdetailedgrade` VALUES ('ff8080816f16128d016f1615e67a002a', 'ff8080816f16128d016f1615e6670028', 'ff8080816f16128d016f16140a9c0003', '0.00', null);
+INSERT INTO `studentdetailedgrade` VALUES ('ff8080816f16128d016f1615e681002b', 'ff8080816f16128d016f1615e6670028', 'ff8080816f16128d016f16140aae0005', '0.00', null);
+INSERT INTO `studentdetailedgrade` VALUES ('ff8080816f16128d016f1615e686002c', 'ff8080816f16128d016f1615e6670028', 'ff8080816f16128d016f16140ab70006', '0.00', null);
+INSERT INTO `studentdetailedgrade` VALUES ('ff8080816f16128d016f1615e68e002d', 'ff8080816f16128d016f1615e6670028', 'ff8080816f16128d016f16156ed90008', '0.00', null);
+INSERT INTO `studentdetailedgrade` VALUES ('ff8080816f16128d016f1615e692002e', 'ff8080816f16128d016f1615e6670028', 'ff8080816f16128d016f16156f130009', '0.00', null);
 
 -- ----------------------------
 -- Table structure for `students`
@@ -185,9 +227,9 @@ CREATE TABLE `students` (
 -- Records of students
 -- ----------------------------
 INSERT INTO `students` VALUES ('U96796201', 'Qian', '', 'Xiang');
-INSERT INTO `students` VALUES ('U96796202', 'haha', 'hey', 'Li');
-INSERT INTO `students` VALUES ('U96796203', 'Victoria', '', 'Ming');
-INSERT INTO `students` VALUES ('U96796204', 'Jimin', 'King', 'Park');
+INSERT INTO `students` VALUES ('U96796202', 'Xueyan', '', 'Xia');
+INSERT INTO `students` VALUES ('U96796203', 'Kaijie', '', 'Chen');
+INSERT INTO `students` VALUES ('U96796204', 'Feng', '', 'Jia');
 INSERT INTO `students` VALUES ('U96796205', 'Lin', 'A', 'oo');
 
 -- ----------------------------
@@ -206,10 +248,16 @@ CREATE TABLE `templatedetailedcriteria` (
 -- ----------------------------
 -- Records of templatedetailedcriteria
 -- ----------------------------
-INSERT INTO `templatedetailedcriteria` VALUES ('1', 'abcc', 'a1', '0.50', '100.00');
-INSERT INTO `templatedetailedcriteria` VALUES ('2', 'abcc', 'a2', '0.50', '900.00');
-INSERT INTO `templatedetailedcriteria` VALUES ('8a80803d6ed40e84016ed40e870a0000', 'abcd', 'dh1', '0.50', '0.00');
-INSERT INTO `templatedetailedcriteria` VALUES ('8a80803d6ed40e84016ed40e873d0001', 'abcd', 'dh2', '0.50', '0.00');
+INSERT INTO `templatedetailedcriteria` VALUES ('1ba9faa66f15e129016f15e161330000', '1ba9faa66f15e129016f15e161490004', 'a1', '0.50', '100.00');
+INSERT INTO `templatedetailedcriteria` VALUES ('1ba9faa66f15e129016f15e1613c0001', '1ba9faa66f15e129016f15e161490004', 'a2', '0.50', '100.00');
+INSERT INTO `templatedetailedcriteria` VALUES ('1ba9faa66f15e129016f15e161420002', '1ba9faa66f15e129016f15e1614d0005', 'dh1', '0.50', '100.00');
+INSERT INTO `templatedetailedcriteria` VALUES ('1ba9faa66f15e129016f15e161460003', '1ba9faa66f15e129016f15e1614d0005', 'dh2', '0.50', '100.00');
+INSERT INTO `templatedetailedcriteria` VALUES ('ff8080816f16128d016f16159701000a', 'ff8080816f16128d016f16140a5e0001', 'a1', '0.50', '100.00');
+INSERT INTO `templatedetailedcriteria` VALUES ('ff8080816f16128d016f16159736000b', 'ff8080816f16128d016f16140a5e0001', 'a2', '0.50', '100.00');
+INSERT INTO `templatedetailedcriteria` VALUES ('ff8080816f16128d016f16159741000c', 'ff8080816f16128d016f16140aa50004', 'dh1', '0.50', '100.00');
+INSERT INTO `templatedetailedcriteria` VALUES ('ff8080816f16128d016f16159747000d', 'ff8080816f16128d016f16140aa50004', 'dh2', '0.50', '100.00');
+INSERT INTO `templatedetailedcriteria` VALUES ('ff8080816f16128d016f16159752000e', 'ff8080816f16128d016f161484380007', 'final project', '0.50', '100.00');
+INSERT INTO `templatedetailedcriteria` VALUES ('ff8080816f16128d016f16159758000f', 'ff8080816f16128d016f161484380007', 'gorup project', '0.50', '100.00');
 
 -- ----------------------------
 -- Table structure for `templategeneralcriteria`
@@ -226,5 +274,8 @@ CREATE TABLE `templategeneralcriteria` (
 -- ----------------------------
 -- Records of templategeneralcriteria
 -- ----------------------------
-INSERT INTO `templategeneralcriteria` VALUES ('abcc', '1', 'final', '0.50');
-INSERT INTO `templategeneralcriteria` VALUES ('abcd', '1', 'assignment', '0.50');
+INSERT INTO `templategeneralcriteria` VALUES ('1ba9faa66f15e129016f15e161490004', '1', 'exam', '0.50');
+INSERT INTO `templategeneralcriteria` VALUES ('1ba9faa66f15e129016f15e1614d0005', '1', 'assignment', '0.50');
+INSERT INTO `templategeneralcriteria` VALUES ('ff8080816f16128d016f1615975e0010', 'ff8080816f16128d016f1613a3f70000', 'exam', '0.50');
+INSERT INTO `templategeneralcriteria` VALUES ('ff8080816f16128d016f161597640011', 'ff8080816f16128d016f1613a3f70000', 'assignment', '0.20');
+INSERT INTO `templategeneralcriteria` VALUES ('ff8080816f16128d016f161597690012', 'ff8080816f16128d016f1613a3f70000', 'project', '0.30');
