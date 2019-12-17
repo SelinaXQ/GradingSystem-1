@@ -345,7 +345,7 @@ public class CourseInfoController implements Initializable {
 	public void addDetailedCriteriaButton(ActionEvent event) {
 		DetailedCriteria dCriteria = new DetailedCriteria(null, generalCur.getgCriID(), detailedCriteriaType.getText(),
 				Double.parseDouble(detailedCriteriaPer.getText()), Double.parseDouble(detailedCScore.getText()));
-		detailedTableView.getItems().add(dCriteria);
+//		detailedTableView.getItems().add(dCriteria);
 		detailedCriteria.add(dCriteria);
 	}
 

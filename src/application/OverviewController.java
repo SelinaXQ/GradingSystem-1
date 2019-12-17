@@ -99,8 +99,10 @@ public class OverviewController implements Initializable {
 					ArrayList<GeneralGrade> gcS = param.getValue().getGcScores();
 					double gc=0.0;
 					for(GeneralGrade g:gcS){
-						if (g.getgCriID().equals(i.getgCriID())) gc=g.getScore();
-						break;
+						if (g.getgCriID().equals(i.getgCriID())){
+							gc=g.getScore();
+							break;
+						}
 					}
 					return new SimpleStringProperty(new DoubleStringConverter().toString(gc));
 				}
@@ -116,8 +118,10 @@ public class OverviewController implements Initializable {
 						ArrayList<HashMap<String, DetailedGrade>> dcS = param.getValue().getDcs();
 						double dc=0.0;
 						for( HashMap<String, DetailedGrade> d:dcS){
-							if (d.get(i.getgCriID()).getdCriID().equals(j.getdCriID())) dc=d.get(i.getgCriID()).getScore();
-							break;
+							if (d.get(i.getgCriID()).getdCriID().equals(j.getdCriID())) {
+								dc=d.get(i.getgCriID()).getScore();
+								break;
+							}
 						}
 						return new SimpleStringProperty(new DoubleStringConverter().toString(dc));
 					}
