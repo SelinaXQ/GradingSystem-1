@@ -126,6 +126,7 @@ public class CourseInfoController implements Initializable {
 		operations = new Operations();
 		Login loginController = new Login();
 		String semesterStr = loginController.getSemester();
+		
 		semester.setText(semesterStr);
 		semester.setEditable(false);
 
