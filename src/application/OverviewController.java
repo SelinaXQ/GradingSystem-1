@@ -139,7 +139,7 @@ public class OverviewController implements Initializable {
 									break;
 								}
 							}
-							return new SimpleStringProperty(new DoubleStringConverter().toString(gc));
+							return new SimpleStringProperty(String.format("%.2f",gc));
 						}
 					});
 			tableView.getColumns().add(gColumn);
@@ -159,7 +159,7 @@ public class OverviewController implements Initializable {
 									break;
 								}
 							}
-							return new SimpleStringProperty(new DoubleStringConverter().toString(gc));
+							return new SimpleStringProperty(String.format("%.2f", gc));
 						}
 					});
 			ArrayList<DetailedCriteria> detailedList = operations
@@ -196,7 +196,7 @@ public class OverviewController implements Initializable {
 											}
 										}
 									}
-									return new SimpleStringProperty(new DoubleStringConverter().toString(dc));
+									return new SimpleStringProperty(String.format("%.2f", dc));
 								}
 							});
 					// dColumn.setVisible(false);
