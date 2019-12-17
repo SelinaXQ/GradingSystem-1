@@ -322,7 +322,7 @@ public class Operations {
 			cs.setCondition(sInfo.getCondition());
 			if (css.size() == 0) {
 				mStudents.updateOrSaveCourseStudent(cs);
-				if (cs.getCondition().equals("w") == false) {
+				if (cs.getCondition().equalsIgnoreCase("w") == false) {
 					initDetailedGrades(cs, c);
 				} else {
 					deleteDetailedGrades(cs, c);
@@ -356,7 +356,7 @@ public class Operations {
 			cStudents.setCondition(sInfo.getCondition());
 			mStudents.updateOrSaveCourseStudent(cStudents);
 
-			if (sInfo.getCondition().trim().equals("w")) {
+			if (sInfo.getCondition().trim().equalsIgnoreCase("w")) {
 				deleteDetailedGrades(cs, c);
 			}
 		}

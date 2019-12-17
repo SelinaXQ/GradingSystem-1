@@ -116,6 +116,7 @@ public class CourseHomeController implements Initializable {
 		
 		Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
 		window.setScene(scene);
+		window.setTitle("Grading");
 		window.show();
 		
 		
@@ -207,5 +208,13 @@ public class CourseHomeController implements Initializable {
 	public boolean getAddOrEdit() {
 		return addOrEdit;
 	}
-
+	
+	public void setAddOrEdit(boolean flag) {
+		addOrEdit = flag;
+	}
+	
+	public void setCourse(Course c) {
+		course = c;
+	}
 }
+
