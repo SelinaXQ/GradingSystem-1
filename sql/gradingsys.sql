@@ -15,6 +15,10 @@ Date: 2019-12-17 18:37:43
 
 SET FOREIGN_KEY_CHECKS=0;
 
+create database gradingsys;
+
+use gradingsys;
+
 -- ----------------------------
 -- Table structure for `account`
 -- ----------------------------
